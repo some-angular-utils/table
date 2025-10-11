@@ -3,6 +3,11 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@some-angular-utils/table": [
+        "./dist/some-angular-utils/table"
+      ]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -29,6 +34,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/some-angular-utils/table/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/some-angular-utils/table/tsconfig.spec.json"
     }
   ]
 }
