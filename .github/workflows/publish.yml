@@ -28,17 +28,12 @@ jobs:
       # - name: Run tests
       #   run: npm test
 
-      - name: Change to project directory
-        run: cd projects/some-angular-utils/table
-
       - name: Update package.json with release tag
         run: |
+          cd projects/some-angular-utils/table
           TAG="${{ github.event.release.tag_name }}"
           echo "Updating package.json version to $TAG"
           npm version "$TAG" --no-git-tag-version
-
-      - name: Change to root directory
-        run: cd ../../.. 
 
       - name: Commit and push version update
         run: |
