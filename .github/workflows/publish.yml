@@ -53,6 +53,6 @@ jobs:
 
       - name: Publish to npm
         working-directory: dist/some-angular-utils/table
-        run: npm publish --access public
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
