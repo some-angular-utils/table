@@ -1,6 +1,6 @@
 {
   "name": "@some-angular-utils/table",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "peerDependencies": {
     "@angular/common": "^20.3.0",
     "@angular/core": "^20.3.0"
