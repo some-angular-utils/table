@@ -1,6 +1,6 @@
 {
   "name": "@some-angular-utils/table",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Angular table utility library",
   "repository": "https://github.com/some-angular-utils/table",
   "peerDependencies": {
