@@ -28,22 +28,18 @@ jobs:
       # - name: Run tests
       #   run: npm test
 
-      - name: Update package.json with release tag and commit
+      - name: build package
+        run: npm run build:lib
+
+      - name: Update package.json version
+        working-directory: projects/some-angular-utils/table
         run: |
           TAG="${{ github.event.release.tag_name }}"
-
-          # Go to the library directory and update version
-          cd projects/some-angular-utils/table
-
-          # Update version using
           npm version "$TAG" --no-git-tag-version
 
-          # Verify the change
-          echo "New package.json version:"
-          grep '"version"' package.json
-
-          cd ../../..
-
+      - name: Commit updated package.json
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add projects/some-angular-utils/table/package.json
@@ -51,9 +47,6 @@ jobs:
           git push origin ${{ github.event.repository.default_branch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: build package
-        run: npm run build:lib
 
       - name: Publish to npm
         working-directory: dist/some-angular-utils/table
