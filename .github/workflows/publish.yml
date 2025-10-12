@@ -35,14 +35,13 @@ jobs:
           # Go to the library directory and update version
           cd projects/some-angular-utils/table
 
-          # Update version using sed (more reliable than npm version)
-          sed -i "s/\"version\": \".*\"/\"version\": \"$TAG\"/" package.json
-          
+          # Update version using
+          npm version "$TAG" --no-git-tag-version
+
           # Verify the change
           echo "New package.json version:"
           grep '"version"' package.json
-          
-          # Go back to root and commit changes
+
           cd ../../..
 
           git config user.name "github-actions"
