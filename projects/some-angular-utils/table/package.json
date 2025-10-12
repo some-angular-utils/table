@@ -11,6 +11,6 @@
   },
   "sideEffects": false,
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://github.com/some-angular-utils/table"
   }
 }
