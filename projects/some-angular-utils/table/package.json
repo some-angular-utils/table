@@ -1,6 +1,7 @@
 {
   "name": "@some-angular-utils/table",
   "version": "0.0.6",
+  "repository": "https://github.com/some-angular-utils/table",
   "peerDependencies": {
     "@angular/common": "^20.3.0",
     "@angular/core": "^20.3.0"
