@@ -2,7 +2,10 @@
   "name": "@some-angular-utils/table",
   "version": "0.0.13",
   "description": "Angular table utility library",
-  "repository": "https://github.com/some-angular-utils/table",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/some-angular-utils/table.git"
+  },
   "peerDependencies": {
     "@angular/common": "^20.3.0",
     "@angular/core": "^20.3.0"
@@ -10,8 +13,5 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false,
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  }
+  "sideEffects": false
 }
