@@ -28,7 +28,7 @@ jobs:
       # - name: Run tests
       #   run: npm test
 
-      - name: build package
+      - name: build package before version update
         run: npm run build:lib
 
       - name: Update package.json version
@@ -47,6 +47,9 @@ jobs:
           git push origin ${{ github.event.repository.default_branch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: build package with updated version
+        run: npm run build:lib
 
       - name: Publish to npm
         working-directory: dist/some-angular-utils/table
