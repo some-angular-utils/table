@@ -29,6 +29,9 @@ jobs:
       # - name: Run tests
       #   run: npm test
 
+      - name: copy README.md
+        run: cp README.md projects/some-angular-utils/table/README.md
+
       - name: build package before version update
         run: npm run build:lib
 
