@@ -18,6 +18,7 @@ export class TableModule {
   @Input() contentTotal?: string;
   @Input() pageParamName = 'page';
   @Input() limitParamName = 'limit'
+  @Input() sizeInitialPage = 0
   @Input() sizeBetweenPages = 1
   @Input() headers?: { name: string, key: string | string[], subKey?: string, type?: string, innerHtml?: boolean, headers?: any }[];
   @Output() editEvent = new EventEmitter();
@@ -33,6 +34,26 @@ export class TableModule {
 
   @Input() limit = 10
 
+  // Getter para obtener las páginas visibles (3 antes y 3 después de la página actual)
+  get visiblePages(): number[] {
+    const totalPages = this.total.length;
+    if (totalPages <= 7) {
+      // Si hay 7 páginas o menos, mostrar todas
+      return this.total;
+    }
+
+    const currentPage = this.page;
+    const start = Math.max(1, currentPage - 3);
+    const end = Math.min(totalPages, currentPage + 3);
+
+    const pages: number[] = [];
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  }
+
   constructor(
     private http: HttpClient,
     private cdr: ChangeDetectorRef
@@ -44,11 +65,20 @@ export class TableModule {
     }
   }
 
+  // Método para obtener la página interna (0-based si sizeInitialPage es 0, 1-based si es 1)
+  private getInternalPage(): number {
+    if (this.sizeInitialPage === 0) {
+      return (this.page - 1) * this.sizeBetweenPages;
+    }
+    return this.page * this.sizeBetweenPages;
+  }
+
   getItems() {
     this.loading = true;
     this.cdr.detectChanges(); // Forzar detección antes de la petición
 
-    const filters = `?${this.pageParamName}=${this.page * this.sizeBetweenPages}&${this.limitParamName}=${this.limit}`;
+    const internalPage = this.getInternalPage();
+    const filters = `?${this.pageParamName}=${internalPage}&${this.limitParamName}=${this.limit}`;
 
     this.http.get(this.url + filters).subscribe({
       next: (data: any) => {
@@ -150,6 +180,21 @@ export class TableModule {
   changePage(page: number) {
     this.page = page
     this.getItems()
+  }
+
+  // Método para ir a la primera página
+  goToFirstPage() {
+    if (this.page !== 1) {
+      this.changePage(1);
+    }
+  }
+
+  // Método para ir a la última página
+  goToLastPage() {
+    const lastPage = this.total.length;
+    if (this.page !== lastPage && lastPage > 0) {
+      this.changePage(lastPage);
+    }
   }
 
   clickEditButton(id?: number) {
