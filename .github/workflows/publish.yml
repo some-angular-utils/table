@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: write
+  packages: write
 
 jobs:
   publish:
@@ -55,4 +56,15 @@ jobs:
         working-directory: dist/some-angular-utils/table
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - uses: healthplace/npmrc-registry-login-action@v1.0
+        with:
+          scope: '@some-angular-utils'
+          registry: 'https://npm.pkg.github.com'
+          auth-token: ${{ secrets.GITHUB_TOKEN }}
+          path: 'dist/some-angular-utils/table'
+
+      - name: Publish to github npm
+        working-directory: dist/some-angular-utils/table
+        run: npm publish
