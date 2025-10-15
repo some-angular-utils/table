@@ -289,6 +289,12 @@
 
         }
 
+        @case ('image'){
+        @let link = getLink(header.url, item, value);
+
+        <img [src]="link.url" [alt]="getValue(item, value)" loading="lazy" class="w-10 h-10 object-cover">
+        }
+
         @case ('login'){
         @if(item.active){
         <span class="inline-flex items-center gap-1">
