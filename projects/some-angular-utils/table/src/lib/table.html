@@ -4,49 +4,46 @@
 </div>
 }
 
-<div class="overflow-auto rounded-2xl bg-white/90 backdrop-blur-lg shadow-xl border border-white/50">
+<div class="sau-table">
 
     <!----------------------------------- Table mobile ----------------------------------->
-    <div class="md:hidden">
+    <div class="sau-table-mobile">
         <!-- Mobile header -->
-        <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-t-2xl">
-            <h3 class="text-base font-semibold leading-tight">Lista de elementos</h3>
-            <div class="w-8 h-0.5 bg-white/30 rounded-full mt-1"></div>
+        <div class="sau-table-mobile-header">
+            <h3 class="sau-table-mobile-title">Lista de elementos</h3>
+            <div class="sau-table-mobile-divider"></div>
         </div>
 
-        <table class="w-full text-sm text-left rtl:text-right text-neutral-700">
+        <table class="sau-table-mobile-table">
             <tbody>
                 @for (item of items; track $index) {
-                <tr class="border-b border-purple-100/50 last:border-b-0">
+                <tr class="sau-table-mobile-row">
                     <td>
-                        <table class="w-full">
+                        <table class="sau-table-width-full">
                             <tbody>
                                 @for (header of headers; track $index) {
-                                <tr [class]="$index%2==0?'bg-purple-50/30':''">
+                                <tr [class]="$index%2==0?'sau-table-mobile-row-even':''">
 
-                                    <th scope="col"
-                                        class="p-2 font-medium bg-gradient-to-r from-purple-600 to-pink-600 text-white max-w-min">
+                                    <th scope="col" class="sau-table-mobile-header-cell">
                                         {{header.name}}
                                     </th>
-                                    <td class="p-2 w-full text-neutral-800">
+                                    <td class="sau-table-mobile-data-cell">
 
                                         @if(header.type == 'table' && !isArray(header.key)){
 
                                         <!-- CSS-only toggle button -->
-                                        <input type="checkbox" [id]="'toggle-table-' + $index" class="hidden peer">
-                                        <label [for]="'toggle-table-' + $index"
-                                            class="inline-flex items-center gap-2 px-3 py-2 bg-purple-100 text-purple-600 rounded-lg hover:bg-purple-200 transition-all duration-200 cursor-pointer select-none">
+                                        <input type="checkbox" [id]="'toggle-table-' + $index" class="sau-table-toggle-input">
+                                        <label [for]="'toggle-table-' + $index" class="sau-table-toggle-label">
                                             <!-- <fa-icon [icon]="['fas', 'chevron-down']"
                                                 class="text-xs transition-transform duration-200 peer-checked:rotate-180"></fa-icon> -->
-                                            <span class="text-sm font-medium">
-                                                <span class="peer-checked:hidden">Mostrar</span>
-                                                <span class="hidden peer-checked:inline">Ocultar</span>
+                                            <span class="sau-table-toggle-text">
+                                                <span class="sau-table-toggle-show">Mostrar</span>
+                                                <span class="sau-table-toggle-hide">Ocultar</span>
                                             </span>
                                         </label>
 
                                         <!-- Content that toggles -->
-                                        <div
-                                            class="mt-3 h-0 overflow-hidden opacity-0 peer-checked:h-auto peer-checked:opacity-100 peer-checked:overflow-visible transition-all duration-300 ease-in-out">
+                                        <div class="sau-table-toggle-content">
                                             <sau-table [headers]="header.headers"
                                                 [items]="getValue(item, header.key)"></sau-table>
                                         </div>
@@ -63,23 +60,18 @@
                                 }
 
                                 @if(this.url){
-                                <tr
-                                    class="border-b-8 border-transparent bg-gradient-to-r from-purple-600 to-purple-400 p-4">
+                                <tr class="sau-table-mobile-actions-row">
                                     <td colspan="2">
-                                        <div class="flex justify-center gap-4 p-4">
+                                        <div class="sau-table-mobile-actions-container">
                                             @if(editEvent.observers.length > 0){
-                                            <button
-                                                class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-purple-600 bg-purple-50 hover:bg-purple-100 rounded-lg transition-all duration-200 border border-purple-200 hover:border-purple-300"
-                                                (click)="clickEditButton(item.id)">
+                                            <button class="sau-table-edit-button" (click)="clickEditButton(item.id)">
                                                 <!-- <fa-icon [icon]="['fas', 'pen']" class="text-xs"></fa-icon> -->
                                                 Editar
                                             </button>
                                             }
 
                                             @if(deleteEvent.observers.length > 0){
-                                            <button
-                                                class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-lg transition-all duration-200 border border-rose-200 hover:border-rose-300"
-                                                (click)="clickDeleteButton(item.id)">
+                                            <button class="sau-table-delete-button" (click)="clickDeleteButton(item.id)">
                                                 <!-- <fa-icon [icon]="['fas', 'trash-can']" class="text-xs"></fa-icon> -->
                                                 Eliminar
                                             </button>
@@ -100,17 +92,17 @@
     <!--------------------------------- Table mobile end --------------------------------->
 
     <!----------------------------------- Table desktop ----------------------------------->
-    <table class="w-full text-sm text-center rtl:text-right text-neutral-700 hidden md:table">
-        <thead class="text-xs font-semibold uppercase bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+    <table class="sau-table-desktop">
+        <thead class="sau-table-desktop-header">
             <tr>
                 @for (header of headers; track $index) {
-                <th scope="col" class="p-2">
+                <th scope="col" class="sau-table-desktop-header-cell">
                     {{header.name}}
                 </th>
                 }
 
                 @if(this.url){
-                <th scope="col" class="p-2">
+                <th scope="col" class="sau-table-desktop-header-cell">
                     Opciones
                 </th>
                 }
@@ -118,11 +110,10 @@
         </thead>
         <tbody>
             @for (item of items; track $index) {
-            <tr
-                [class]="'min-w-max hover:bg-purple-50/50 transition-colors duration-200 border-b border-purple-100/30 last:border-b-0 ' + ($index%2==0?'bg-purple-50/20':'')">
+            <tr [class]="'sau-table-desktop-row ' + ($index%2==0?'sau-table-desktop-row-even':'')">
 
                 @for (header of headers; track $index) {
-                <td class="p-2">
+                <td class="sau-table-desktop-cell">
 
                     @if(header.type == 'table'){
 
@@ -139,20 +130,16 @@
                 }
 
                 @if(this.url){
-                <td class="px-6 py-4">
-                    <div class="flex items-center gap-2">
+                <td class="sau-table-desktop-actions-cell">
+                    <div class="sau-table-desktop-actions-container">
                         @if(editEvent.observers.length > 0){
-                        <button
-                            class="inline-flex items-center justify-center w-8 h-8 text-purple-600 bg-purple-50 hover:bg-purple-100 rounded-lg transition-all duration-200 border border-purple-200 hover:border-purple-300"
-                            (click)="clickEditButton(item.id)" title="Editar">
+                        <button class="sau-table-desktop-edit-button" (click)="clickEditButton(item.id)" title="Editar">
                             <!-- <fa-icon [icon]="['fas', 'pen']" class="text-xs"></fa-icon> -->
                         </button>
                         }
 
                         @if(deleteEvent.observers.length > 0){
-                        <button
-                            class="inline-flex items-center justify-center w-8 h-8 text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-lg transition-all duration-200 border border-rose-200 hover:border-rose-300"
-                            (click)="clickDeleteButton(item.id)" title="Eliminar">
+                        <button class="sau-table-desktop-delete-button" (click)="clickDeleteButton(item.id)" title="Eliminar">
                             <!-- <fa-icon [icon]="['fas', 'trash-can']" class="text-xs"></fa-icon> -->
                         </button>
                         }
@@ -167,25 +154,24 @@
     <!--------------------------------- table desktop end --------------------------------->
 
     @if (items.length == 0) {
-    <div class="flex flex-col items-center justify-center h-48 text-center">
-        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+    <div class="sau-table-empty">
+        <div class="sau-table-empty-icon">
             <!-- <fa-icon [icon]="['fas', 'inbox']" class="text-purple-400 text-2xl"></fa-icon> -->
         </div>
-        <p class="text-neutral-500 font-medium">No hay elementos</p>
-        <p class="text-neutral-400 text-sm">Los elementos aparecerán aquí cuando estén disponibles</p>
+        <p class="sau-table-empty-title">No hay elementos</p>
+        <p class="sau-table-empty-subtitle">Los elementos aparecerán aquí cuando estén disponibles</p>
     </div>
 
     } @else if(total.length > 1) {
 
     <!----------------------------------- Pagination ----------------------------------->
-    <div
-        class="sticky left-0 flex flex-wrap gap-2 items-center justify-center md:justify-between p-6 bg-gradient-to-r from-purple-50/50 to-pink-50/50 border-t border-purple-200/50">
+    <div class="sau-table-pagination">
 
         <!-- Números de página -->
-        <div class="md:order-2 w-full md:w-max flex items-center justify-center gap-2">
+        <div class="sau-table-pagination-number-buttons">
             @for (item of visiblePages; track $index) {
             <button (click)="changePage(item)"
-                [class]="'cursor-pointer w-10 h-10 rounded-lg font-medium text-sm transition-all duration-200 ' + (item == page ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg' : 'text-purple-600 hover:bg-purple-50 border border-purple-200 hover:border-purple-300')"
+                [class]="'sau-table-pagination-number-button ' + (item == page ? 'sau-table-pagination-number-button-active' : 'sau-table-pagination-number-button-inactive')"
                 type="button">
                 {{item}}
             </button>
@@ -193,34 +179,34 @@
         </div>
 
         <!-- Botones de navegación izquierda -->
-        <div class="md:order-1 flex items-center gap-2">
+        <div class="sau-table-pagination-nav-left">
             <!-- Botón ir al inicio -->
             <button type="button" (click)="goToFirstPage()"
-                [class]="'cursor-pointer inline-flex items-center justify-center px-3 h-10 text-purple-600 bg-white border border-purple-200 rounded-lg hover:bg-purple-50 transition-all duration-200 text-sm font-medium ' + (page == 1?'opacity-50 pointer-events-none':'hover:border-purple-300')"
+                [class]="'sau-table-pagination-nav-button-wide ' + (page == 1?'sau-table-pagination-nav-button-disabled':'sau-table-pagination-nav-button-enabled')"
                 title="Ir al inicio">
                 ‹‹
             </button>
 
             <!-- Botón página anterior -->
             <button type="button" (click)="changePage(page-1)"
-                [class]="'cursor-pointer inline-flex items-center justify-center w-10 h-10 text-purple-600 bg-white border border-purple-200 rounded-lg hover:bg-purple-50 transition-all duration-200 ' + (page == 1?'opacity-50 pointer-events-none':'hover:border-purple-300')"
+                [class]="'sau-table-pagination-nav-button ' + (page == 1?'sau-table-pagination-nav-button-disabled':'sau-table-pagination-nav-button-enabled')"
                 title="Página anterior">
                 ‹
             </button>
         </div>
 
         <!-- Botones de navegación derecha -->
-        <div class="md:order-3 flex items-center gap-2">
+        <div class="sau-table-pagination-nav-right">
             <!-- Botón página siguiente -->
             <button type="button" (click)="changePage(page+1)"
-                [class]="'cursor-pointer inline-flex items-center justify-center w-10 h-10 text-purple-600 bg-white border border-purple-200 rounded-lg hover:bg-purple-50 transition-all duration-200 ' + (page == total[total.length-1]?'opacity-50 pointer-events-none':'hover:border-purple-300')"
+                [class]="'sau-table-pagination-nav-button ' + (page == total[total.length-1]?'sau-table-pagination-nav-button-disabled':'sau-table-pagination-nav-button-enabled')"
                 title="Página siguiente">
                 ›
             </button>
 
             <!-- Botón ir al final -->
             <button type="button" (click)="goToLastPage()"
-                [class]="'cursor-pointer inline-flex items-center justify-center px-3 h-10 text-purple-600 bg-white border border-purple-200 rounded-lg hover:bg-purple-50 transition-all duration-200 text-sm font-medium ' + (page == total[total.length-1]?'opacity-50 pointer-events-none':'hover:border-purple-300')"
+                [class]="'sau-table-pagination-nav-button-wide ' + (page == total[total.length-1]?'sau-table-pagination-nav-button-disabled':'sau-table-pagination-nav-button-enabled')"
                 title="Ir al final">
                 ››
             </button>
@@ -234,10 +220,10 @@
 <!----------------------------------- Data template ----------------------------------->
 <ng-template #DataTemplate let-item="item" let-header="header">
 
-    <section class="flex items-center gap-2">
+    <section class="sau-table-data-section">
 
         @if(header.name == 'NOMBRE' && item.role == 'ROLE_ADMIN') {
-        <div class="inline-flex items-center justify-center w-6 h-6 bg-orange-100 rounded-full">
+        <div class="sau-table-admin-crown">
             <!-- <fa-icon [ngClass]="['text-orange-600', 'text-xs']" [icon]="['fas', 'crown']"></fa-icon> -->
         </div>
         }
@@ -251,7 +237,7 @@
             }
 
             @if(header.subKey){
-            <span class="block text-neutral-600 text-xs min-w-max">
+            <span class="sau-table-subkey">
                 (
                 <ng-container [ngTemplateOutlet]="DataTypeTemplate"
                     [ngTemplateOutletContext]="{item:item, header:header, value:header.subKey}"></ng-container>
@@ -268,16 +254,16 @@
 <!----------------------------------- Data Type template ----------------------------------->
 <ng-template #DataTypeTemplate let-item="item" let-header="header" let-value="value">
 
-    <section class="inline-block min-w-max">
+    <section class="sau-table-data-type-section">
         @switch (header.type) {
 
         @case ('boolean') {
         @if(getValue(item, value)){
-        <div class="inline-flex items-center justify-center w-6 h-6 bg-emerald-100 rounded-full">
+        <div class="sau-table-boolean-true">
             <!-- <fa-icon [ngClass]="['text-emerald-600', 'text-xs']" [icon]="['fas', 'check']"></fa-icon> -->
         </div>
         } @else {
-        <div class="inline-flex items-center justify-center w-6 h-6 bg-rose-100 rounded-full">
+        <div class="sau-table-boolean-false">
             <!-- <fa-icon [ngClass]="['text-rose-600', 'text-xs']" [icon]="['fas', 'xmark']"></fa-icon> -->
         </div>
         }
@@ -288,25 +274,24 @@
         }
 
         @case ('dateTime') {
-        <span class="text-neutral-600 text-sm">
+        <span class="sau-table-datetime">
             {{getValue(item, value) | date: 'dd/MM/yyyy HH:mm'}}
         </span>
         }
 
         @case ('color'){
-        <span class="inline-block w-8 h-4 rounded-full border border-neutral-200 shadow-sm"
-            [style.background-color]="getValue(item, value)"></span>
+        <span class="sau-table-color-indicator" [style.background-color]="getValue(item, value)"></span>
         }
 
         @case ('link'){
         @let link = getLink(header.url, item, value);
 
         @if(link.isExternal){
-        <a [href]="link.url" class="text-purple-600 hover:underline">
+        <a [href]="link.url" class="sau-table-link">
             {{header.linkName}}
         </a>
         }@else{
-        <a [routerLink]="link.url" class="text-purple-600 hover:underline" target="_blank">
+        <a [routerLink]="link.url" class="sau-table-link" target="_blank">
             {{header.linkName}}
         </a>
         }
@@ -316,29 +301,28 @@
         @case ('image'){
         @let link = getLink(header.url, item, value);
 
-        <img [src]="link.url" [alt]="getValue(item, value)" loading="lazy" class="w-10 h-10 object-cover">
+        <img [src]="link.url" [alt]="getValue(item, value)" loading="lazy" class="sau-table-image">
         }
 
         @case ('login'){
         @if(item.active){
-        <span class="inline-flex items-center gap-1">
+        <span class="sau-table-login-container">
 
             @if(item.email_verified_at){
-            <div [title]="item.email" class="inline-flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full">
+            <div [title]="item.email" class="sau-table-login-email-verified">
                 <!-- <fa-icon [ngClass]="['text-blue-600', 'text-xs']" [icon]="['fas', 'envelope']"></fa-icon> -->
             </div>
             }
 
             @if(item.google_id){
-            <div [title]="item.google_id"
-                class="inline-flex items-center justify-center w-6 h-6 bg-red-100 rounded-full">
+            <div [title]="item.google_id" class="sau-table-login-google">
                 <!-- <fa-icon [ngClass]="['text-red-600', 'text-xs']" [icon]="['fab', 'google']"></fa-icon> -->
             </div>
             }
 
         </span>
         } @else {
-        <div class="inline-flex items-center justify-center w-6 h-6 bg-rose-100 rounded-full">
+        <div class="sau-table-login-inactive">
             <!-- <fa-icon [ngClass]="['text-rose-600', 'text-xs']" [icon]="['fas', 'xmark']"></fa-icon> -->
         </div>
         }

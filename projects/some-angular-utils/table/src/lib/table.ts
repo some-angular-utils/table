@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'sau-table',
   templateUrl: './table.html',
+  styleUrl: './table.scss',
   imports: [
     RouterModule,
     DatePipe,
