@@ -1,10 +1,12 @@
 # @some-angular-utils/table
 
-![NPM Version](https://img.shields.io/npm/v/%40some-angular-utils%2Ftable)
-![NPM Downloads](https://img.shields.io/npm/dm/%40some-angular-utils%2Ftable)
+[![github stars](https://img.shields.io/github/stars/some-angular-utils/table.svg?style=social&label=Star)](https://github.com/some-angular-utils/table)
 
-![npm bundle size](https://img.shields.io/bundlephobia/min/%40some-angular-utils%2Ftable)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/%40some-angular-utils%2Ftable)
+[![NPM Version](https://img.shields.io/npm/v/@some-angular-utils/table)](https://www.npmjs.com/package/@some-angular-utils/table)
+[![NPM Downloads](https://img.shields.io/npm/dm/@some-angular-utils/table)](https://www.npmjs.com/package/@some-angular-utils/table)
+
+[![npm bundle size](https://img.shields.io/bundlephobia/min/@some-angular-utils/table)](https://www.npmjs.com/package/@some-angular-utils/table)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@some-angular-utils/table)](https://www.npmjs.com/package/@some-angular-utils/table)
 
 ## IMPORT
 ```ts
