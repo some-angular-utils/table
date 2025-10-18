@@ -1,22 +1,22 @@
-// Variables de colores CSS vanilla
-:root {
+.sau-table {
+
     // Colores principales
-    --sau-color-primary: rgb(147, 51, 234);      // purple-600
-    --sau-color-secondary: rgb(219, 39, 119);    // pink-600
+    --sau-color-primary: rgb(147, 51, 234); // purple-600
+    --sau-color-secondary: rgb(219, 39, 119); // pink-600
     --sau-color-primary-light: rgb(168, 85, 247); // purple-500
     --sau-color-secondary-light: rgb(236, 72, 153); // pink-500
-    
+
     // Tonos de púrpura
     --sau-color-purple-50: rgb(250, 245, 255);
     --sau-color-purple-100: rgb(243, 232, 255);
     --sau-color-purple-200: rgb(233, 213, 255);
     --sau-color-purple-300: rgb(196, 181, 253);
     --sau-color-purple-600: var(--sau-color-primary);
-    
+
     // Tonos de rosa
     --sau-color-pink-50: rgb(253, 242, 248);
     --sau-color-pink-600: var(--sau-color-secondary);
-    
+
     // Colores neutros
     --sau-color-white: rgb(255, 255, 255);
     --sau-color-neutral-400: rgb(156, 163, 175);
@@ -25,19 +25,19 @@
     --sau-color-neutral-700: rgb(64, 64, 64);
     --sau-color-neutral-800: rgb(38, 38, 38);
     --sau-color-gray-200: rgb(229, 231, 235);
-    
+
     // Colores de estado
-    --sau-color-success-100: rgb(209, 250, 229);   // emerald-100
-    --sau-color-error-100: rgb(254, 226, 226);     // rose-100
-    --sau-color-error-600: rgb(244, 63, 94);       // rose-600
-    --sau-color-error-700: rgb(239, 68, 68);       // red-600
-    --sau-color-error-200: rgb(251, 113, 133);     // rose-300
-    --sau-color-error-50: rgb(255, 241, 242);      // rose-50
-    
+    --sau-color-success-100: rgb(209, 250, 229); // emerald-100
+    --sau-color-error-100: rgb(254, 226, 226); // rose-100
+    --sau-color-error-600: rgb(244, 63, 94); // rose-600
+    --sau-color-error-700: rgb(239, 68, 68); // red-600
+    --sau-color-error-200: rgb(251, 113, 133); // rose-300
+    --sau-color-error-50: rgb(255, 241, 242); // rose-50
+
     // Colores de información
-    --sau-color-info-100: rgb(219, 234, 254);      // blue-100
-    --sau-color-warning-100: rgb(254, 243, 199);   // amber-100
-    
+    --sau-color-info-100: rgb(219, 234, 254); // blue-100
+    --sau-color-warning-100: rgb(254, 243, 199); // amber-100
+
     // Transparencias
     --sau-color-white-90: rgba(255, 255, 255, 0.9);
     --sau-color-white-50: rgba(255, 255, 255, 0.5);
@@ -48,15 +48,12 @@
     --sau-color-purple-100-50: rgba(196, 181, 253, 0.5);
     --sau-color-purple-300-30: rgba(196, 181, 253, 0.3);
     --sau-color-pink-50-50: rgba(253, 242, 248, 0.5);
-    
+
     // Sombras
     --sau-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
     --sau-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --sau-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
 
-// Contenedor principal
-.sau-table {
     overflow: auto;
     border-radius: 1rem;
     background: var(--sau-color-white-90);
@@ -134,13 +131,13 @@
         .sau-table-toggle-input {
             display: none;
 
-            &:checked ~ .sau-table-toggle-content {
+            &:checked~.sau-table-toggle-content {
                 height: auto !important;
                 opacity: 1 !important;
                 overflow: visible !important;
             }
 
-            &:checked + .sau-table-toggle-label {
+            &:checked+.sau-table-toggle-label {
                 .sau-table-toggle-show {
                     display: none;
                 }
