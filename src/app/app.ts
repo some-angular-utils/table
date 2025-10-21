@@ -19,4 +19,6 @@ export class App {
     { name: 'URL', key: 'url', type: 'link', linkName: 'Ver' },
     { name: 'IMG', key: 'name', type: 'image', url: 'https://img.pokemondb.net/artwork/{key}.jpg' }
   ]
+
+  test() { }
 }

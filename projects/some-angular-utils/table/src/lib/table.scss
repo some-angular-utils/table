@@ -54,6 +54,7 @@
     --sau-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --sau-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 
+    // Estilos principales del contenedor
     overflow: auto;
     border-radius: 1rem;
     background: var(--sau-color-white-90);
@@ -64,6 +65,33 @@
     // Utility classes
     .sau-table-width-full {
         width: 100%;
+    }
+
+    // Iconos SVG puros
+    .sau-icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        vertical-align: middle;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        &.sau-icon-chevron-down svg {
+            width: 1.8em;
+            height: 1.8em;
+        }
+
+        &.sau-icon-inbox svg {
+            width: 1.5em;
+            height: 1.5em;
+        }
     }
 
     // Mobile

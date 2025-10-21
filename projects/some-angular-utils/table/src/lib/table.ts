@@ -1,16 +1,43 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ChevronDownIconComponent } from './icons/chevron-down-icon';
+import { ChevronLeftIconComponent } from './icons/chevron-left-icon';
+import { ChevronRightIconComponent } from './icons/chevron-right-icon';
+import { ChevronDoubleLeftIconComponent } from './icons/chevron-double-left-icon';
+import { ChevronDoubleRightIconComponent } from './icons/chevron-double-right-icon';
+import { PenIconComponent } from './icons/pen-icon';
+import { TrashIconComponent } from './icons/trash-icon';
+import { InboxIconComponent } from './icons/inbox-icon';
+import { CrownIconComponent } from './icons/crown-icon';
+import { CheckIconComponent } from './icons/check-icon';
+import { XmarkIconComponent } from './icons/xmark-icon';
+import { EnvelopeIconComponent } from './icons/envelope-icon';
+import { GoogleIconComponent } from './icons/google-icon';
 
 @Component({
   selector: 'sau-table',
   templateUrl: './table.html',
-  styleUrl: './table.scss',
+  styleUrls: ['./table.scss'],
+  encapsulation: ViewEncapsulation.None,
   imports: [
     RouterModule,
     DatePipe,
     CommonModule,
+    ChevronDownIconComponent,
+    ChevronLeftIconComponent,
+    ChevronRightIconComponent,
+    ChevronDoubleLeftIconComponent,
+    ChevronDoubleRightIconComponent,
+    PenIconComponent,
+    TrashIconComponent,
+    InboxIconComponent,
+    CrownIconComponent,
+    CheckIconComponent,
+    XmarkIconComponent,
+    EnvelopeIconComponent,
+    GoogleIconComponent,
   ]
 })
 export class TableModule {
@@ -24,6 +51,15 @@ export class TableModule {
   @Input() headers?: { name: string, key: string | string[], subKey?: string, type?: string, innerHtml?: boolean, headers?: any }[];
   @Output() editEvent = new EventEmitter();
   @Output() deleteEvent = new EventEmitter();
+
+  // Getters para verificar si hay suscriptores
+  get hasEditSubscription(): boolean {
+    return this.editEvent.observed;
+  }
+
+  get hasDeleteSubscription(): boolean {
+    return this.deleteEvent.observed;
+  }
 
   loading = false
 
