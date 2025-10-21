@@ -71,3 +71,25 @@ jobs:
       - name: Publish to github npm
         working-directory: dist/some-angular-utils/table
         run: npm publish
+
+  github-pages:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build docs
+        run: npm run build:gh-pages
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist/table/browser # The folder the action should deploy.

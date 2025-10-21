@@ -5,10 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "dev": "npm run build:lib && npm run start",
-    "build": "ng build",
+    "build": "ng build --base-href=/table/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:lib": "ng-packagr -p projects/some-angular-utils/table/ng-package.json"
+    "build:lib": "ng-packagr -p projects/some-angular-utils/table/ng-package.json",
+    "build:gh-pages": "npm run build:lib && npm run build"
   },
   "prettier": {
     "printWidth": 100,
