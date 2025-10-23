@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ViewEncapsulation } from '@angular/core';
 import { TableModule } from '@some-angular-utils/table';
 
 @Component({
@@ -7,7 +7,8 @@ import { TableModule } from '@some-angular-utils/table';
     TableModule
   ],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class App {
   protected readonly title = signal('table');

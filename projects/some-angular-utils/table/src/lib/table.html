@@ -35,8 +35,7 @@
                                         <input type="checkbox" [id]="'toggle-table-' + $index"
                                             class="sau-table-toggle-input">
                                         <label [for]="'toggle-table-' + $index" class="sau-table-toggle-label">
-                                            <span
-                                                class="sau-icon sau-icon-chevron-down text-xs transition-transform duration-200 peer-checked:rotate-180">
+                                            <span class="sau-icon sau-icon-chevron-down">
                                                 <sau-chevron-down-icon></sau-chevron-down-icon>
                                             </span>
                                             <span class="sau-table-toggle-text">
@@ -68,7 +67,7 @@
                                         <div class="sau-table-mobile-actions-container">
                                             @if(hasEditSubscription){
                                             <button class="sau-table-edit-button" (click)="clickEditButton(item.id)">
-                                                <span class="sau-icon sau-icon-pen text-xs">
+                                                <span class="sau-icon sau-icon-pen">
                                                     <sau-pen-icon></sau-pen-icon>
                                                 </span>
                                                 Editar
@@ -78,7 +77,7 @@
                                             @if(hasDeleteSubscription){
                                             <button class="sau-table-delete-button"
                                                 (click)="clickDeleteButton(item.id)">
-                                                <span class="sau-icon sau-icon-trash text-xs text-red-600">
+                                                <span class="sau-icon sau-icon-trash">
                                                     <sau-trash-icon></sau-trash-icon>
                                                 </span>
                                                 Eliminar
@@ -142,7 +141,7 @@
                     <div class="sau-table-desktop-actions-container">
                         @if(hasEditSubscription){
                         <button class="sau-table-desktop-edit-button" (click)="clickEditButton(item.id)" title="Editar">
-                            <span class="sau-icon sau-icon-pen text-xs">
+                            <span class="sau-icon sau-icon-pen">
                                 <sau-pen-icon></sau-pen-icon>
                             </span>
                         </button>
@@ -151,7 +150,7 @@
                         @if(hasDeleteSubscription){
                         <button class="sau-table-desktop-delete-button" (click)="clickDeleteButton(item.id)"
                             title="Eliminar">
-                            <span class="sau-icon sau-icon-trash text-xs">
+                            <span class="sau-icon sau-icon-trash">
                                 <sau-trash-icon></sau-trash-icon>
                             </span>
                         </button>
@@ -169,7 +168,7 @@
     @if (items.length == 0) {
     <div class="sau-table-empty">
         <div class="sau-table-empty-icon">
-            <span class="sau-icon sau-icon-inbox text-purple-400 text-2xl">
+            <span class="sau-icon sau-icon-inbox">
                 <sau-inbox-icon></sau-inbox-icon>
             </span>
         </div>
@@ -239,7 +238,7 @@
 
         @if(header.name == 'NOMBRE' && item.role == 'ROLE_ADMIN') {
         <div class="sau-table-admin-crown">
-            <span class="sau-icon sau-icon-crown text-orange-600 text-xs">
+            <span class="sau-icon sau-icon-crown">
                 <sau-crown-icon></sau-crown-icon>
             </span>
         </div>
@@ -277,13 +276,13 @@
         @case ('boolean') {
         @if(getValue(item, value)){
         <div class="sau-table-boolean-true">
-            <span class="sau-icon sau-icon-check text-emerald-600 text-xs">
+            <span class="sau-icon sau-icon-check">
                 <sau-check-icon></sau-check-icon>
             </span>
         </div>
         } @else {
         <div class="sau-table-boolean-false">
-            <span class="sau-icon sau-icon-xmark text-rose-600 text-xs">
+            <span class="sau-icon sau-icon-xmark">
                 <sau-xmark-icon></sau-xmark-icon>
             </span>
         </div>
@@ -331,7 +330,7 @@
 
             @if(item.email_verified_at){
             <div [title]="item.email" class="sau-table-login-email-verified">
-                <span class="sau-icon sau-icon-envelope text-blue-600 text-xs">
+                <span class="sau-icon sau-icon-envelope">
                     <sau-envelope-icon></sau-envelope-icon>
                 </span>
             </div>
@@ -339,7 +338,7 @@
 
             @if(item.google_id){
             <div [title]="item.google_id" class="sau-table-login-google">
-                <span class="sau-icon sau-icon-google text-red-600 text-xs">
+                <span class="sau-icon sau-icon-google">
                     <sau-google-icon></sau-google-icon>
                 </span>
             </div>
@@ -348,7 +347,7 @@
         </span>
         } @else {
         <div class="sau-table-login-inactive">
-            <span class="sau-icon sau-icon-xmark text-rose-600 text-xs">
+            <span class="sau-icon sau-icon-xmark">
                 <sau-xmark-icon></sau-xmark-icon>
             </span>
         </div>

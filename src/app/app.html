@@ -1,4 +1,4 @@
-<div class="flex flex-col xl:flex-row gap-5 p-5 bg-gray-200 min-h-screen">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-5 p-5 bg-gray-200 min-h-screen">
     <section class="flex-1">
         <h2>Empty</h2>
         <sau-table></sau-table>
@@ -16,6 +16,19 @@
         <h2>Filled with pokemon api</h2>
         <sau-table #sauTable [url]="url" contentList="results" contentTotal="count" pageParamName="offset"
             limitParamName="limit" [sizeBetweenPages]="10" [limit]="10" [headers]="headers"></sau-table>
+
+    </section>
+
+    <section class="colorsChanged flex-1">
+        <h2>Colors changed empty</h2>
+        <sau-table></sau-table>
+    </section>
+
+    <section class="colorsChanged flex-1">
+        <h2>Colors changed</h2>
+        <sau-table #sauTable [url]="url" contentList="results" contentTotal="count" pageParamName="offset"
+            limitParamName="limit" [sizeBetweenPages]="10" [limit]="10" [headers]="headers" (deleteEvent)="test()"
+            (editEvent)="test()"></sau-table>
 
     </section>
 </div>

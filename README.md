@@ -37,3 +37,16 @@ public headers = [
     [headers]="headers"
 ></sau-table>
 ```
+
+## COLORS
+
+```css
+.sau-table{
+    --sau-color-primary: rgb(147, 51, 234);
+    --sau-color-secondary: var(--sau-color-primary);
+    --sau-color-background: rgb(255, 255, 255);
+    --sau-color-edit: rgb(34, 197, 94);
+    --sau-color-delete: rgb(239, 68, 68);
+    --sau-color-text: rgb(31, 41, 55);
+}
+```

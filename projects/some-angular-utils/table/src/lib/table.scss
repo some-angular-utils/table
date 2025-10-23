@@ -1,66 +1,16 @@
 .sau-table {
 
     // Colores principales
-    --sau-color-primary: rgb(147, 51, 234); // purple-600
-    --sau-color-secondary: rgb(219, 39, 119); // pink-600
-    --sau-color-primary-light: rgb(168, 85, 247); // purple-500
-    --sau-color-secondary-light: rgb(236, 72, 153); // pink-500
-
-    // Tonos de púrpura
-    --sau-color-purple-50: rgb(250, 245, 255);
-    --sau-color-purple-100: rgb(243, 232, 255);
-    --sau-color-purple-200: rgb(233, 213, 255);
-    --sau-color-purple-300: rgb(196, 181, 253);
-    --sau-color-purple-600: var(--sau-color-primary);
-
-    // Tonos de rosa
-    --sau-color-pink-50: rgb(253, 242, 248);
-    --sau-color-pink-600: var(--sau-color-secondary);
-
-    // Colores neutros
-    --sau-color-white: rgb(255, 255, 255);
-    --sau-color-neutral-400: rgb(156, 163, 175);
-    --sau-color-neutral-500: rgb(107, 114, 128);
-    --sau-color-neutral-600: rgb(75, 85, 99);
-    --sau-color-neutral-700: rgb(64, 64, 64);
-    --sau-color-neutral-800: rgb(38, 38, 38);
-    --sau-color-gray-200: rgb(229, 231, 235);
-
-    // Colores de estado
-    --sau-color-success-100: rgb(209, 250, 229); // emerald-100
-    --sau-color-error-100: rgb(254, 226, 226); // rose-100
-    --sau-color-error-600: rgb(244, 63, 94); // rose-600
-    --sau-color-error-700: rgb(239, 68, 68); // red-600
-    --sau-color-error-200: rgb(251, 113, 133); // rose-300
-    --sau-color-error-50: rgb(255, 241, 242); // rose-50
-
-    // Colores de información
-    --sau-color-info-100: rgb(219, 234, 254); // blue-100
-    --sau-color-warning-100: rgb(254, 243, 199); // amber-100
-
-    // Transparencias
-    --sau-color-white-90: rgba(255, 255, 255, 0.9);
-    --sau-color-white-50: rgba(255, 255, 255, 0.5);
-    --sau-color-white-30: rgba(255, 255, 255, 0.3);
-    --sau-color-purple-50-50: rgba(250, 245, 255, 0.5);
-    --sau-color-purple-50-30: rgba(250, 245, 255, 0.3);
-    --sau-color-purple-50-20: rgba(250, 245, 255, 0.2);
-    --sau-color-purple-100-50: rgba(196, 181, 253, 0.5);
-    --sau-color-purple-300-30: rgba(196, 181, 253, 0.3);
-    --sau-color-pink-50-50: rgba(253, 242, 248, 0.5);
-
-    // Sombras
-    --sau-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    --sau-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    --sau-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --sau-color-primary: rgb(147, 51, 234);
+    --sau-color-secondary: var(--sau-color-primary);
+    --sau-color-background: rgb(255, 255, 255);
+    --sau-color-edit: rgb(34, 197, 94);
+    --sau-color-delete: rgb(239, 68, 68);
+    --sau-color-text: rgb(31, 41, 55);
 
     // Estilos principales del contenedor
     overflow: auto;
-    border-radius: 1rem;
-    background: var(--sau-color-white-90);
-    backdrop-filter: blur(16px);
-    box-shadow: var(--sau-shadow-xl);
-    border: 1px solid var(--sau-color-white-50);
+    background: var(--sau-color-background);
 
     // Utility classes
     .sau-table-width-full {
@@ -102,10 +52,8 @@
 
         .sau-table-mobile-header {
             background: linear-gradient(to right, var(--sau-color-primary), var(--sau-color-secondary));
-            color: var(--sau-color-white);
+            color: var(--sau-color-background);
             padding: 0.5rem 1rem;
-            border-top-left-radius: 1rem;
-            border-top-right-radius: 1rem;
 
             .sau-table-mobile-title {
                 font-size: 1rem;
@@ -116,8 +64,7 @@
             .sau-table-mobile-divider {
                 width: 2rem;
                 height: 0.125rem;
-                background: var(--sau-color-white-30);
-                border-radius: 9999px;
+                background: var(--sau-color-background);
                 margin-top: 0.25rem;
             }
         }
@@ -126,31 +73,31 @@
             width: 100%;
             font-size: 0.875rem;
             text-align: left;
-            color: var(--sau-color-neutral-700);
+            color: var(--sau-color-primary);
 
             .sau-table-mobile-row {
-                border-bottom: 1px solid var(--sau-color-purple-100-50);
+                border-bottom: 1px solid var(--sau-color-primary);
 
                 &:last-child {
                     border-bottom: none;
                 }
 
                 &.sau-table-mobile-row-even {
-                    background: var(--sau-color-purple-50-30);
+                    background: var(--sau-color-background);
                 }
 
                 .sau-table-mobile-header-cell {
                     padding: 0.5rem;
                     font-weight: 500;
                     background: linear-gradient(to right, var(--sau-color-primary), var(--sau-color-secondary));
-                    color: var(--sau-color-white);
+                    color: var(--sau-color-background);
                     max-width: min-content;
                 }
 
                 .sau-table-mobile-data-cell {
                     padding: 0.5rem;
                     width: 100%;
-                    color: var(--sau-color-neutral-800);
+                    color: var(--sau-color-primary);
                 }
             }
         }
@@ -181,15 +128,15 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.75rem;
-            background: var(--sau-color-purple-100);
+            background: var(--sau-color-background);
             color: var(--sau-color-primary);
-            border-radius: 0.5rem;
             cursor: pointer;
             user-select: none;
             transition: all 0.2s;
 
             &:hover {
-                background: var(--sau-color-purple-200);
+                background: var(--sau-color-secondary);
+                color: var(--sau-color-background);
             }
 
             .sau-table-toggle-text {
@@ -216,15 +163,15 @@
 
         // Action buttons mobile
         .sau-table-mobile-actions-row {
-            border-bottom: 8px solid transparent;
-            background: linear-gradient(to right, var(--sau-color-primary), var(--sau-color-primary-light));
+            border-bottom: 0.5rem solid transparent;
+            background: linear-gradient(to right, var(--sau-color-primary), var(--sau-color-secondary));
             padding: 1rem;
 
             .sau-table-mobile-actions-container {
                 display: flex;
                 justify-content: center;
                 gap: 1rem;
-                padding: 1rem;
+                padding: 0.5rem;
 
                 .sau-table-edit-button {
                     display: inline-flex;
@@ -233,16 +180,15 @@
                     padding: 0.5rem 1rem;
                     font-size: 0.875rem;
                     font-weight: 500;
-                    color: var(--sau-color-primary);
-                    background: var(--sau-color-purple-50);
-                    border: 1px solid var(--sau-color-purple-300);
-                    border-radius: 0.5rem;
+                    color: var(--sau-color-edit);
+                    background: var(--sau-color-background);
+                    border: 1px solid var(--sau-color-edit);
                     transition: all 0.2s;
                     cursor: pointer;
 
                     &:hover {
-                        background: var(--sau-color-purple-100);
-                        border-color: var(--sau-color-primary-light);
+                        background: var(--sau-color-edit);
+                        color: var(--sau-color-background);
                     }
                 }
 
@@ -253,16 +199,15 @@
                     padding: 0.5rem 1rem;
                     font-size: 0.875rem;
                     font-weight: 500;
-                    color: var(--sau-color-error-600);
-                    background: var(--sau-color-error-50);
-                    border: 1px solid var(--sau-color-error-200);
-                    border-radius: 0.5rem;
+                    color: var(--sau-color-delete);
+                    background: var(--sau-color-background);
+                    border: 1px solid var(--sau-color-delete);
                     transition: all 0.2s;
                     cursor: pointer;
 
                     &:hover {
-                        background: var(--sau-color-error-100);
-                        border-color: var(--sau-color-error-700);
+                        background: var(--sau-color-delete);
+                        color: var(--sau-color-background);
                     }
                 }
             }
@@ -274,7 +219,7 @@
         width: 100%;
         font-size: 0.875rem;
         text-align: center;
-        color: var(--sau-color-neutral-700);
+        color: var(--sau-color-primary);
         display: none;
 
         @media (min-width: 768px) {
@@ -286,7 +231,7 @@
             font-weight: 600;
             text-transform: uppercase;
             background: linear-gradient(to right, var(--sau-color-primary), var(--sau-color-secondary));
-            color: var(--sau-color-white);
+            color: var(--sau-color-background);
 
             .sau-table-desktop-header-cell {
                 padding: 0.5rem;
@@ -296,18 +241,18 @@
         .sau-table-desktop-row {
             min-width: max-content;
             transition: background-color 0.2s;
-            border-bottom: 1px solid var(--sau-color-purple-300-30);
+            border-bottom: 1px solid var(--sau-color-primary);
 
             &:last-child {
                 border-bottom: none;
             }
 
             &:hover {
-                background: var(--sau-color-purple-50-50);
+                background: var(--sau-color-background);
             }
 
             &.sau-table-desktop-row-even {
-                background: var(--sau-color-purple-50-20);
+                background: var(--sau-color-background);
             }
 
             .sau-table-desktop-cell {
@@ -315,7 +260,7 @@
             }
 
             .sau-table-desktop-actions-cell {
-                padding: 1.5rem 1rem;
+                padding: 0.5rem;
 
                 .sau-table-desktop-actions-container {
                     display: flex;
@@ -328,16 +273,16 @@
                         justify-content: center;
                         width: 2rem;
                         height: 2rem;
-                        color: var(--sau-color-primary);
-                        background: var(--sau-color-purple-50);
-                        border: 1px solid var(--sau-color-purple-300);
-                        border-radius: 0.5rem;
+                        color: var(--sau-color-edit);
+                        background: var(--sau-color-background);
+                        border: 1px solid var(--sau-color-edit);
                         transition: all 0.2s;
+                        font-size: 1.2rem;
                         cursor: pointer;
 
                         &:hover {
-                            background: var(--sau-color-purple-100);
-                            border-color: var(--sau-color-primary-light);
+                            background: var(--sau-color-edit);
+                            color: var(--sau-color-background);
                         }
                     }
 
@@ -347,16 +292,16 @@
                         justify-content: center;
                         width: 2rem;
                         height: 2rem;
-                        color: var(--sau-color-error-600);
-                        background: var(--sau-color-error-50);
-                        border: 1px solid var(--sau-color-error-200);
-                        border-radius: 0.5rem;
+                        color: var(--sau-color-delete);
+                        background: var(--sau-color-background);
+                        border: 1px solid var(--sau-color-delete);
                         transition: all 0.2s;
+                        font-size: 1.2rem;
                         cursor: pointer;
 
                         &:hover {
-                            background: var(--sau-color-error-100);
-                            border-color: var(--sau-color-error-700);
+                            background: var(--sau-color-delete);
+                            color: var(--sau-color-background);
                         }
                     }
                 }
@@ -374,23 +319,36 @@
         text-align: center;
 
         .sau-table-empty-icon {
+            position: relative;
             width: 4rem;
             height: 4rem;
-            background: var(--sau-color-purple-100);
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1rem;
+            color: var(--sau-color-primary);
+            font-size: 2rem;
+
+            &::after {
+                content: "";
+                width: 4rem;
+                height: 4rem;
+                background: var(--sau-color-primary);
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0.3;
+                border-radius: 50%;
+            }
         }
 
         .sau-table-empty-title {
-            color: var(--sau-color-neutral-500);
+            color: var(--sau-color-text);
             font-weight: 500;
         }
 
         .sau-table-empty-subtitle {
-            color: var(--sau-color-neutral-400);
+            color: var(--sau-color-text);
             font-size: 0.875rem;
         }
     }
@@ -405,8 +363,8 @@
         align-items: center;
         justify-content: center;
         padding: 1.5rem;
-        background: linear-gradient(to right, var(--sau-color-purple-50-50), var(--sau-color-pink-50-50));
-        border-top: 1px solid var(--sau-color-purple-100-50);
+        background: var(--sau-color-background);
+        border-top: 1px solid var(--sau-color-primary);
 
         @media (min-width: 768px) {
             justify-content: space-between;
@@ -428,26 +386,24 @@
                 cursor: pointer;
                 width: 2.5rem;
                 height: 2.5rem;
-                border-radius: 0.5rem;
                 font-weight: 500;
                 font-size: 0.875rem;
                 transition: all 0.2s;
                 border: none;
 
                 &.sau-table-pagination-number-button-active {
-                    background: linear-gradient(to right, var(--sau-color-primary-light), var(--sau-color-secondary-light));
-                    color: var(--sau-color-white);
-                    box-shadow: var(--sau-shadow-lg);
+                    background: linear-gradient(to right, var(--sau-color-primary), var(--sau-color-secondary));
+                    color: var(--sau-color-background);
                 }
 
                 &.sau-table-pagination-number-button-inactive {
                     color: var(--sau-color-primary);
-                    background: var(--sau-color-white);
-                    border: 1px solid var(--sau-color-purple-300);
+                    background: var(--sau-color-background);
+                    border: 1px solid var(--sau-color-primary);
 
                     &:hover {
-                        background: var(--sau-color-purple-50);
-                        border-color: var(--sau-color-primary-light);
+                        background: var(--sau-color-primary);
+                        color: var(--sau-color-background);
                     }
                 }
             }
@@ -481,14 +437,13 @@
             width: 2.5rem;
             height: 2.5rem;
             color: var(--sau-color-primary);
-            background: var(--sau-color-white);
-            border: 1px solid var(--sau-color-purple-300);
-            border-radius: 0.5rem;
+            background: var(--sau-color-background);
+            border: 1px solid var(--sau-color-primary);
             transition: all 0.2s;
 
             &.sau-table-pagination-nav-button-enabled:hover {
-                background: var(--sau-color-purple-50);
-                border-color: var(--sau-color-primary-light);
+                background: var(--sau-color-primary);
+                color: var(--sau-color-background);
             }
 
             &.sau-table-pagination-nav-button-disabled {
@@ -505,16 +460,15 @@
             padding: 0 0.75rem;
             height: 2.5rem;
             color: var(--sau-color-primary);
-            background: var(--sau-color-white);
-            border: 1px solid var(--sau-color-purple-300);
-            border-radius: 0.5rem;
+            background: var(--sau-color-background);
+            border: 1px solid var(--sau-color-primary);
             transition: all 0.2s;
             font-size: 0.875rem;
             font-weight: 500;
 
             &.sau-table-pagination-nav-button-enabled:hover {
-                background: var(--sau-color-purple-50);
-                border-color: var(--sau-color-primary-light);
+                background: var(--sau-color-primary);
+                color: var(--sau-color-background);
             }
 
             &.sau-table-pagination-nav-button-disabled {
@@ -537,13 +491,12 @@
         justify-content: center;
         width: 1.5rem;
         height: 1.5rem;
-        background: var(--sau-color-warning-100);
-        border-radius: 50%;
+        background: var(--sau-color-secondary);
     }
 
     .sau-table-subkey {
         display: block;
-        color: var(--sau-color-neutral-600);
+        color: var(--sau-color-primary);
         font-size: 0.75rem;
         min-width: max-content;
     }
@@ -553,6 +506,7 @@
 .sau-table-data-type-section {
     display: inline-block;
     min-width: max-content;
+    color: var(--sau-color-text);
 
     .sau-table-boolean-true {
         display: inline-flex;
@@ -560,8 +514,7 @@
         justify-content: center;
         width: 1.5rem;
         height: 1.5rem;
-        background: var(--sau-color-success-100);
-        border-radius: 50%;
+        background: var(--sau-color-primary);
     }
 
     .sau-table-boolean-false {
@@ -570,12 +523,11 @@
         justify-content: center;
         width: 1.5rem;
         height: 1.5rem;
-        background: var(--sau-color-error-100);
-        border-radius: 50%;
+        background: var(--sau-color-secondary);
     }
 
     .sau-table-datetime {
-        color: var(--sau-color-neutral-600);
+        color: var(--sau-color-primary);
         font-size: 0.875rem;
     }
 
@@ -583,9 +535,7 @@
         display: inline-block;
         width: 2rem;
         height: 1rem;
-        border-radius: 9999px;
-        border: 1px solid var(--sau-color-gray-200);
-        box-shadow: var(--sau-shadow-sm);
+        border: 1px solid var(--sau-color-primary);
     }
 
     .sau-table-link {
@@ -614,8 +564,7 @@
             justify-content: center;
             width: 1.5rem;
             height: 1.5rem;
-            background: var(--sau-color-info-100);
-            border-radius: 50%;
+            background: var(--sau-color-primary);
         }
 
         .sau-table-login-google {
@@ -624,8 +573,7 @@
             justify-content: center;
             width: 1.5rem;
             height: 1.5rem;
-            background: var(--sau-color-error-100);
-            border-radius: 50%;
+            background: var(--sau-color-secondary);
         }
     }
 
@@ -635,7 +583,6 @@
         justify-content: center;
         width: 1.5rem;
         height: 1.5rem;
-        background: var(--sau-color-error-100);
-        border-radius: 50%;
+        background: var(--sau-color-secondary);
     }
 }
