@@ -8,6 +8,14 @@
 [![npm bundle size](https://img.shields.io/bundlephobia/min/@some-angular-utils/table)](https://www.npmjs.com/package/@some-angular-utils/table)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/@some-angular-utils/table)](https://www.npmjs.com/package/@some-angular-utils/table)
 
+---
+
+[DEMO](https://some-angular-utils.github.io/table)
+
+[NPM](https://www.npmjs.com/package/@some-angular-utils/table)
+
+---
+
 ## IMPORT
 ```ts
 import { TableModule } from '@some-angular-utils/table';
