@@ -331,8 +331,8 @@
 
             &::after {
                 content: "";
-                width: 4rem;
-                height: 4rem;
+                width: 100%;
+                height: 100%;
                 background: var(--sau-color-primary);
                 position: absolute;
                 top: 0;
@@ -509,25 +509,49 @@
     color: var(--sau-color-text);
 
     .sau-table-boolean-true {
+        position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         width: 1.5rem;
         height: 1.5rem;
-        background: var(--sau-color-primary);
+
+        &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: var(--sau-color-primary);
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.3;
+            border-radius: 50%;
+        }
     }
 
     .sau-table-boolean-false {
+        position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         width: 1.5rem;
         height: 1.5rem;
-        background: var(--sau-color-secondary);
+
+        &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: var(--sau-color-primary);
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.3;
+            border-radius: 50%;
+        }
     }
 
     .sau-table-datetime {
-        color: var(--sau-color-primary);
+        color: var(--sau-color-text);
         font-size: 0.875rem;
     }
 
@@ -535,7 +559,6 @@
         display: inline-block;
         width: 2rem;
         height: 1rem;
-        border: 1px solid var(--sau-color-primary);
     }
 
     .sau-table-link {

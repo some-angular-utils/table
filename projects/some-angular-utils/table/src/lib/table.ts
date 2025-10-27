@@ -48,6 +48,7 @@ export class TableModule {
   @Input() limitParamName = 'limit'
   @Input() sizeInitialPage = 0
   @Input() sizeBetweenPages = 1
+  @Input() fixedContent = []
   @Input() headers?: { name: string, key: string | string[], subKey?: string, type?: string, innerHtml?: boolean, headers?: any }[];
   @Output() editEvent = new EventEmitter();
   @Output() deleteEvent = new EventEmitter();
@@ -99,6 +100,10 @@ export class TableModule {
   ngOnInit() {
     if (this.url) {
       this.getItems();
+
+    } else if (this.fixedContent && this.fixedContent.length > 0) {
+      this.items = [...this.fixedContent];
+
     }
   }
 
