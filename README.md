@@ -58,3 +58,22 @@ public headers = [
     --sau-color-text: rgb(31, 41, 55);
 }
 ```
+
+## CUSTOM BUTTONS
+```ts
+<sau-table ... >
+
+    <ng-template #editButton let-item>
+        <button>
+            ✏️ Edit {{item.name}}
+        </button>
+    </ng-template>
+
+    <ng-template #deleteButton let-item>
+        <button>
+            🗑️ Delete {{item.name}}
+        </button>
+    </ng-template>
+
+</sau-table>
+```

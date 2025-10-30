@@ -1,6 +1,7 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation, ContentChild } from '@angular/core';
+import { TemplateRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ChevronDownIconComponent } from './icons/chevron-down-icon';
 import { ChevronLeftIconComponent } from './icons/chevron-left-icon';
@@ -52,6 +53,10 @@ export class TableModule {
   @Input() headers?: { name: string, key: string | string[], subKey?: string, type?: string, innerHtml?: boolean, headers?: any }[];
   @Output() editEvent = new EventEmitter();
   @Output() deleteEvent = new EventEmitter();
+
+  // ContentChild para detectar cosas personalizadas
+  @ContentChild('editButton', { static: false }) editButtonTemplate?: TemplateRef<any>;
+  @ContentChild('deleteButton', { static: false }) deleteButtonTemplate?: TemplateRef<any>;
 
   // Getters para verificar si hay suscriptores
   get hasEditSubscription(): boolean {

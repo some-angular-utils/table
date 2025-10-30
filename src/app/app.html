@@ -1,4 +1,5 @@
 <main class="flex flex-col gap-5 bg-gray-200 min-h-screen p-5">
+
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <section>
             <h2>Empty</h2>
@@ -35,4 +36,25 @@
         <h2>Filled with data in variable</h2>
         <sau-table [headers]="headers2" [fixedContent]="content"></sau-table>
     </section>
+
+    <section>
+        <h2>Custom buttons</h2>
+        <sau-table #sauTable [url]="url" contentList="results" contentTotal="count" pageParamName="offset"
+            limitParamName="limit" [sizeBetweenPages]="10" [limit]="10" [headers]="headers" (deleteEvent)="test()"
+            (editEvent)="test()">
+            <ng-template #editButton let-item>
+                <button
+                    class="cursor-pointer bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors">
+                    ✏️ Editar {{item?.name}}
+                </button>
+            </ng-template>
+            <ng-template #deleteButton let-item>
+                <button
+                    class="cursor-pointer bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors">
+                    🗑️ Eliminar {{item?.name}}
+                </button>
+            </ng-template>
+        </sau-table>
+    </section>
+
 </main>

@@ -65,7 +65,11 @@
                                 <tr class="sau-table-mobile-actions-row">
                                     <td colspan="2">
                                         <div class="sau-table-mobile-actions-container">
-                                            @if(hasEditSubscription){
+                                            @if(editButtonTemplate){
+                                            <ng-container
+                                                *ngTemplateOutlet="editButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                                            } @else if(hasEditSubscription){
                                             <button class="sau-table-edit-button" (click)="clickEditButton(item.id)">
                                                 <span class="sau-icon sau-icon-pen">
                                                     <sau-pen-icon></sau-pen-icon>
@@ -74,7 +78,11 @@
                                             </button>
                                             }
 
-                                            @if(hasDeleteSubscription){
+                                            @if(deleteButtonTemplate){
+                                            <ng-container
+                                                *ngTemplateOutlet="deleteButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                                            } @else if(hasDeleteSubscription){
                                             <button class="sau-table-delete-button"
                                                 (click)="clickDeleteButton(item.id)">
                                                 <span class="sau-icon sau-icon-trash">
@@ -83,6 +91,7 @@
                                                 Eliminar
                                             </button>
                                             }
+
                                         </div>
                                     </td>
                                 </tr>
@@ -139,7 +148,12 @@
                 @if(this.url){
                 <td class="sau-table-desktop-actions-cell">
                     <div class="sau-table-desktop-actions-container">
-                        @if(hasEditSubscription){
+
+                        @if(editButtonTemplate){
+                        <ng-container
+                            *ngTemplateOutlet="editButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                        } @else if(hasEditSubscription){
                         <button class="sau-table-desktop-edit-button" (click)="clickEditButton(item.id)" title="Editar">
                             <span class="sau-icon sau-icon-pen">
                                 <sau-pen-icon></sau-pen-icon>
@@ -147,7 +161,11 @@
                         </button>
                         }
 
-                        @if(hasDeleteSubscription){
+                        @if(deleteButtonTemplate){
+                        <ng-container
+                            *ngTemplateOutlet="deleteButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                        } @else if(hasDeleteSubscription){
                         <button class="sau-table-desktop-delete-button" (click)="clickDeleteButton(item.id)"
                             title="Eliminar">
                             <span class="sau-icon sau-icon-trash">
@@ -155,6 +173,7 @@
                             </span>
                         </button>
                         }
+
                     </div>
                 </td>
                 }
