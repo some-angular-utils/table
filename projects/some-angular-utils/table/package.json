@@ -1,11 +1,19 @@
 {
   "name": "@some-angular-utils/table",
   "version": "0.1.6",
-  "description": "Angular table utility library",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/some-angular-utils/table.git"
   },
+  "description": "Angular table utility library",
+  "license": "MIT",
+  "homepage": "https://tanstack.com/table",
+  "keywords": [
+    "angular",
+    "table",
+    "angular-table",
+    "datagrid"
+  ],
   "peerDependencies": {
     "@angular/common": "^20.3.0",
     "@angular/core": "^20.3.0"
