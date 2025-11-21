@@ -201,8 +201,9 @@ export class TableModule {
 
         let isArray = Array.isArray(finalValue)
         let isBoolean = typeof finalValue === 'boolean'
+        let isNumber = typeof finalValue === 'number'
 
-        if (isArray || isBoolean) {
+        if (isArray || isBoolean || isNumber) {
           return finalValue
         }
 

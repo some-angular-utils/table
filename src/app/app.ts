@@ -52,9 +52,13 @@ export class App {
     },
     {
       name: 'Yellow', isActive: true, color: 'yellow', date: new Date('2023-01-03 22:00'), link: 'hola/adios', image: 'pikachu', table: [
-        { name: 'name5', isActive: false },
-        { name: 'name6', isActive: false }
+        { name: 'name5', isActive: 0 },
+        { name: 'name6', isActive: 1 }
       ]
+    },
+
+    {
+      name: 'Orange', isActive: 0, color: 'orange', date: new Date('2023-01-03 22:00'), link: 'hola/adios', image: 'unown'
     },
   ];
 
