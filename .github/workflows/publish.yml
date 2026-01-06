@@ -57,7 +57,7 @@ jobs:
 
       - name: Publish to npm
         working-directory: dist/some-angular-utils/table
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -70,7 +70,7 @@ jobs:
 
       - name: Publish to github npm
         working-directory: dist/some-angular-utils/table
-        run: npm publish
+        run: npm publish --access public
 
   github-pages:
     needs: publish
