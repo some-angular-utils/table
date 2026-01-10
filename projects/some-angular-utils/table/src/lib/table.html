@@ -197,55 +197,8 @@
 
     } @else if(total.length > 1) {
 
-    <!----------------------------------- Pagination ----------------------------------->
-    <div class="sau-table-pagination">
+    <sau-paginator [total]="total" [page]="page" (getitems)="getItems()"></sau-paginator>
 
-        <!-- Números de página -->
-        <div class="sau-table-pagination-number-buttons">
-            @for (item of visiblePages; track $index) {
-            <button (click)="changePage(item)"
-                [class]="'sau-table-pagination-number-button ' + (item == page ? 'sau-table-pagination-number-button-active' : 'sau-table-pagination-number-button-inactive')"
-                type="button">
-                {{item}}
-            </button>
-            }
-        </div>
-
-        <!-- Botones de navegación izquierda -->
-        <div class="sau-table-pagination-nav-left">
-            <!-- Botón ir al inicio -->
-            <button type="button" (click)="goToFirstPage()"
-                [class]="'sau-table-pagination-nav-button-wide ' + (page == 1?'sau-table-pagination-nav-button-disabled':'sau-table-pagination-nav-button-enabled')"
-                title="Ir al inicio">
-                <sau-chevron-double-left-icon></sau-chevron-double-left-icon>
-            </button>
-
-            <!-- Botón página anterior -->
-            <button type="button" (click)="changePage(page-1)"
-                [class]="'sau-table-pagination-nav-button ' + (page == 1?'sau-table-pagination-nav-button-disabled':'sau-table-pagination-nav-button-enabled')"
-                title="Página anterior">
-                <sau-chevron-left-icon></sau-chevron-left-icon>
-            </button>
-        </div>
-
-        <!-- Botones de navegación derecha -->
-        <div class="sau-table-pagination-nav-right">
-            <!-- Botón página siguiente -->
-            <button type="button" (click)="changePage(page+1)"
-                [class]="'sau-table-pagination-nav-button ' + (page == total[total.length-1]?'sau-table-pagination-nav-button-disabled':'sau-table-pagination-nav-button-enabled')"
-                title="Página siguiente">
-                <sau-chevron-right-icon></sau-chevron-right-icon>
-            </button>
-
-            <!-- Botón ir al final -->
-            <button type="button" (click)="goToLastPage()"
-                [class]="'sau-table-pagination-nav-button-wide ' + (page == total[total.length-1]?'sau-table-pagination-nav-button-disabled':'sau-table-pagination-nav-button-enabled')"
-                title="Ir al final">
-                <sau-chevron-double-right-icon></sau-chevron-double-right-icon>
-            </button>
-        </div>
-    </div>
-    <!--------------------------------- pagination end --------------------------------->
     }
 
 </div>

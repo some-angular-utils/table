@@ -3,11 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation, ContentChild } from '@angular/core';
 import { TemplateRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SAUPaginatorModule } from '@some-angular-utils/paginator'
+
 import { ChevronDownIconComponent } from './icons/chevron-down-icon';
-import { ChevronLeftIconComponent } from './icons/chevron-left-icon';
-import { ChevronRightIconComponent } from './icons/chevron-right-icon';
-import { ChevronDoubleLeftIconComponent } from './icons/chevron-double-left-icon';
-import { ChevronDoubleRightIconComponent } from './icons/chevron-double-right-icon';
 import { PenIconComponent } from './icons/pen-icon';
 import { TrashIconComponent } from './icons/trash-icon';
 import { InboxIconComponent } from './icons/inbox-icon';
@@ -26,11 +24,8 @@ import { GoogleIconComponent } from './icons/google-icon';
     RouterModule,
     DatePipe,
     CommonModule,
+    SAUPaginatorModule,
     ChevronDownIconComponent,
-    ChevronLeftIconComponent,
-    ChevronRightIconComponent,
-    ChevronDoubleLeftIconComponent,
-    ChevronDoubleRightIconComponent,
     PenIconComponent,
     TrashIconComponent,
     InboxIconComponent,
@@ -41,7 +36,7 @@ import { GoogleIconComponent } from './icons/google-icon';
     GoogleIconComponent,
   ]
 })
-export class TableModule {
+export class SAUTableModule {
   @Input() url?: string;
   @Input() contentList?: string;
   @Input() contentTotal?: string;
@@ -76,26 +71,6 @@ export class TableModule {
   page = 1
 
   @Input() limit = 10
-
-  // Getter para obtener las páginas visibles (3 antes y 3 después de la página actual)
-  get visiblePages(): number[] {
-    const totalPages = this.total.length;
-    if (totalPages <= 7) {
-      // Si hay 7 páginas o menos, mostrar todas
-      return this.total;
-    }
-
-    const currentPage = this.page;
-    const start = Math.max(1, currentPage - 3);
-    const end = Math.min(totalPages, currentPage + 3);
-
-    const pages: number[] = [];
-    for (let i = start; i <= end; i++) {
-      pages.push(i);
-    }
-
-    return pages;
-  }
 
   constructor(
     private http: HttpClient,
@@ -223,26 +198,6 @@ export class TableModule {
 
   isArray(array: any): boolean {
     return Array.isArray(array)
-  }
-
-  changePage(page: number) {
-    this.page = page
-    this.getItems()
-  }
-
-  // Método para ir a la primera página
-  goToFirstPage() {
-    if (this.page !== 1) {
-      this.changePage(1);
-    }
-  }
-
-  // Método para ir a la última página
-  goToLastPage() {
-    const lastPage = this.total.length;
-    if (this.page !== lastPage && lastPage > 0) {
-      this.changePage(lastPage);
-    }
   }
 
   clickEditButton(id?: number) {

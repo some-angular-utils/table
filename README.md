@@ -18,7 +18,7 @@
 
 ## IMPORT
 ```ts
-import { TableModule } from '@some-angular-utils/table';
+import { SAUTableModule } from '@some-angular-utils/table';
 ```
 
 ## TYPESCRIPT

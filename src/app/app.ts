@@ -1,10 +1,10 @@
 import { Component, signal, ViewEncapsulation } from '@angular/core';
-import { TableModule } from '@some-angular-utils/table';
+import { SAUTableModule } from '@some-angular-utils/table';
 
 @Component({
   selector: 'app-root',
   imports: [
-    TableModule
+    SAUTableModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
