@@ -66,7 +66,7 @@ export class SAUTableModule {
 
   @Input() items: any = [];
 
-  total: number[] = []
+  total: number = 0
 
   page = 1
 
@@ -112,10 +112,12 @@ export class SAUTableModule {
         }
 
         if (this.contentTotal) {
-          this.total = []
+          const total = []
           for (let i = 0; i < data[this.contentTotal] / this.limit; i++) {
-            this.total.push(i + 1)
+            total.push(i + 1)
           }
+
+          this.total = total.length
         }
 
         this.loading = false;
@@ -206,6 +208,11 @@ export class SAUTableModule {
 
   clickDeleteButton(id?: number) {
     this.deleteEvent.emit(id);
+  }
+
+  onPageChange(newPage: number) {
+    this.page = newPage;
+    this.getItems()
   }
 
 }

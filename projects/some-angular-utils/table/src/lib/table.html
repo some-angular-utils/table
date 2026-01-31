@@ -195,9 +195,9 @@
         <p class="sau-table-empty-subtitle">Los elementos aparecerán aquí cuando estén disponibles</p>
     </div>
 
-    } @else if(total.length > 1) {
+    } @else if(total > 1) {
 
-    <sau-paginator [total]="total" [page]="page" (getitems)="getItems()"></sau-paginator>
+    <sau-paginator [totalPages]="total" [currentPage]="page" (pageChange)="onPageChange($event)"></sau-paginator>
 
     }
 
