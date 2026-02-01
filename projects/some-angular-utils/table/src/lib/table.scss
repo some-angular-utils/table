@@ -353,8 +353,15 @@
         }
     }
 
-    .sau-table-pagination {
+    .sau-paginator {
         border-top: 1px solid var(--sau-color-primary);
+
+        --sau-color-primary:inherit !important;
+        --sau-color-secondary: inherit !important;
+        --sau-color-background: inherit !important;
+        --sau-color-edit: inherit !important;
+        --sau-color-delete: inherit !important;
+        --sau-color-text: inherit !important;
     }
 
 }
