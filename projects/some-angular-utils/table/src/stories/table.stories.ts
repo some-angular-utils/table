@@ -32,6 +32,20 @@ export const RemoteData: Story = {
     },
     render: (args) => ({
         props: args,
+        template: `
+      <sau-table 
+        [url]="url" 
+        [contentList]="contentList" 
+        [contentTotal]="contentTotal" 
+        [pageParamName]="pageParamName"
+        [limitParamName]="limitParamName" 
+        [sizeBetweenPages]="sizeBetweenPages" 
+        [limit]="limit" 
+        [headers]="headers" 
+        (deleteEvent)="deleteEvent($event)"
+        (editEvent)="editEvent($event)">
+      </sau-table>
+    `,
     }),
 };
 
@@ -68,5 +82,13 @@ export const LocalData: Story = {
     },
     render: (args) => ({
         props: args,
+        template: `
+      <sau-table 
+        [headers]="headers" 
+        [fixedContent]="fixedContent"
+        (deleteEvent)="deleteEvent($event)"
+        (editEvent)="editEvent($event)">
+      </sau-table>
+    `,
     }),
 };
