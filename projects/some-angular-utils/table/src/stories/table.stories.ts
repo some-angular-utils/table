@@ -4,13 +4,8 @@ import { SAUTableModule } from '@some-angular-utils/table';
 
 const meta: Meta = {
     title: 'Components/Table',
-    // Importante: Al ser un módulo, lo inyectamos en los metadatos
-    decorators: [
-        moduleMetadata({
-            imports: [SAUTableModule],
-        }),
-    ],
-    // Definimos los controles para que aparezcan en la interfaz de Storybook
+    component: SAUTableModule,
+
     argTypes: {
         deleteEvent: { action: 'deleteEvent' },
         editEvent: { action: 'editEvent' },
