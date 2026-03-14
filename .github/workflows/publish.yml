@@ -86,9 +86,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build docs
-        run: npm run build:gh-pages
-
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:

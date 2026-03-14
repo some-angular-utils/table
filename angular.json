@@ -121,6 +121,24 @@
               "zone.js/testing"
             ]
           }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/some-angular-utils/table/.storybook",
+            "browserTarget": "@some-angular-utils/table:build",
+            "compodoc": false,
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/some-angular-utils/table/.storybook",
+            "browserTarget": "@some-angular-utils/table:build",
+            "compodoc": false,
+            "outputDir": "dist/storybook/@some-angular-utils/table"
+          }
         }
       }
     }
