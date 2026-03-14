@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { SAUTableModule } from '@some-angular-utils/table';
+import { SAUTableModule } from '../public-api';
 
 const meta: Meta = {
     title: 'Components/Table',
