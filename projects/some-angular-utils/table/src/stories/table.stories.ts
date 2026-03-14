@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { moduleMetadata } from '@storybook/angular';
 import { SAUTableModule } from '@some-angular-utils/table';
 
 const meta: Meta = {
