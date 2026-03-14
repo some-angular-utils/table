@@ -8,6 +8,13 @@ const meta: Meta = {
     argTypes: {
         deleteEvent: { action: 'deleteEvent' },
         editEvent: { action: 'editEvent' },
+
+        colorPrimary: { control: 'color' },
+        colorSecondary: { control: 'color' },
+        colorBackground: { control: 'color' },
+        colorEdit: { control: 'color' },
+        colorDelete: { control: 'color' },
+        colorText: { control: 'color' },
     },
 };
 
@@ -89,6 +96,50 @@ export const LocalData: Story = {
         (deleteEvent)="deleteEvent($event)"
         (editEvent)="editEvent($event)">
       </sau-table>
+    `,
+    }),
+};
+
+export const CustomStyles: Story = {
+    args: {
+        colorPrimary: 'rgba(35, 163, 31, 1)',
+        colorSecondary: 'rgba(35, 163, 31, 1)',
+        colorBackground: 'rgb(255, 255, 255)',
+        colorEdit: 'rgb(34, 197, 94)',
+        colorDelete: 'rgb(239, 68, 68)',
+        colorText: 'rgb(31, 41, 55)',
+        headers: [
+            { name: 'USUARIO', key: 'name' },
+            { name: 'ESTADO', key: 'status', type: 'boolean' },
+        ],
+        fixedContent: [
+            { name: 'Gemini User', status: true },
+            { name: 'Tester', status: false },
+        ]
+    },
+    render: (args) => ({
+        props: args,
+        template: `
+    <div id="custom-container">
+        <sau-table 
+          [headers]="headers" 
+          [fixedContent]="fixedContent"
+          (deleteEvent)="deleteEvent($event)"
+          (editEvent)="editEvent($event)">
+        </sau-table>
+    </div>
+
+    <style>
+        #custom-container ::ng-deep .sau-table {
+            --sau-color-primary: ${args['colorPrimary']} !important;
+            --sau-color-secondary: ${args['colorSecondary']} !important;
+            --sau-color-background: ${args['colorBackground']} !important;
+            --sau-color-edit: ${args['colorEdit']} !important;
+            --sau-color-delete: ${args['colorDelete']} !important;
+            --sau-color-text: ${args['colorText']} !important;
+        }
+    </style>
+
     `,
     }),
 };
