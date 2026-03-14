@@ -17,6 +17,7 @@
         <table class="sau-table-mobile-table">
             <tbody>
                 @for (item of items; track $index) {
+                @let itemIndex = $index;
                 <tr class="sau-table-mobile-row">
                     <td>
                         <table class="sau-table-width-full">
@@ -32,9 +33,9 @@
                                         @if(header.type == 'table' && !isArray(header.key)){
 
                                         <!-- CSS-only toggle button -->
-                                        <input type="checkbox" [id]="'toggle-table-' + $index"
+                                        <input type="checkbox" [id]="'toggle-table-' + itemIndex"
                                             class="sau-table-toggle-input">
-                                        <label [for]="'toggle-table-' + $index" class="sau-table-toggle-label">
+                                        <label [for]="'toggle-table-' + itemIndex" class="sau-table-toggle-label">
                                             <span class="sau-icon sau-icon-chevron-down">
                                                 <sau-chevron-down-icon></sau-chevron-down-icon>
                                             </span>

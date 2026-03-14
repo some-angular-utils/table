@@ -12,6 +12,10 @@
     overflow: auto;
     background: var(--sau-color-background);
 
+    table {
+        border-collapse: collapse;
+    }
+
     // Utility classes
     .sau-table-width-full {
         width: 100%;
@@ -356,7 +360,7 @@
     .sau-paginator {
         border-top: 1px solid var(--sau-color-primary);
 
-        --sau-color-primary:inherit !important;
+        --sau-color-primary: inherit !important;
         --sau-color-secondary: inherit !important;
         --sau-color-background: inherit !important;
         --sau-color-edit: inherit !important;
