@@ -1,8 +1,94 @@
 @if (loading) {
-<div>
-    Loading
+<div class="sau-table sau-skeleton">
+
+    <div class="sau-table-mobile">
+        <div class="sau-table-mobile-header">
+            <div class="skeleton-line head" style="width: 150px; height: 24px;"></div>
+            <div class="sau-table-mobile-divider"></div>
+        </div>
+
+        <table class="sau-table-mobile-table">
+            <tbody>
+                @for (i of [1,2,3]; track $index) {
+                <tr class="sau-table-mobile-row">
+                    <td>
+                        <table class="sau-table-width-full">
+                            <tbody>
+                                @for (h of headers; track $index) {
+                                <tr [class]="$index % 2 == 0 ? 'sau-table-mobile-row-even' : ''">
+                                    <th class="sau-table-mobile-header-cell">
+                                        <div class="skeleton-line head"></div>
+                                    </th>
+                                    <td class="sau-table-mobile-data-cell">
+                                        <div class="skeleton-line data"></div>
+                                    </td>
+                                </tr>
+                                }
+
+                                @if(this.url){
+                                <tr class="sau-table-mobile-actions-row">
+                                    <td colspan="2">
+                                        <div class="sau-table-mobile-actions-container">
+                                            @if(editButtonTemplate){
+                                            <ng-container
+                                                *ngTemplateOutlet="editButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                                            } @else if(hasEditSubscription){
+                                            <div class="skeleton-line head"></div>
+                                            }
+
+                                            @if(deleteButtonTemplate){
+                                            <ng-container
+                                                *ngTemplateOutlet="deleteButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                                            } @else if(hasDeleteSubscription){
+                                            <div class="skeleton-line head"></div>
+                                            }
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <table class="sau-table-desktop">
+        <thead class="sau-table-desktop-header">
+            <tr>
+                @for (h of headers; track $index) {
+                <th class="sau-table-desktop-header-cell">
+                    <div class="skeleton-line head"></div>
+                </th>
+                }
+                @if(this.url){ <th class="sau-table-desktop-header-cell"></th> }
+            </tr>
+        </thead>
+        <tbody>
+            @for (i of [1,2,3,4,5]; track $index) {
+            <tr [class]="'sau-table-desktop-row ' + ($index % 2 == 0 ? 'sau-table-desktop-row-even' : '')">
+                @for (h of headers; track $index) {
+                <td class="sau-table-desktop-cell">
+                    <div class="skeleton-line data"></div>
+                </td>
+                }
+                @if(this.url){
+                <td class="sau-table-desktop-actions-cell">
+                    <div class="skeleton-line data" style="width: 40px; margin: 0 auto;"></div>
+                </td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>
-}
+
+} @else {
 
 <div class="sau-table">
 
@@ -203,6 +289,7 @@
     }
 
 </div>
+}
 
 <!----------------------------------- Data template ----------------------------------->
 <ng-template #DataTemplate let-item="item" let-header="header">
