@@ -30,16 +30,12 @@
                                     <td colspan="2">
                                         <div class="sau-table-mobile-actions-container">
                                             @if(editButtonTemplate){
-                                            <ng-container
-                                                *ngTemplateOutlet="editButtonTemplate; context: { $implicit: item }"></ng-container>
 
                                             } @else if(hasEditSubscription){
                                             <div class="skeleton-line head"></div>
                                             }
 
                                             @if(deleteButtonTemplate){
-                                            <ng-container
-                                                *ngTemplateOutlet="deleteButtonTemplate; context: { $implicit: item }"></ng-container>
 
                                             } @else if(hasDeleteSubscription){
                                             <div class="skeleton-line head"></div>
