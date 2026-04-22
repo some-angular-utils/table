@@ -301,12 +301,15 @@
         }
 
         <span>
-            @if (customCellTemplate) {
-            <section class="sau-table-data-type-section">
-                <ng-container [ngTemplateOutlet]="customCellTemplate"
-                    [ngTemplateOutletContext]="{item: item, header: header}"></ng-container>
-            </section>
+            @let customTmpl = getCustomTemplate(header.key);
+
+            @if (customTmpl) {
+
+            <ng-container [ngTemplateOutlet]="customTmpl" [ngTemplateOutletContext]="{item: item, header: header}">
+            </ng-container>
+
             } @else {
+
             @if (header.innerHtml) {
             <span [innerHTML]="getValue(item, header.key)"></span>
             } @else {

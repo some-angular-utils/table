@@ -153,28 +153,28 @@ export const ConInputDeMoneda: Story = {
     args: {
         headers: [
             { name: 'PRODUCT', key: 'name' },
-            { name: 'PRICE (cents)', key: 'price', type: 'currency' }, // Usamos 'currency' para identificar la columna
+            { name: 'PRICE (cents)', key: 'price' },
+            { name: 'STATUS', key: 'active', type: 'boolean' }
         ],
         fixedContent: [
-            { name: 'Café', price: 150 },
-            { name: 'Té', price: 200 },
-        ]
+            { name: 'Coffee', price: 150, active: true },
+            { name: 'Tea', price: 200, active: false },
+        ],
     },
     render: (args) => ({
         props: args,
         template: `
         <sau-table 
             [headers]="headers" 
-            [fixedContent]="fixedContent">
-            
-            <ng-template #customCell let-item="item" let-header="header">
-                
-                @if (header.type === 'currency') {
-                    <span [centToEurDisplay]="item[header.key]" ></span>
-                } @else {
-                    {{ item[header.key] }}
-                }
+            [fixedContent]="fixedContent"
+            [customTemplates]="{ 'price': priceTmpl, 'name': nameTmpl }">
 
+            <ng-template #priceTmpl let-item="item" let-header="header">
+                <span [centToEurDisplay]="item[header.key]"></span>
+            </ng-template>
+
+            <ng-template #nameTmpl let-item="item">
+                <strong>{{ item.name }}</strong>
             </ng-template>
 
         </sau-table>

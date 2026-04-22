@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation, ContentChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation, ContentChild, ContentChildren, QueryList } from '@angular/core';
 import { TemplateRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SAUPaginatorModule } from '@some-angular-utils/paginator'
@@ -52,7 +52,12 @@ export class SAUTableModule {
   // ContentChild para detectar cosas personalizadas
   @ContentChild('editButton', { static: false }) editButtonTemplate?: TemplateRef<any>;
   @ContentChild('deleteButton', { static: false }) deleteButtonTemplate?: TemplateRef<any>;
-  @ContentChild('customCell', { static: false }) customCellTemplate?: TemplateRef<any>;
+  @ContentChildren('customCell') customCellTemplates!: QueryList<any>;
+  @Input() customTemplates: { [key: string]: TemplateRef<any> } = {};
+
+  getCustomTemplate(key: string): TemplateRef<any> | undefined {
+    return this.customTemplates ? this.customTemplates[key] : undefined;
+  }
 
   // Getters para verificar si hay suscriptores
   get hasEditSubscription(): boolean {
