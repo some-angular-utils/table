@@ -52,6 +52,7 @@ export class SAUTableModule {
   // ContentChild para detectar cosas personalizadas
   @ContentChild('editButton', { static: false }) editButtonTemplate?: TemplateRef<any>;
   @ContentChild('deleteButton', { static: false }) deleteButtonTemplate?: TemplateRef<any>;
+  @ContentChild('customCell', { static: false }) customCellTemplate?: TemplateRef<any>;
 
   // Getters para verificar si hay suscriptores
   get hasEditSubscription(): boolean {

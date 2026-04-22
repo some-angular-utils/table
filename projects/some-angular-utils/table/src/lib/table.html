@@ -301,6 +301,12 @@
         }
 
         <span>
+            @if (customCellTemplate) {
+            <section class="sau-table-data-type-section">
+                <ng-container [ngTemplateOutlet]="customCellTemplate"
+                    [ngTemplateOutletContext]="{item: item, header: header}"></ng-container>
+            </section>
+            } @else {
             @if (header.innerHtml) {
             <span [innerHTML]="getValue(item, header.key)"></span>
             } @else {
@@ -315,6 +321,7 @@
                     [ngTemplateOutletContext]="{item:item, header:header, value:header.subKey}"></ng-container>
                 )
             </span>
+            }
             }
         </span>
 

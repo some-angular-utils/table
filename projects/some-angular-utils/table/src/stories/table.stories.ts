@@ -1,10 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { SAUTableModule } from '../public-api';
+import { CentToEurDisplayDirective } from '../directives/cent-to-eur.directive';
 
 const meta: Meta = {
     title: 'Components/Table',
     component: SAUTableModule,
-
+    decorators: [
+        moduleMetadata({
+            imports: [CentToEurDisplayDirective],
+        }),
+    ],
     argTypes: {
         deleteEvent: { action: 'deleteEvent' },
         editEvent: { action: 'editEvent' },
@@ -109,8 +114,8 @@ export const CustomStyles: Story = {
         colorDelete: 'rgb(239, 68, 68)',
         colorText: 'rgb(31, 41, 55)',
         headers: [
-            { name: 'USUARIO', key: 'name' },
-            { name: 'ESTADO', key: 'status', type: 'boolean' },
+            { name: 'USER', key: 'name' },
+            { name: 'STATUS', key: 'status', type: 'boolean' },
         ],
         fixedContent: [
             { name: 'Gemini User', status: true },
@@ -141,5 +146,38 @@ export const CustomStyles: Story = {
     </style>
 
     `,
+    }),
+};
+
+export const ConInputDeMoneda: Story = {
+    args: {
+        headers: [
+            { name: 'PRODUCT', key: 'name' },
+            { name: 'PRICE (cents)', key: 'price', type: 'currency' }, // Usamos 'currency' para identificar la columna
+        ],
+        fixedContent: [
+            { name: 'Café', price: 150 },
+            { name: 'Té', price: 200 },
+        ]
+    },
+    render: (args) => ({
+        props: args,
+        template: `
+        <sau-table 
+            [headers]="headers" 
+            [fixedContent]="fixedContent">
+            
+            <ng-template #customCell let-item="item" let-header="header">
+                
+                @if (header.type === 'currency') {
+                    <span [centToEurDisplay]="item[header.key]" ></span>
+                } @else {
+                    {{ item[header.key] }}
+                }
+
+            </ng-template>
+
+        </sau-table>
+        `,
     }),
 };

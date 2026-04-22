@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build:lib": "ng-packagr -p projects/some-angular-utils/table/ng-package.json",
-    "start:storybook": "ng run @some-angular-utils/table:storybook",
+    "start:storybook": "npm run build:lib && ng run @some-angular-utils/table:storybook",
     "build:storybook": "ng run @some-angular-utils/table:build-storybook"
   },
   "prettier": {
