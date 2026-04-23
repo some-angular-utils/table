@@ -25,7 +25,6 @@
                                 </tr>
                                 }
 
-                                @if(this.url){
                                 <tr class="sau-table-mobile-actions-row">
                                     <td colspan="2">
                                         <div class="sau-table-mobile-actions-container">
@@ -50,7 +49,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                }
+
                             </tbody>
                         </table>
                     </td>
@@ -150,10 +149,10 @@
                                 </tr>
                                 }
 
-                                @if(this.url){
                                 <tr class="sau-table-mobile-actions-row">
                                     <td colspan="2">
                                         <div class="sau-table-mobile-actions-container">
+                                            @if(showEdit(item)){
                                             @if(editButtonTemplate){
                                             <ng-container
                                                 *ngTemplateOutlet="editButtonTemplate; context: { $implicit: item }"></ng-container>
@@ -166,7 +165,9 @@
                                                 Editar
                                             </button>
                                             }
+                                            }
 
+                                            @if(showDelete(item)){
                                             @if(deleteButtonTemplate){
                                             <ng-container
                                                 *ngTemplateOutlet="deleteButtonTemplate; context: { $implicit: item }"></ng-container>
@@ -180,7 +181,9 @@
                                                 Eliminar
                                             </button>
                                             }
+                                            }
 
+                                            @if(showPrint(item)){
                                             @if(printButtonTemplate){
                                             <ng-container
                                                 *ngTemplateOutlet="printButtonTemplate; context: { $implicit: item }"></ng-container>
@@ -193,11 +196,11 @@
                                                 Imprimir
                                             </button>
                                             }
+                                            }
 
                                         </div>
                                     </td>
                                 </tr>
-                                }
 
                             </tbody>
                         </table>
@@ -219,11 +222,9 @@
                 </th>
                 }
 
-                @if(this.url){
                 <th scope="col" class="sau-table-desktop-header-cell">
                     Opciones
                 </th>
-                }
             </tr>
         </thead>
         <tbody>
@@ -247,10 +248,10 @@
                 </td>
                 }
 
-                @if(this.url){
                 <td class="sau-table-desktop-actions-cell">
                     <div class="sau-table-desktop-actions-container">
 
+                        @if(showEdit(item)){
                         @if(editButtonTemplate){
                         <ng-container
                             *ngTemplateOutlet="editButtonTemplate; context: { $implicit: item }"></ng-container>
@@ -262,7 +263,9 @@
                             </span>
                         </button>
                         }
+                        }
 
+                        @if(showDelete(item)){
                         @if(deleteButtonTemplate){
                         <ng-container
                             *ngTemplateOutlet="deleteButtonTemplate; context: { $implicit: item }"></ng-container>
@@ -275,7 +278,9 @@
                             </span>
                         </button>
                         }
+                        }
 
+                        @if(showPrint(item)){
                         @if(printButtonTemplate){
                         <ng-container
                             *ngTemplateOutlet="printButtonTemplate; context: { $implicit: item }"></ng-container>
@@ -288,11 +293,11 @@
                             </span>
                         </button>
                         }
+                        }
 
 
                     </div>
                 </td>
-                }
 
             </tr>
             }

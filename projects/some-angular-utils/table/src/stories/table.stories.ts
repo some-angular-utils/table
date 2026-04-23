@@ -11,6 +11,9 @@ const meta: Meta = {
         }),
     ],
     argTypes: {
+        canEdit: { control: false },
+        canDelete: { control: false },
+        canPrint: { control: false },
         deleteEvent: { action: 'deleteEvent' },
         editEvent: { action: 'editEvent' },
         printEvent: { action: 'printEvent' },
@@ -144,7 +147,7 @@ export const CustomStyles: Story = {
     }),
 };
 
-export const ConInputDeMoneda: Story = {
+export const customColumnTemplate: Story = {
     args: {
         headers: [
             { name: 'PRODUCT', key: 'name' },
@@ -172,6 +175,40 @@ export const ConInputDeMoneda: Story = {
                 <strong>{{ item.name }}</strong>
             </ng-template>
 
+        </sau-table>
+        `,
+    }),
+};
+
+export const ConditionalActions: Story = {
+    args: {
+        headers: [
+            { name: 'USER', key: 'name' },
+            { name: 'ROLE', key: 'role' },
+            { name: 'STATUS', key: 'active', type: 'boolean' }
+        ],
+        fixedContent: [
+            { id: 1, name: 'Alice Admin', role: 'Admin', active: true },
+            { id: 2, name: 'Bob Guest', role: 'Guest', active: true },
+            { id: 3, name: 'Charlie Inactive', role: 'User', active: false }
+        ],
+        // Logic functions passed to the component
+        canEdit: (item: any) => item.role !== 'Guest', // Guests cannot edit
+        canDelete: (item: any) => item.active === false, // Only inactive users can be deleted
+        canPrint: (item: any) => true // Everyone can print
+    },
+    render: (args) => ({
+        props: args,
+        template: `
+        <sau-table 
+            [headers]="headers" 
+            [fixedContent]="fixedContent"
+            [canEdit]="canEdit"
+            [canDelete]="canDelete"
+            [canPrint]="canPrint"
+            (editEvent)="editEvent($event)"
+            (deleteEvent)="deleteEvent($event)"
+            (printEvent)="printEvent($event)">
         </sau-table>
         `,
     }),

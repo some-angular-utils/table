@@ -57,6 +57,10 @@ export class SAUTableModule {
   @ContentChild('deleteButton', { static: false }) deleteButtonTemplate?: TemplateRef<any>;
   @ContentChild('printButton', { static: false }) printButtonTemplate?: TemplateRef<any>;
 
+  @Input() canEdit?: (item: any) => boolean;
+  @Input() canDelete?: (item: any) => boolean;
+  @Input() canPrint?: (item: any) => boolean;
+
   @ContentChildren('customCell') customCellTemplates!: QueryList<any>;
   @Input() customTemplates: { [key: string]: TemplateRef<any> } = {};
 
@@ -75,6 +79,18 @@ export class SAUTableModule {
 
   get hasPrintSubscription(): boolean {
     return this.printEvent.observed;
+  }
+
+  showEdit(item: any): boolean {
+    return this.canEdit ? this.canEdit(item) : this.hasEditSubscription;
+  }
+
+  showDelete(item: any): boolean {
+    return this.canDelete ? this.canDelete(item) : this.hasDeleteSubscription;
+  }
+
+  showPrint(item: any): boolean {
+    return this.canPrint ? this.canPrint(item) : this.hasPrintSubscription;
   }
 
   loading = false
