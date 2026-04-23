@@ -6,6 +6,7 @@
     --sau-color-background: rgb(255, 255, 255);
     --sau-color-edit: rgb(34, 197, 94);
     --sau-color-delete: rgb(239, 68, 68);
+    --sau-color-print: rgb(212, 167, 44);
     --sau-color-text: rgb(31, 41, 55);
 
     // Estilos principales del contenedor
@@ -177,43 +178,51 @@
                 gap: 1rem;
                 padding: 0.5rem;
 
-                .sau-table-edit-button {
+                .sau-table-edit-button,
+                .sau-table-delete-button,
+                .sau-table-print-button {
                     display: inline-flex;
                     align-items: center;
                     gap: 0.5rem;
                     padding: 0.5rem 1rem;
                     font-size: 0.875rem;
                     font-weight: 500;
-                    color: var(--sau-color-edit);
                     background: var(--sau-color-background);
-                    border: 1px solid var(--sau-color-edit);
                     transition: all 0.2s;
                     cursor: pointer;
 
                     &:hover {
-                        background: var(--sau-color-edit);
                         color: var(--sau-color-background);
+                    }
+                }
+
+                .sau-table-edit-button {
+                    color: var(--sau-color-edit);
+                    border: 1px solid var(--sau-color-edit);
+
+                    &:hover {
+                        background: var(--sau-color-edit);
                     }
                 }
 
                 .sau-table-delete-button {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    padding: 0.5rem 1rem;
-                    font-size: 0.875rem;
-                    font-weight: 500;
                     color: var(--sau-color-delete);
-                    background: var(--sau-color-background);
                     border: 1px solid var(--sau-color-delete);
-                    transition: all 0.2s;
-                    cursor: pointer;
 
                     &:hover {
                         background: var(--sau-color-delete);
-                        color: var(--sau-color-background);
                     }
                 }
+
+                .sau-table-print-button {
+                    color: var(--sau-color-print);
+                    border: 1px solid var(--sau-color-print);
+
+                    &:hover {
+                        background: var(--sau-color-print);
+                    }
+                }
+
             }
         }
     }
@@ -271,41 +280,48 @@
                     align-items: center;
                     gap: 0.5rem;
 
-                    .sau-table-desktop-edit-button {
+                    .sau-table-desktop-edit-button,
+                    .sau-table-desktop-delete-button,
+                    .sau-table-desktop-print-button {
                         display: inline-flex;
                         align-items: center;
                         justify-content: center;
                         width: 2rem;
                         height: 2rem;
-                        color: var(--sau-color-edit);
                         background: var(--sau-color-background);
-                        border: 1px solid var(--sau-color-edit);
                         transition: all 0.2s;
                         font-size: 1.2rem;
                         cursor: pointer;
 
                         &:hover {
-                            background: var(--sau-color-edit);
                             color: var(--sau-color-background);
                         }
                     }
 
+                    .sau-table-desktop-edit-button {
+                        color: var(--sau-color-edit);
+                        border: 1px solid var(--sau-color-edit);
+
+                        &:hover {
+                            background: var(--sau-color-edit);
+                        }
+                    }
+
                     .sau-table-desktop-delete-button {
-                        display: inline-flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 2rem;
-                        height: 2rem;
                         color: var(--sau-color-delete);
-                        background: var(--sau-color-background);
                         border: 1px solid var(--sau-color-delete);
-                        transition: all 0.2s;
-                        font-size: 1.2rem;
-                        cursor: pointer;
 
                         &:hover {
                             background: var(--sau-color-delete);
-                            color: var(--sau-color-background);
+                        }
+                    }
+
+                    .sau-table-desktop-print-button {
+                        color: var(--sau-color-print);
+                        border: 1px solid var(--sau-color-print);
+
+                        &:hover {
+                            background: var(--sau-color-print);
                         }
                     }
                 }

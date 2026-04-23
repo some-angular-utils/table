@@ -14,6 +14,7 @@ import { CheckIconComponent } from './icons/check-icon';
 import { XmarkIconComponent } from './icons/xmark-icon';
 import { EnvelopeIconComponent } from './icons/envelope-icon';
 import { GoogleIconComponent } from './icons/google-icon';
+import { PrintIconComponent } from './icons/print-icon';
 
 @Component({
   selector: 'sau-table',
@@ -34,6 +35,7 @@ import { GoogleIconComponent } from './icons/google-icon';
     XmarkIconComponent,
     EnvelopeIconComponent,
     GoogleIconComponent,
+    PrintIconComponent,
   ]
 })
 export class SAUTableModule {
@@ -48,10 +50,13 @@ export class SAUTableModule {
   @Input() headers?: { name: string, key: string | string[], subKey?: string, type?: string, innerHtml?: boolean, headers?: any }[];
   @Output() editEvent = new EventEmitter();
   @Output() deleteEvent = new EventEmitter();
+  @Output() printEvent = new EventEmitter();
 
   // ContentChild para detectar cosas personalizadas
   @ContentChild('editButton', { static: false }) editButtonTemplate?: TemplateRef<any>;
   @ContentChild('deleteButton', { static: false }) deleteButtonTemplate?: TemplateRef<any>;
+  @ContentChild('printButton', { static: false }) printButtonTemplate?: TemplateRef<any>;
+
   @ContentChildren('customCell') customCellTemplates!: QueryList<any>;
   @Input() customTemplates: { [key: string]: TemplateRef<any> } = {};
 
@@ -66,6 +71,10 @@ export class SAUTableModule {
 
   get hasDeleteSubscription(): boolean {
     return this.deleteEvent.observed;
+  }
+
+  get hasPrintSubscription(): boolean {
+    return this.printEvent.observed;
   }
 
   loading = false
@@ -214,6 +223,10 @@ export class SAUTableModule {
 
   clickDeleteButton(id?: number) {
     this.deleteEvent.emit(id);
+  }
+
+  clickPrintButton(id?: number) {
+    this.printEvent.emit(id);
   }
 
   onPageChange(newPage: number) {

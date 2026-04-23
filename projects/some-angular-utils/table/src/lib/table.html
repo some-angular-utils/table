@@ -41,6 +41,12 @@
                                             <div class="skeleton-line head"></div>
                                             }
 
+                                            @if(printButtonTemplate){
+
+                                            } @else if(hasPrintSubscription){
+                                            <div class="skeleton-line head"></div>
+                                            }
+
                                         </div>
                                     </td>
                                 </tr>
@@ -175,6 +181,19 @@
                                             </button>
                                             }
 
+                                            @if(printButtonTemplate){
+                                            <ng-container
+                                                *ngTemplateOutlet="printButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                                            } @else if(hasPrintSubscription){
+                                            <button class="sau-table-print-button" (click)="clickPrintButton(item.id)">
+                                                <span class="sau-icon sau-icon-trash">
+                                                    <sau-print-icon></sau-print-icon>
+                                                </span>
+                                                Imprimir
+                                            </button>
+                                            }
+
                                         </div>
                                     </td>
                                 </tr>
@@ -256,6 +275,20 @@
                             </span>
                         </button>
                         }
+
+                        @if(printButtonTemplate){
+                        <ng-container
+                            *ngTemplateOutlet="printButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                        } @else if(hasPrintSubscription){
+                        <button class="sau-table-desktop-print-button" (click)="clickPrintButton(item.id)"
+                            title="Imprimir">
+                            <span class="sau-icon sau-icon-trash">
+                                <sau-print-icon></sau-print-icon>
+                            </span>
+                        </button>
+                        }
+
 
                     </div>
                 </td>

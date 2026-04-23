@@ -13,13 +13,7 @@ const meta: Meta = {
     argTypes: {
         deleteEvent: { action: 'deleteEvent' },
         editEvent: { action: 'editEvent' },
-
-        colorPrimary: { control: 'color' },
-        colorSecondary: { control: 'color' },
-        colorBackground: { control: 'color' },
-        colorEdit: { control: 'color' },
-        colorDelete: { control: 'color' },
-        colorText: { control: 'color' },
+        printEvent: { action: 'printEvent' },
     },
 };
 
@@ -55,7 +49,8 @@ export const RemoteData: Story = {
         [limit]="limit" 
         [headers]="headers" 
         (deleteEvent)="deleteEvent($event)"
-        (editEvent)="editEvent($event)">
+        (editEvent)="editEvent($event)"
+        (printEvent)="printEvent($event)">
       </sau-table>
     `,
     }),
