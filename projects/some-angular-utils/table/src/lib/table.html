@@ -300,15 +300,17 @@
         </div>
         }
 
-        <span>
-            @let customTmpl = getCustomTemplate(header.key);
+        @let customTmpl = getCustomTemplate(header.key);
 
-            @if (customTmpl) {
+        @if (customTmpl) {
 
+        <section class="sau-table-data-type-section">
             <ng-container [ngTemplateOutlet]="customTmpl" [ngTemplateOutletContext]="{item: item, header: header}">
             </ng-container>
+        </section>
 
-            } @else {
+        } @else {
+        <span>
 
             @if (header.innerHtml) {
             <span [innerHTML]="getValue(item, header.key)"></span>
@@ -325,8 +327,9 @@
                 )
             </span>
             }
-            }
+
         </span>
+        }
 
     </section>
 
