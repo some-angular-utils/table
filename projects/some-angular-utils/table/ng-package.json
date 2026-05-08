@@ -3,8 +3,5 @@
   "dest": "../../../dist/some-angular-utils/table",
   "lib": {
     "entryFile": "src/public-api.ts"
-  },
-  "allowedNonPeerDependencies": [
-    "@some-angular-utils/paginator"
-  ]
+  }
 }
