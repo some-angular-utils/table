@@ -48,6 +48,8 @@ export class SAUTableModule {
   @Input() sizeBetweenPages = 1
   @Input() fixedContent = []
   @Input() headers?: { name: string, key: string | string[], subKey?: string, type?: string, innerHtml?: boolean, headers?: any }[];
+  
+  @Input() showOptions = true;
   @Output() editEvent = new EventEmitter();
   @Output() deleteEvent = new EventEmitter();
   @Output() printEvent = new EventEmitter();

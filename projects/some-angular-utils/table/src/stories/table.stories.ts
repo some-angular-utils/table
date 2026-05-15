@@ -165,6 +165,7 @@ export const customColumnTemplate: Story = {
         <sau-table 
             [headers]="headers" 
             [fixedContent]="fixedContent"
+            [showOptions]="false"
             [customTemplates]="{ 'price': priceTmpl, 'name': nameTmpl }">
 
             <ng-template #priceTmpl let-item="item" let-header="header">
