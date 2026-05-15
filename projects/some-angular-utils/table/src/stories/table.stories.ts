@@ -223,3 +223,57 @@ export const ConditionalActions: Story = {
         `,
     }),
 };
+
+export const WithFilters: Story = {
+    args: {
+        url: 'https://rickandmortyapi.com/api/character/?status=alive',
+        contentList: 'results',
+        contentTotal: 'info.count',
+        pageParamName: 'page',
+        limit: 20,
+        sizeInitialPage: 1,
+        headers: [
+            {
+                name: 'AVATAR',
+                key: 'image',
+                type: 'image',
+                url: '{key}'
+            },
+            { name: 'NOMBRE', key: 'name' },
+            { name: 'ESPECIE', key: 'species' },
+            {
+                name: 'ESTADO',
+                key: 'status',
+                type: 'boolean'
+            },
+            { name: 'ORIGEN', key: 'origin.name' },
+            {
+                name: 'DETALLES',
+                key: 'id',
+                type: 'link',
+                linkName: 'Ver más',
+                url: 'https://rickandmortyapi.com/api/character/{key}'
+            }
+        ],
+    },
+    render: (args) => ({
+        props: args,
+        template: `
+      <div style="margin-bottom: 1rem;">
+        <strong>Filter:</strong> Status alive
+      </div>
+      <sau-table 
+        [url]="url" 
+        [contentList]="contentList" 
+        [contentTotal]="contentTotal" 
+        [pageParamName]="pageParamName"
+        [sizeInitialPage]="sizeInitialPage"
+        [limit]="limit" 
+        [headers]="headers" 
+        (showEvent)="showEvent($event)"
+        (editEvent)="editEvent($event)"
+        >
+      </sau-table>
+    `,
+    }),
+};

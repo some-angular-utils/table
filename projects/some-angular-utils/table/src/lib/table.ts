@@ -146,9 +146,10 @@ export class SAUTableModule {
     this.cdr.detectChanges(); // Forzar detección antes de la petición
 
     const internalPage = this.getInternalPage();
-    const filters = `?${this.pageParamName}=${internalPage}&${this.limitParamName}=${this.limit}`;
+    const questionMark = this.url?.includes('?') ? '&' : '?'
+    const filters = `${this.pageParamName}=${internalPage}&${this.limitParamName}=${this.limit}`;
 
-    this.http.get(this.url + filters).subscribe({
+    this.http.get(this.url + questionMark + filters).subscribe({
       next: (data: any) => {
 
         if (this.contentList && data[this.contentList]) {
@@ -158,8 +159,9 @@ export class SAUTableModule {
         }
 
         if (this.contentTotal) {
+
           const total = []
-          for (let i = 0; i < data[this.contentTotal] / this.limit; i++) {
+          for (let i = 0; i < this.getValue(data, this.contentTotal) / this.limit; i++) {
             total.push(i + 1)
           }
 
