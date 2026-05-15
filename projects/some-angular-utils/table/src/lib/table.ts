@@ -15,6 +15,7 @@ import { XmarkIconComponent } from './icons/xmark-icon';
 import { EnvelopeIconComponent } from './icons/envelope-icon';
 import { GoogleIconComponent } from './icons/google-icon';
 import { PrintIconComponent } from './icons/print-icon';
+import { EyeIconComponent } from './icons/eye-icon';
 
 @Component({
   selector: 'sau-table',
@@ -36,6 +37,7 @@ import { PrintIconComponent } from './icons/print-icon';
     EnvelopeIconComponent,
     GoogleIconComponent,
     PrintIconComponent,
+    EyeIconComponent,
   ]
 })
 export class SAUTableModule {
@@ -48,20 +50,23 @@ export class SAUTableModule {
   @Input() sizeBetweenPages = 1
   @Input() fixedContent = []
   @Input() headers?: { name: string, key: string | string[], subKey?: string, type?: string, innerHtml?: boolean, headers?: any }[];
-  
+
   @Input() showOptions = true;
   @Output() editEvent = new EventEmitter();
   @Output() deleteEvent = new EventEmitter();
   @Output() printEvent = new EventEmitter();
+  @Output() showEvent = new EventEmitter();
 
   // ContentChild para detectar cosas personalizadas
   @ContentChild('editButton', { static: false }) editButtonTemplate?: TemplateRef<any>;
   @ContentChild('deleteButton', { static: false }) deleteButtonTemplate?: TemplateRef<any>;
   @ContentChild('printButton', { static: false }) printButtonTemplate?: TemplateRef<any>;
+  @ContentChild('showButton', { static: false }) showButtonTemplate?: TemplateRef<any>;
 
   @Input() canEdit?: (item: any) => boolean;
   @Input() canDelete?: (item: any) => boolean;
   @Input() canPrint?: (item: any) => boolean;
+  @Input() canShow?: (item: any) => boolean;
 
   @ContentChildren('customCell') customCellTemplates!: QueryList<any>;
   @Input() customTemplates: { [key: string]: TemplateRef<any> } = {};
@@ -83,6 +88,10 @@ export class SAUTableModule {
     return this.printEvent.observed;
   }
 
+  get hasShowSubscription(): boolean {
+    return this.showEvent.observed;
+  }
+
   showEdit(item: any): boolean {
     return this.canEdit ? this.canEdit(item) : this.hasEditSubscription;
   }
@@ -93,6 +102,10 @@ export class SAUTableModule {
 
   showPrint(item: any): boolean {
     return this.canPrint ? this.canPrint(item) : this.hasPrintSubscription;
+  }
+
+  showShow(item: any): boolean {
+    return this.canShow ? this.canShow(item) : this.hasShowSubscription;
   }
 
   loading = false
@@ -245,6 +258,10 @@ export class SAUTableModule {
 
   clickPrintButton(id?: number) {
     this.printEvent.emit(id);
+  }
+
+  clickShowButton(id?: number) {
+    this.showEvent.emit(id);
   }
 
   onPageChange(newPage: number) {

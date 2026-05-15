@@ -46,6 +46,12 @@
                                             <div class="skeleton-line head"></div>
                                             }
 
+                                            @if(showButtonTemplate){
+
+                                            } @else if(hasShowSubscription){
+                                            <div class="skeleton-line head"></div>
+                                            }
+
                                         </div>
                                     </td>
                                 </tr>
@@ -199,6 +205,21 @@
                                             }
                                             }
 
+                                            @if(showShow(item)){
+                                            @if(showButtonTemplate){
+                                            <ng-container
+                                                *ngTemplateOutlet="showButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                                            } @else if(hasShowSubscription){
+                                            <button class="sau-table-show-button" (click)="clickShowButton(item.id)">
+                                                <span class="sau-icon sau-icon-eye">
+                                                    <sau-eye-icon></sau-eye-icon>
+                                                </span>
+                                                Mostrar
+                                            </button>
+                                            }
+                                            }
+
                                         </div>
                                     </td>
                                 </tr>
@@ -301,6 +322,21 @@
                         }
                         }
 
+
+                        @if(showShow(item)){
+                        @if(showButtonTemplate){
+                        <ng-container
+                            *ngTemplateOutlet="showButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                        } @else if(hasShowSubscription){
+                        <button class="sau-table-desktop-show-button" (click)="clickShowButton(item.id)"
+                            title="Mostrar">
+                            <span class="sau-icon sau-icon-eye">
+                                <sau-eye-icon></sau-eye-icon>
+                            </span>
+                        </button>
+                        }
+                        }
 
                     </div>
                 </td>

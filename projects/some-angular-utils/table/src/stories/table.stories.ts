@@ -14,9 +14,12 @@ const meta: Meta = {
         canEdit: { control: false },
         canDelete: { control: false },
         canPrint: { control: false },
+        canShow: { control: false },
+
         deleteEvent: { action: 'deleteEvent' },
         editEvent: { action: 'editEvent' },
         printEvent: { action: 'printEvent' },
+        showEvent: { action: 'showEvent' },
     },
 };
 
@@ -53,7 +56,9 @@ export const RemoteData: Story = {
         [headers]="headers" 
         (deleteEvent)="deleteEvent($event)"
         (editEvent)="editEvent($event)"
-        (printEvent)="printEvent($event)">
+        (printEvent)="printEvent($event)"
+        (showEvent)="showEvent($event)"
+        >
       </sau-table>
     `,
     }),
@@ -196,7 +201,8 @@ export const ConditionalActions: Story = {
         // Logic functions passed to the component
         canEdit: (item: any) => item.role !== 'Guest', // Guests cannot edit
         canDelete: (item: any) => item.active === false, // Only inactive users can be deleted
-        canPrint: (item: any) => true // Everyone can print
+        canPrint: () => true, // Everyone can print
+        canShow: (item: any) => item.role !== 'Admin'
     },
     render: (args) => ({
         props: args,
@@ -207,9 +213,12 @@ export const ConditionalActions: Story = {
             [canEdit]="canEdit"
             [canDelete]="canDelete"
             [canPrint]="canPrint"
+            [canShow]="canShow"
             (editEvent)="editEvent($event)"
             (deleteEvent)="deleteEvent($event)"
-            (printEvent)="printEvent($event)">
+            (printEvent)="printEvent($event)"
+            (showEvent)="showEvent($event)"
+            >
         </sau-table>
         `,
     }),
