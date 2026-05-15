@@ -100,7 +100,8 @@
 <div class="sau-table">
 
     <!----------------------------------- Table mobile ----------------------------------->
-    <div class="sau-table-mobile">
+    @if(orientation=='dynamic' || orientation=='vertical'){
+    <div class="sau-table-mobile" [class.sau-table-dynamic-mode]="orientation=='dynamic'">
         <!-- Mobile header -->
         <div class="sau-table-mobile-header">
             <h3 class="sau-table-mobile-title">Lista de elementos</h3>
@@ -233,10 +234,12 @@
             </tbody>
         </table>
     </div>
+    }
     <!--------------------------------- Table mobile end --------------------------------->
 
     <!----------------------------------- Table desktop ----------------------------------->
-    <table class="sau-table-desktop">
+    @if(orientation=='dynamic' || orientation=='horizontal'){
+    <table class="sau-table-desktop" [class.sau-table-dynamic-mode]="orientation=='dynamic'">
         <thead class="sau-table-desktop-header">
             <tr>
                 @for (header of headers; track $index) {
@@ -346,6 +349,7 @@
             }
         </tbody>
     </table>
+    }
     <!--------------------------------- table desktop end --------------------------------->
 
     @if (items.length == 0) {

@@ -277,3 +277,60 @@ export const WithFilters: Story = {
     `,
     }),
 };
+
+export const orientations: Story = {
+    argTypes: {
+        orientation: {
+            control: 'radio',
+            options: ['vertical', 'horizontal', 'dynamic'],
+            description: 'Defines the table layout orientation',
+        },
+    },
+    args: {
+        orientation: 'horizontal',
+        headers: [
+            { name: 'SYSTEM', key: 'system' },
+            { name: 'STATUS', key: 'status', type: 'boolean' },
+            { name: 'LEVEL', key: 'level', type: 'color' },
+            { name: 'LAST UPDATE', key: 'updatedAt', type: 'dateTime' },
+        ],
+        fixedContent: [
+            {
+                system: 'Core Engine',
+                status: true,
+                level: '#22c55e',
+                updatedAt: new Date(),
+            },
+            {
+                system: 'Neural Interface',
+                status: true,
+                level: '#3b82f6',
+                updatedAt: new Date(),
+            },
+            {
+                system: 'Legacy Shield',
+                status: false,
+                level: '#ef4444',
+                updatedAt: new Date(),
+            }
+        ]
+    },
+    render: (args) => ({
+        props: args,
+        template: `
+      <div style="padding: 1rem; background: #f9fafb; border-radius: 8px;">
+        <div style="margin-bottom: 1rem; font-family: sans-serif;">
+          <strong>Current Mode:</strong> <code>{{ orientation }}</code>
+        </div>
+        
+        <sau-table 
+          [orientation]="orientation"
+          [headers]="headers" 
+          [fixedContent]="fixedContent"
+          (editEvent)="editEvent($event)"
+          (deleteEvent)="deleteEvent($event)">
+        </sau-table>
+      </div>
+    `,
+    }),
+};

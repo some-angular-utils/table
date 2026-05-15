@@ -49,6 +49,7 @@ export class SAUTableModule {
   @Input() sizeInitialPage = 0
   @Input() sizeBetweenPages = 1
   @Input() fixedContent = []
+  @Input() orientation: "dynamic" | "horizontal" | "vertical" = "dynamic"
   @Input() headers?: { name: string, key: string | string[], subKey?: string, type?: string, innerHtml?: boolean, headers?: any }[];
 
   @Input() showOptions = true;
