@@ -443,8 +443,10 @@
         }
         }
 
-        @case ('currency'){
-        <!-- {{formatEuro(getValue(item, value))}} -->
+        @case ('date') {
+        <span class="sau-table-date">
+            {{getValue(item, value) | date: 'dd/MM/yyyy'}}
+        </span>
         }
 
         @case ('dateTime') {
