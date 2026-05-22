@@ -1,4 +1,5 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { useArgs } from '@storybook/preview-api';
 import { SAUTableModule } from '../public-api';
 import { CentToEurDisplayDirective } from '../directives/cent-to-eur.directive';
 
@@ -26,7 +27,31 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-// 1. Historia con datos desde una API (PokeAPI)
+const defaultSelectorConfig = {
+    order: ['name', 'status'],
+    mobile: ['name'],
+    form: {
+        name: {
+            name: 'Nombre Personaje',
+            key: 'name',
+            type: 'inputText',
+            defaultValue: 'Alien'
+        },
+        status: {
+            name: 'Estado de Vida',
+            key: 'status',
+            type: 'selectorSimple',
+            dropdowns: [
+                { id: 'alive', name: 'Vivo' },
+                { id: 'dead', name: 'Muerto' },
+                { id: 'unknown', name: 'Desconocido' }
+            ],
+            defaultValue: 'dead'
+        }
+    }
+};
+
+
 export const RemoteData: Story = {
     args: {
         url: 'https://pokeapi.co/api/v2/pokemon',
@@ -226,12 +251,13 @@ export const ConditionalActions: Story = {
 
 export const WithFilters: Story = {
     args: {
-        url: 'https://rickandmortyapi.com/api/character/?status=alive',
+        url: 'https://rickandmortyapi.com/api/character/',
         contentList: 'results',
         contentTotal: 'info.count',
         pageParamName: 'page',
         limit: 20,
         sizeInitialPage: 1,
+        selectorConfig: defaultSelectorConfig,
         headers: [
             {
                 name: 'AVATAR',
@@ -256,26 +282,35 @@ export const WithFilters: Story = {
             }
         ],
     },
-    render: (args) => ({
-        props: args,
-        template: `
-      <div style="margin-bottom: 1rem;">
-        <strong>Filter:</strong> Status alive
-      </div>
-      <sau-table 
-        [url]="url" 
-        [contentList]="contentList" 
-        [contentTotal]="contentTotal" 
-        [pageParamName]="pageParamName"
-        [sizeInitialPage]="sizeInitialPage"
-        [limit]="limit" 
-        [headers]="headers" 
-        (showEvent)="showEvent($event)"
-        (editEvent)="editEvent($event)"
-        >
-      </sau-table>
-    `,
-    }),
+    render: (args) => {
+        const [{ url }, updateArgs] = useArgs();
+
+        return {
+            props: {
+                ...args,
+                url,
+                onFilterProcessed: (event: { json: any, url: string }) => {
+                    const newUrl = `${args['baseUrl']}${event.url}`;
+
+                    updateArgs({ url: newUrl });
+                }
+            },
+            template: `
+                <sau-table 
+                    [url]="url" 
+                    [selectorConfig]="selectorConfig" 
+                    [contentList]="contentList" 
+                    [contentTotal]="contentTotal" 
+                    [pageParamName]="pageParamName"
+                    [sizeInitialPage]="sizeInitialPage"
+                    [limit]="limit" 
+                    [headers]="headers" 
+                    (showEvent)="showEvent($event)"
+                    (editEvent)="editEvent($event)">
+                </sau-table>
+            `,
+        };
+    },
 };
 
 export const orientations: Story = {

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation, ContentChild, ContentChildren, QueryList } from '@angular/core';
 import { TemplateRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SAUSelectorModule } from '@some-angular-utils/selector'
 import { SAUPaginatorModule } from '@some-angular-utils/paginator'
 
 import { ChevronDownIconComponent } from './icons/chevron-down-icon';
@@ -26,6 +27,7 @@ import { EyeIconComponent } from './icons/eye-icon';
     RouterModule,
     DatePipe,
     CommonModule,
+    SAUSelectorModule,
     SAUPaginatorModule,
     ChevronDownIconComponent,
     PenIconComponent,
@@ -42,6 +44,8 @@ import { EyeIconComponent } from './icons/eye-icon';
 })
 export class SAUTableModule {
   @Input() url?: string;
+  @Input() filters = ''
+  @Input() selectorConfig = ''
   @Input() contentList?: string;
   @Input() contentTotal?: string;
   @Input() pageParamName = 'page';
@@ -147,10 +151,11 @@ export class SAUTableModule {
     this.cdr.detectChanges(); // Forzar detección antes de la petición
 
     const internalPage = this.getInternalPage();
-    const questionMark = this.url?.includes('?') ? '&' : '?'
+    const url = this.url + this.filters;
+    const questionMark = url?.includes('?') ? '&' : '?'
     const filters = `${this.pageParamName}=${internalPage}&${this.limitParamName}=${this.limit}`;
 
-    this.http.get(this.url + questionMark + filters).subscribe({
+    this.http.get(url + questionMark + filters).subscribe({
       next: (data: any) => {
 
         if (this.contentList && data[this.contentList]) {
@@ -269,6 +274,11 @@ export class SAUTableModule {
 
   onPageChange(newPage: number) {
     this.page = newPage;
+    this.getItems()
+  }
+
+  onFiltersChange(filters: string) {
+    this.filters = filters;
     this.getItems()
   }
 

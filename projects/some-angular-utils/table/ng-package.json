@@ -5,6 +5,7 @@
     "entryFile": "src/public-api.ts"
   },
   "allowedNonPeerDependencies": [
+    "@some-angular-utils/selector",
     "@some-angular-utils/paginator"
   ]
 }
