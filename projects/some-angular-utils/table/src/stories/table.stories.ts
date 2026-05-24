@@ -27,7 +27,7 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-const defaultSelectorConfig = {
+const defaultfilterConfig = {
     order: ['name', 'status'],
     mobile: ['name'],
     form: {
@@ -40,7 +40,7 @@ const defaultSelectorConfig = {
         status: {
             name: 'Estado de Vida',
             key: 'status',
-            type: 'selectorSimple',
+            type: 'selectSimple',
             dropdowns: [
                 { id: 'alive', name: 'Vivo' },
                 { id: 'dead', name: 'Muerto' },
@@ -257,7 +257,8 @@ export const WithFilters: Story = {
         pageParamName: 'page',
         limit: 20,
         sizeInitialPage: 1,
-        selectorConfig: defaultSelectorConfig,
+        searchButtonText: 'aaaaaaaa',
+        filterConfig: defaultfilterConfig,
         headers: [
             {
                 name: 'AVATAR',
@@ -266,19 +267,9 @@ export const WithFilters: Story = {
                 url: '{key}'
             },
             { name: 'NOMBRE', key: 'name' },
-            { name: 'ESPECIE', key: 'species' },
             {
                 name: 'ESTADO',
-                key: 'status',
-                type: 'boolean'
-            },
-            { name: 'ORIGEN', key: 'origin.name' },
-            {
-                name: 'DETALLES',
-                key: 'id',
-                type: 'link',
-                linkName: 'Ver más',
-                url: 'https://rickandmortyapi.com/api/character/{key}'
+                key: 'status'
             }
         ],
     },
@@ -298,7 +289,7 @@ export const WithFilters: Story = {
             template: `
                 <sau-table 
                     [url]="url" 
-                    [selectorConfig]="selectorConfig" 
+                    [filterConfig]="filterConfig" 
                     [contentList]="contentList" 
                     [contentTotal]="contentTotal" 
                     [pageParamName]="pageParamName"

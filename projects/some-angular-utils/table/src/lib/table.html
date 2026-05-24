@@ -1,7 +1,8 @@
 <div class="sau-table">
 
-    @if(selectorConfig){
-    <sau-selector [selectorConfig]="selectorConfig" (onFilterProcessed)="onFiltersChange($event.url)"></sau-selector>
+    @if(filterConfig){
+    <sau-filter #filterComponent [filterConfig]="filterConfig"
+        (onFilterProcessed)="onFiltersChange($event.url)"></sau-filter>
     }
 
     @if (loading) {

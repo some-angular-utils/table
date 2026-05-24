@@ -1,9 +1,9 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation, ContentChild, ContentChildren, QueryList } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation, ContentChild, ContentChildren, QueryList, ViewChild } from '@angular/core';
 import { TemplateRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SAUSelectorModule } from '@some-angular-utils/selector'
+import { SAUFilterModule } from '@some-angular-utils/filter'
 import { SAUPaginatorModule } from '@some-angular-utils/paginator'
 
 import { ChevronDownIconComponent } from './icons/chevron-down-icon';
@@ -27,7 +27,7 @@ import { EyeIconComponent } from './icons/eye-icon';
     RouterModule,
     DatePipe,
     CommonModule,
-    SAUSelectorModule,
+    SAUFilterModule,
     SAUPaginatorModule,
     ChevronDownIconComponent,
     PenIconComponent,
@@ -44,8 +44,7 @@ import { EyeIconComponent } from './icons/eye-icon';
 })
 export class SAUTableModule {
   @Input() url?: string;
-  @Input() filters = ''
-  @Input() selectorConfig = ''
+  @Input() filterConfig = ''
   @Input() contentList?: string;
   @Input() contentTotal?: string;
   @Input() pageParamName = 'page';
@@ -72,6 +71,8 @@ export class SAUTableModule {
   @Input() canDelete?: (item: any) => boolean;
   @Input() canPrint?: (item: any) => boolean;
   @Input() canShow?: (item: any) => boolean;
+
+  @ViewChild('filterComponent') filterComponent?: SAUFilterModule;
 
   @ContentChildren('customCell') customCellTemplates!: QueryList<any>;
   @Input() customTemplates: { [key: string]: TemplateRef<any> } = {};
@@ -123,12 +124,18 @@ export class SAUTableModule {
 
   @Input() limit = 10
 
+  filters = ''
+
   constructor(
     private http: HttpClient,
     private cdr: ChangeDetectorRef
   ) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    if (this.filterConfig && this.filterComponent) {
+      this.filterComponent.processFilter()
+    }
+
     if (this.url) {
       this.getItems();
 
