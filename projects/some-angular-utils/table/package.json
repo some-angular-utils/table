@@ -1,11 +1,16 @@
 {
   "name": "@some-angular-utils/table",
   "version": "0.1.16",
+  "description": "Angular table utility library",
+  "author": {
+    "name": "jose de los santos",
+    "email": "delossantosramosjose@gmail.com",
+    "url": "https://jose-web.github.io"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/some-angular-utils/table.git"
   },
-  "description": "Angular table utility library",
   "license": "MIT",
   "homepage": "https://some-angular-utils.github.io/table",
   "keywords": [
