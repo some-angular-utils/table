@@ -173,7 +173,7 @@
                                                 *ngTemplateOutlet="editButtonTemplate; context: { $implicit: item }"></ng-container>
 
                                             } @else if(hasEditSubscription){
-                                            <button class="sau-table-edit-button" (click)="clickEditButton(item.id)">
+                                            <button class="sau-table-edit-button" (click)="clickEditButton(item)">
                                                 <span class="sau-icon sau-icon-pen">
                                                     <sau-pen-icon></sau-pen-icon>
                                                 </span>
@@ -188,8 +188,7 @@
                                                 *ngTemplateOutlet="deleteButtonTemplate; context: { $implicit: item }"></ng-container>
 
                                             } @else if(hasDeleteSubscription){
-                                            <button class="sau-table-delete-button"
-                                                (click)="clickDeleteButton(item.id)">
+                                            <button class="sau-table-delete-button" (click)="clickDeleteButton(item)">
                                                 <span class="sau-icon sau-icon-trash">
                                                     <sau-trash-icon></sau-trash-icon>
                                                 </span>
@@ -204,7 +203,7 @@
                                                 *ngTemplateOutlet="printButtonTemplate; context: { $implicit: item }"></ng-container>
 
                                             } @else if(hasPrintSubscription){
-                                            <button class="sau-table-print-button" (click)="clickPrintButton(item.id)">
+                                            <button class="sau-table-print-button" (click)="clickPrintButton(item)">
                                                 <span class="sau-icon sau-icon-trash">
                                                     <sau-print-icon></sau-print-icon>
                                                 </span>
@@ -219,7 +218,7 @@
                                                 *ngTemplateOutlet="showButtonTemplate; context: { $implicit: item }"></ng-container>
 
                                             } @else if(hasShowSubscription){
-                                            <button class="sau-table-show-button" (click)="clickShowButton(item.id)">
+                                            <button class="sau-table-show-button" (click)="clickShowButton(item)">
                                                 <span class="sau-icon sau-icon-eye">
                                                     <sau-eye-icon></sau-eye-icon>
                                                 </span>
@@ -294,7 +293,7 @@
                             *ngTemplateOutlet="editButtonTemplate; context: { $implicit: item }"></ng-container>
 
                         } @else if(hasEditSubscription){
-                        <button class="sau-table-desktop-edit-button" (click)="clickEditButton(item.id)" title="Editar">
+                        <button class="sau-table-desktop-edit-button" (click)="clickEditButton(item)" title="Editar">
                             <span class="sau-icon sau-icon-pen">
                                 <sau-pen-icon></sau-pen-icon>
                             </span>
@@ -308,7 +307,7 @@
                             *ngTemplateOutlet="deleteButtonTemplate; context: { $implicit: item }"></ng-container>
 
                         } @else if(hasDeleteSubscription){
-                        <button class="sau-table-desktop-delete-button" (click)="clickDeleteButton(item.id)"
+                        <button class="sau-table-desktop-delete-button" (click)="clickDeleteButton(item)"
                             title="Eliminar">
                             <span class="sau-icon sau-icon-trash">
                                 <sau-trash-icon></sau-trash-icon>
@@ -323,7 +322,7 @@
                             *ngTemplateOutlet="printButtonTemplate; context: { $implicit: item }"></ng-container>
 
                         } @else if(hasPrintSubscription){
-                        <button class="sau-table-desktop-print-button" (click)="clickPrintButton(item.id)"
+                        <button class="sau-table-desktop-print-button" (click)="clickPrintButton(item)"
                             title="Imprimir">
                             <span class="sau-icon sau-icon-trash">
                                 <sau-print-icon></sau-print-icon>
@@ -339,8 +338,7 @@
                             *ngTemplateOutlet="showButtonTemplate; context: { $implicit: item }"></ng-container>
 
                         } @else if(hasShowSubscription){
-                        <button class="sau-table-desktop-show-button" (click)="clickShowButton(item.id)"
-                            title="Mostrar">
+                        <button class="sau-table-desktop-show-button" (click)="clickShowButton(item)" title="Mostrar">
                             <span class="sau-icon sau-icon-eye">
                                 <sau-eye-icon></sau-eye-icon>
                             </span>

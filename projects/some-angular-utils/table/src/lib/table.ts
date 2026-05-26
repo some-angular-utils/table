@@ -263,20 +263,20 @@ export class SAUTableModule {
     return Array.isArray(array)
   }
 
-  clickEditButton(id?: number) {
-    this.editEvent.emit(id)
+  clickEditButton(item?: any) {
+    this.editEvent.emit(item)
   }
 
-  clickDeleteButton(id?: number) {
-    this.deleteEvent.emit(id);
+  clickDeleteButton(item?: any) {
+    this.deleteEvent.emit(item);
   }
 
-  clickPrintButton(id?: number) {
-    this.printEvent.emit(id);
+  clickPrintButton(item?: any) {
+    this.printEvent.emit(item);
   }
 
-  clickShowButton(id?: number) {
-    this.showEvent.emit(id);
+  clickShowButton(item?: any) {
+    this.showEvent.emit(item);
   }
 
   onPageChange(newPage: number) {
