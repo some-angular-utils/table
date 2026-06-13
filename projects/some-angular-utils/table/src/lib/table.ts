@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation, ContentChild, ContentChildren, QueryList, ViewChild } from '@angular/core';
 import { TemplateRef } from '@angular/core';
@@ -10,13 +10,9 @@ import { ChevronDownIconComponent } from './icons/chevron-down-icon';
 import { PenIconComponent } from './icons/pen-icon';
 import { TrashIconComponent } from './icons/trash-icon';
 import { InboxIconComponent } from './icons/inbox-icon';
-import { CrownIconComponent } from './icons/crown-icon';
-import { CheckIconComponent } from './icons/check-icon';
-import { XmarkIconComponent } from './icons/xmark-icon';
-import { EnvelopeIconComponent } from './icons/envelope-icon';
-import { GoogleIconComponent } from './icons/google-icon';
 import { PrintIconComponent } from './icons/print-icon';
 import { EyeIconComponent } from './icons/eye-icon';
+import { DataTemplateComponent } from './components/data-template/data-template.component';
 
 @Component({
   selector: 'sau-table',
@@ -25,7 +21,6 @@ import { EyeIconComponent } from './icons/eye-icon';
   encapsulation: ViewEncapsulation.None,
   imports: [
     RouterModule,
-    DatePipe,
     CommonModule,
     SAUFilterModule,
     SAUPaginatorModule,
@@ -33,13 +28,9 @@ import { EyeIconComponent } from './icons/eye-icon';
     PenIconComponent,
     TrashIconComponent,
     InboxIconComponent,
-    CrownIconComponent,
-    CheckIconComponent,
-    XmarkIconComponent,
-    EnvelopeIconComponent,
-    GoogleIconComponent,
     PrintIconComponent,
     EyeIconComponent,
+    DataTemplateComponent,
   ]
 })
 export class SAUTableModule {

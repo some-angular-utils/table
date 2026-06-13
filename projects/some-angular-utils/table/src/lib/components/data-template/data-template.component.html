@@ -1,0 +1,40 @@
+<section class="sau-table-data-section">
+
+    @if(header.name == 'NOMBRE' && item.role == 'ROLE_ADMIN') {
+    <div class="sau-table-admin-crown">
+        <span class="sau-icon sau-icon-crown">
+            <sau-crown-icon></sau-crown-icon>
+        </span>
+    </div>
+    }
+
+    @let customTmpl = getCustomTemplate(header.key);
+
+    @if (customTmpl) {
+
+    <section class="sau-table-data-type-section">
+        <ng-container [ngTemplateOutlet]="customTmpl" [ngTemplateOutletContext]="{item: item, header: header}">
+        </ng-container>
+    </section>
+
+    } @else {
+    <span>
+
+        @if (header.innerHtml) {
+        <span [innerHTML]="getValue(item, header.key)"></span>
+        } @else {
+        <sau-data-type-template [item]="item" [header]="header" [value]="header.key"></sau-data-type-template>
+        }
+
+        @if(header.subKey){
+        <span class="sau-table-subkey">
+            (
+            <sau-data-type-template [item]="item" [header]="header" [value]="header.subKey"></sau-data-type-template>
+            )
+        </span>
+        }
+
+    </span>
+    }
+
+</section>

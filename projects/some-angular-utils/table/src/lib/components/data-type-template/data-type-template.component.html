@@ -1,0 +1,91 @@
+<section class="sau-table-data-type-section">
+    @switch (header.type) {
+
+    @case ('boolean') {
+    @if(getValue(item, value)){
+    <div class="sau-table-boolean-true">
+        <span class="sau-icon sau-icon-check">
+            <sau-check-icon></sau-check-icon>
+        </span>
+    </div>
+    } @else {
+    <div class="sau-table-boolean-false">
+        <span class="sau-icon sau-icon-xmark">
+            <sau-xmark-icon></sau-xmark-icon>
+        </span>
+    </div>
+    }
+    }
+
+    @case ('date') {
+    <span class="sau-table-date">
+        {{getValue(item, value) | date: 'dd/MM/yyyy'}}
+    </span>
+    }
+
+    @case ('dateTime') {
+    <span class="sau-table-datetime">
+        {{getValue(item, value) | date: 'dd/MM/yyyy HH:mm'}}
+    </span>
+    }
+
+    @case ('color'){
+    <span class="sau-table-color-indicator" [style.background-color]="getValue(item, value)"></span>
+    }
+
+    @case ('link'){
+    @let link = getLink(header.url, item, value);
+
+    @if(link.isExternal){
+    <a [href]="link.url" class="sau-table-link">
+        {{header.linkName}}
+    </a>
+    }@else{
+    <a [routerLink]="link.url" class="sau-table-link" target="_blank">
+        {{header.linkName}}
+    </a>
+    }
+
+    }
+
+    @case ('image'){
+    @let link = getLink(header.url, item, value);
+
+    <img [src]="link.url" [alt]="getValue(item, value)" loading="lazy" class="sau-table-image">
+    }
+
+    @case ('login'){
+    @if(item.active){
+    <span class="sau-table-login-container">
+
+        @if(item.email_verified_at){
+        <div [title]="item.email" class="sau-table-login-email-verified">
+            <span class="sau-icon sau-icon-envelope">
+                <sau-envelope-icon></sau-envelope-icon>
+            </span>
+        </div>
+        }
+
+        @if(item.google_id){
+        <div [title]="item.google_id" class="sau-table-login-google">
+            <span class="sau-icon sau-icon-google">
+                <sau-google-icon></sau-google-icon>
+            </span>
+        </div>
+        }
+
+    </span>
+    } @else {
+    <div class="sau-table-login-inactive">
+        <span class="sau-icon sau-icon-xmark">
+            <sau-xmark-icon></sau-xmark-icon>
+        </span>
+    </div>
+    }
+    }
+
+    @default {
+    {{getValue(item, value)}}
+    }
+    }
+</section>
