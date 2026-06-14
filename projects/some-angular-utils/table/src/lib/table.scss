@@ -10,12 +10,19 @@
     --sau-color-show: rgb(44, 122, 212);
     --sau-color-text: rgb(31, 41, 55);
 
-    // Estilos principales del contenedor
-    overflow: auto;
     background: var(--sau-color-background);
 
     .sau-filter {
-        margin-bottom: 0.5rem;
+        --sau-color-primary: inherit !important;
+        --sau-color-secondary: inherit !important;
+        --sau-color-background: inherit !important;
+        --sau-color-edit: inherit !important;
+        --sau-color-delete: inherit !important;
+        --sau-color-text: inherit !important;
+
+        &__grid {
+            padding: 0.5rem 1rem;
+        }
     }
 
     table {
