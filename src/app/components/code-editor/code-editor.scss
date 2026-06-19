@@ -1,0 +1,28 @@
+.editor-body {
+  height: 340px;
+}
+
+.gutter,
+.editor-textarea {
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.gutter {
+  overflow-y: hidden;
+}
+
+.editor-textarea {
+  white-space: pre;
+  tab-size: 2;
+}
+
+.editor-textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.editor-textarea::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+}

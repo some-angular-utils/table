@@ -1,0 +1,31 @@
+<div class="overflow-hidden rounded-2xl border border-gray-800 bg-gray-900">
+  <div class="flex items-center justify-between border-b border-gray-800 px-4 py-2">
+    <span class="font-mono text-xs text-gray-400">{{ filename() }}</span>
+
+    <div class="flex items-center gap-3">
+      @if (error()) {
+        <span class="font-mono text-xs text-red-400">{{ error() }}</span>
+      } @else {
+        <span class="flex items-center gap-1.5 font-mono text-xs text-green-500">
+          <span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>
+          live
+        </span>
+      }
+
+      <button type="button" (click)="reset()"
+        class="font-mono text-xs text-gray-500 transition hover:text-gray-200">reset</button>
+    </div>
+  </div>
+
+  <div class="editor-body flex font-mono text-[13px] leading-[1.6]">
+    <div class="gutter select-none bg-black/20 px-3 py-3 text-right text-gray-500">
+      @for (n of lineNumbers(); track n) {
+        <div>{{ n }}</div>
+      }
+    </div>
+    <textarea class="editor-textarea flex-1 resize-none bg-transparent px-3 py-3 text-gray-100 outline-none"
+      spellcheck="false" autocapitalize="off" autocomplete="off" [value]="code()"
+      (input)="onInput($any($event.target).value)" (keydown)="onKeydown($event)"
+      (scroll)="onScroll($event)"></textarea>
+  </div>
+</div>

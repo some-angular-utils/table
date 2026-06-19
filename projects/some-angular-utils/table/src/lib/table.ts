@@ -132,6 +132,7 @@ export class SAUTableModule {
 
     } else if (this.fixedContent && this.fixedContent.length > 0) {
       this.items = [...this.fixedContent];
+      this.cdr.detectChanges();
 
     }
   }

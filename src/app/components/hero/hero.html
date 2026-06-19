@@ -1,0 +1,61 @@
+<section id="top" class="relative overflow-hidden bg-white">
+  <div
+    class="pointer-events-none absolute inset-x-0 -top-40 h-[480px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-100 via-white to-white">
+  </div>
+
+  <div class="relative mx-auto grid max-w-6xl gap-16 px-6 pt-20 pb-24 lg:grid-cols-2 lg:items-center lg:pt-28">
+    <div>
+      <span
+        class="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-semibold tracking-wide text-brand-700 uppercase">
+        Angular component library
+      </span>
+
+      <h1 class="mt-6 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+        A table component that <span class="text-brand-600">does the heavy lifting</span>.
+      </h1>
+
+      <p class="mt-5 max-w-lg text-lg leading-relaxed text-gray-600">
+        Remote or local data, pagination, filters, responsive layouts and full template
+        control — wired into one declarative <code class="text-[0.9em] text-gray-800">&lt;sau-table&gt;</code>
+        element.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <button type="button" (click)="copyInstall()"
+          class="group flex items-center gap-3 rounded-lg bg-gray-900 px-4 py-3 font-mono text-sm text-gray-100 transition hover:bg-gray-800">
+          <span class="text-brand-400">$</span>
+          npm install @some-angular-utils/table
+          <span class="ml-1 text-xs text-gray-400 group-hover:text-gray-200">
+            {{ copied() ? 'Copied!' : 'Copy' }}
+          </span>
+        </button>
+      </div>
+
+      <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <a href="https://www.npmjs.com/package/@some-angular-utils/table" target="_blank" rel="noopener">
+          <img src="https://img.shields.io/npm/v/@some-angular-utils/table" alt="npm version" class="h-5">
+        </a>
+        <a href="https://www.npmjs.com/package/@some-angular-utils/table" target="_blank" rel="noopener">
+          <img src="https://img.shields.io/npm/dm/@some-angular-utils/table" alt="npm downloads" class="h-5">
+        </a>
+        <a href="https://www.npmjs.com/package/@some-angular-utils/table" target="_blank" rel="noopener">
+          <img src="https://img.shields.io/bundlephobia/minzip/@some-angular-utils/table" alt="bundle size"
+            class="h-5">
+        </a>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="absolute -inset-4 -z-10 rounded-3xl bg-brand-100/60 blur-2xl"></div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-xl shadow-gray-200/60">
+        <div class="mb-4 flex items-center gap-2">
+          <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-yellow-400"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-green-400"></span>
+          <span class="ml-2 font-mono text-xs text-gray-400">infrastructure.component.html</span>
+        </div>
+        <sau-table [headers]="headers" [fixedContent]="fixedContent"></sau-table>
+      </div>
+    </div>
+  </div>
+</section>

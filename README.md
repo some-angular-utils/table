@@ -10,11 +10,20 @@
 
 ---
 
-[DEMO](https://some-angular-utils.github.io/table)
-
 [NPM](https://www.npmjs.com/package/@some-angular-utils/table)
 
 ---
+
+## DEMO
+
+This repo ships with an interactive showcase app — every feature has a live, editable example (edit the code, the table updates in real time). Run it locally:
+
+```bash
+npm install
+npm run dev
+```
+
+Then open http://localhost:4200.
 
 ## IMPORT
 ```ts

@@ -1,0 +1,103 @@
+<section id="demos" class="border-t border-gray-100 py-24">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="max-w-2xl">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">See it in action.</h2>
+      <p class="mt-4 text-lg text-gray-600">
+        Every panel below is a real, interactive <code class="text-[0.9em] text-gray-800">&lt;sau-table&gt;</code> —
+        edit the code on the left and watch it update.
+      </p>
+    </div>
+
+    <div class="mt-10 flex flex-wrap gap-2">
+      @for (demo of demos; track demo.id) {
+        <button type="button" (click)="selectTab(demo.id)"
+          class="cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition"
+          [class.bg-gray-900]="activeTab() === demo.id" [class.text-white]="activeTab() === demo.id"
+          [class.border-gray-900]="activeTab() === demo.id"
+          [class.border-gray-200]="activeTab() !== demo.id" [class.text-gray-600]="activeTab() !== demo.id">
+          {{ demo.label }}
+        </button>
+      }
+    </div>
+
+    @for (demo of demos; track demo.id) {
+      @if (activeTab() === demo.id) {
+        <p class="mt-6 max-w-2xl text-gray-600">{{ demo.description }}</p>
+
+        <div class="mt-6 grid items-start gap-6 lg:grid-cols-[minmax(0,420px)_1fr]">
+          <app-code-editor [code]="demo.code()" (codeChange)="demo.code.set($event)" [error]="demo.error()"
+            [initial]="demo.initialCode" [filename]="demo.kind === 'css' ? 'theme.css' : 'config.js'">
+          </app-code-editor>
+
+          <div class="rounded-2xl border border-gray-200 bg-white p-5">
+            @switch (demo.id) {
+              @case ('remote') {
+                @for (cfg of [demo.parsed()]; track cfg) {
+                  <sau-table [url]="cfg.url" [contentList]="cfg.contentList" [contentTotal]="cfg.contentTotal"
+                    [pageParamName]="cfg.pageParamName" [limitParamName]="cfg.limitParamName"
+                    [sizeBetweenPages]="cfg.sizeBetweenPages" [limit]="cfg.limit" [headers]="cfg.headers" [showOptions]="cfg.showOptions">
+                  </sau-table>
+                }
+              }
+
+              @case ('filters') {
+                @for (cfg of [demo.parsed()]; track cfg) {
+                  <sau-table [url]="cfg.url" [filterConfig]="$any(cfg.filterConfig)" [contentList]="cfg.contentList"
+                    [contentTotal]="cfg.contentTotal" [pageParamName]="cfg.pageParamName"
+                    [sizeInitialPage]="cfg.sizeInitialPage" [limit]="cfg.limit" [headers]="cfg.headers" [showOptions]="cfg.showOptions">
+                  </sau-table>
+                }
+              }
+
+              @case ('types') {
+                @for (cfg of [demo.parsed()]; track cfg) {
+                  <sau-table [headers]="cfg.headers" [fixedContent]="cfg.fixedContent"></sau-table>
+                }
+              }
+
+              @case ('templates') {
+                @for (cfg of [demo.parsed()]; track cfg) {
+                  <sau-table [headers]="cfg.headers" [fixedContent]="cfg.fixedContent" [showOptions]="false"
+                    [customTemplates]="{ price: priceTmpl }">
+                    <ng-template #priceTmpl let-item="item">
+                      {{ formatPrice(cfg, item.price) }}
+                    </ng-template>
+                  </sau-table>
+                }
+              }
+
+              @case ('actions') {
+                @for (cfg of [demo.parsed()]; track cfg) {
+                  <sau-table [headers]="cfg.headers" [fixedContent]="cfg.fixedContent" [canEdit]="cfg.canEdit"
+                    [canDelete]="cfg.canDelete" [canPrint]="cfg.canPrint" [canShow]="cfg.canShow"
+                    (editEvent)="log('edit', $event)" (deleteEvent)="log('delete', $event)"
+                    (printEvent)="log('print', $event)" (showEvent)="log('show', $event)">
+                  </sau-table>
+                }
+
+                @if (eventLog()) {
+                  <p class="mt-4 font-mono text-xs text-brand-700">{{ eventLog() }}</p>
+                }
+              }
+
+              @case ('theme') {
+                <div class="theme-live">
+                  <sau-table [headers]="themeHeaders" [fixedContent]="themeContent" (editEvent)="log('edit', $event)"
+                    (deleteEvent)="log('delete', $event)">
+                  </sau-table>
+                </div>
+              }
+
+              @case ('orientation') {
+                @for (cfg of [demo.parsed()]; track cfg) {
+                  <sau-table [orientation]="cfg.orientation" [headers]="cfg.headers" [fixedContent]="cfg.fixedContent">
+                  </sau-table>
+                }
+              }
+            }
+          </div>
+        </div>
+      }
+    }
+  </div>
+</section>
