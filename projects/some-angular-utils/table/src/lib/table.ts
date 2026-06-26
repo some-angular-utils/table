@@ -51,6 +51,7 @@ export class SAUTableModule {
   @Output() deleteEvent = new EventEmitter();
   @Output() printEvent = new EventEmitter();
   @Output() showEvent = new EventEmitter();
+  @Output() itemsLoadedEvent = new EventEmitter<any[]>();
 
   // ContentChild para detectar cosas personalizadas
   @ContentChild('editButton', { static: false }) editButtonTemplate?: TemplateRef<any>;
@@ -133,6 +134,7 @@ export class SAUTableModule {
     } else if (this.fixedContent && this.fixedContent.length > 0) {
       this.items = [...this.fixedContent];
       this.cdr.detectChanges();
+      this.itemsLoadedEvent.emit(this.items);
 
     }
   }
@@ -175,6 +177,7 @@ export class SAUTableModule {
 
         this.loading = false;
         this.cdr.detectChanges(); // Forzar detección después de actualizar datos
+        this.itemsLoadedEvent.emit(this.items);
       },
       error: (error: any) => {
         console.error('ERROR obtener productos. ' + error);

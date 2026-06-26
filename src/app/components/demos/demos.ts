@@ -1,9 +1,9 @@
-import { Component, effect, inject, OnDestroy, Renderer2, signal, WritableSignal } from '@angular/core';
+import { Component, computed, effect, inject, OnDestroy, Renderer2, signal, WritableSignal } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { SAUTableModule } from '@some-angular-utils/table';
 import { CodeEditorComponent } from '../code-editor/code-editor';
 
-type DemoId = 'remote' | 'filters' | 'types' | 'templates' | 'actions' | 'theme' | 'orientation';
+type DemoId = 'remote' | 'filters' | 'types' | 'templates' | 'actions' | 'theme' | 'orientation' | 'events';
 type DemoKind = 'js' | 'css';
 
 interface DemoEntry {
@@ -157,6 +157,19 @@ const ORIENTATION_CODE = `{
   ],
 }`;
 
+const EVENTS_CODE = `{
+  headers: [
+    { name: 'NAME', key: 'name' },
+    { name: 'ROLE', key: 'role' },
+  ],
+  fixedContent: [
+    { name: 'Alice Admin', role: 'Admin' },
+    { name: 'Bob Guest', role: 'Guest' },
+    { name: 'Charlie Inactive', role: 'User' },
+    { name: 'Diana Editor', role: 'Editor' },
+  ],
+}`;
+
 @Component({
   selector: 'app-demos',
   imports: [SAUTableModule, CodeEditorComponent],
@@ -178,6 +191,7 @@ export class DemosComponent implements OnDestroy {
     createDemo('actions', 'Conditional actions', 'Edit, delete, print and show buttons accept a predicate function per row.', 'js', ACTIONS_CODE),
     createDemo('theme', 'Theming', 'Every color is a CSS custom property. Edit the values below and watch the table restyle instantly.', 'css', THEME_CODE),
     createDemo('orientation', 'Orientation', 'Force a vertical, horizontal or dynamic layout — just change the orientation field.', 'js', ORIENTATION_CODE),
+    createDemo('events', 'Items loaded event', 'sau-table emits itemsLoadedEvent every time it finishes loading rows — from a fetch or from fixedContent.', 'js', EVENTS_CODE),
   ];
 
   constructor() {
@@ -220,6 +234,30 @@ export class DemosComponent implements OnDestroy {
 
   log(action: string, item: any) {
     this.eventLog.set(`${action} → ${item?.name ?? JSON.stringify(item)}`);
+  }
+
+  logItemsLoaded(items: any) {
+    this.eventLog.set(`itemsLoadedEvent → ${items.length} item(s)`);
+  }
+
+  eventsSearch = signal('');
+
+  // Recombina headers + el fixedContent ya filtrado en un objeto nuevo:
+  // como sau-table no tiene ngOnChanges, el @for "track cfg" del template
+  // necesita una referencia nueva para recrear el componente y reemitir itemsLoadedEvent.
+  eventsConfig = computed(() => {
+    const demo = this.demos.find((d) => d.id === 'events')!;
+    const cfg = demo.parsed();
+    const term = this.eventsSearch().trim().toLowerCase();
+    const fixedContent = term
+      ? cfg.fixedContent.filter((item: any) => item.name?.toLowerCase().includes(term))
+      : cfg.fixedContent;
+
+    return { ...cfg, fixedContent };
+  });
+
+  onEventsSearch(value: string) {
+    this.eventsSearch.set(value);
   }
 
   themeHeaders = [

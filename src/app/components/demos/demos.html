@@ -51,7 +51,7 @@
 
               @case ('types') {
                 @for (cfg of [demo.parsed()]; track cfg) {
-                  <sau-table [headers]="cfg.headers" [fixedContent]="cfg.fixedContent"></sau-table>
+                  <sau-table [headers]="cfg.headers" [showOptions]="false" [fixedContent]="cfg.fixedContent"></sau-table>
                 }
               }
 
@@ -90,8 +90,24 @@
 
               @case ('orientation') {
                 @for (cfg of [demo.parsed()]; track cfg) {
-                  <sau-table [orientation]="cfg.orientation" [headers]="cfg.headers" [fixedContent]="cfg.fixedContent">
+                  <sau-table [orientation]="cfg.orientation" [headers]="cfg.headers" [showOptions]="false" [fixedContent]="cfg.fixedContent">
                   </sau-table>
+                }
+              }
+
+              @case ('events') {
+                <input type="text" placeholder="Search by name…"
+                  class="mb-4 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-900 focus:border-brand-500 focus:outline-none"
+                  (input)="onEventsSearch($any($event.target).value)" />
+
+                @for (cfg of [eventsConfig()]; track cfg) {
+                  <sau-table [headers]="cfg.headers" [showOptions]="false" [fixedContent]="cfg.fixedContent"
+                    (itemsLoadedEvent)="logItemsLoaded($event)">
+                  </sau-table>
+                }
+
+                @if (eventLog()) {
+                  <p class="mt-4 font-mono text-xs text-brand-700">{{ eventLog() }}</p>
                 }
               }
             }
