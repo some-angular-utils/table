@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { SAUTableModule } from '@some-angular-utils/table';
 import { CodeEditorComponent } from '../code-editor/code-editor';
 
-type DemoId = 'remote' | 'filters' | 'types' | 'templates' | 'actions' | 'theme' | 'orientation' | 'events';
+type DemoId = 'remote' | 'filters' | 'filterTypes' | 'types' | 'templates' | 'actions' | 'theme' | 'orientation' | 'events';
 type DemoKind = 'js' | 'css';
 
 interface DemoEntry {
@@ -86,6 +86,97 @@ const FILTERS_CODE = `{
     { name: 'AVATAR', key: 'image', type: 'image', url: '{key}' },
     { name: 'NAME', key: 'name' },
     { name: 'STATUS', key: 'status' },
+  ],
+}`;
+
+const FILTER_TYPES_CODE = `{
+  url: 'https://rickandmortyapi.com/api/character/',
+  contentList: 'results',
+  contentTotal: 'info.count',
+  pageParamName: 'page',
+  sizeInitialPage: 1,
+  limit: 20,
+  showOptions: false,
+  filterConfig: {
+    order: ['name', 'status', 'gender', 'species', 'id', 'alive', 'created', 'createdRange'],
+    mobile: ['name'],
+    orderParamName: 'sort',
+    orderByFields: [
+      { field: 'name', label: 'Name', defaultValue: false },
+      { field: 'created', label: 'Created' },
+    ],
+    form: {
+      // inputText
+      name: {
+        name: 'Character name',
+        key: 'name',
+        type: 'inputText',
+        defaultValue: 'Rick',
+      },
+      // selectSimple (dropdowns accept an optional bindSubLabel)
+      status: {
+        name: 'Life status',
+        key: 'status',
+        type: 'selectSimple',
+        bindSubLabel: 'code',
+        dropdowns: [
+          { id: 'alive', name: 'Alive', code: 'ALV' },
+          { id: 'dead', name: 'Dead', code: 'DTH' },
+          { id: 'unknown', name: 'Unknown', code: '???' },
+        ],
+      },
+      // selectMultiple
+      gender: {
+        name: 'Genders',
+        key: 'gender',
+        type: 'selectMultiple',
+        dropdowns: [
+          { id: 'female', name: 'Female' },
+          { id: 'male', name: 'Male' },
+          { id: 'genderless', name: 'Genderless' },
+          { id: 'unknown', name: 'Unknown' },
+        ],
+      },
+      // a second inputText, just to filter by a different key
+      species: {
+        name: 'Species',
+        key: 'species',
+        type: 'inputText',
+        defaultValue: '',
+      },
+      // inputNumber
+      id: {
+        name: 'Character id',
+        key: 'id',
+        type: 'inputNumber',
+      },
+      // inputCheckbox (tri-state: true / false / unset)
+      alive: {
+        name: 'Confirmed alive',
+        key: 'confirmed_alive',
+        type: 'inputCheckbox',
+      },
+      // date
+      created: {
+        name: 'Created on',
+        key: 'created',
+        type: 'date',
+      },
+      // dateRange (needs keyTo)
+      createdRange: {
+        name: 'Created between',
+        key: 'created_from',
+        keyTo: 'created_to',
+        type: 'dateRange',
+      },
+    },
+  },
+  headers: [
+    { name: 'AVATAR', key: 'image', type: 'image', url: '{key}' },
+    { name: 'NAME', key: 'name' },
+    { name: 'STATUS', key: 'status' },
+    { name: 'SPECIES', key: 'species' },
+    { name: 'GENDER', key: 'gender' },
   ],
 }`;
 
@@ -186,6 +277,7 @@ export class DemosComponent implements OnDestroy {
   demos: DemoEntry[] = [
     createDemo('remote', 'Remote data', 'Point sau-table at any REST endpoint. Edit the URL, headers or pagination params below — it refetches live.', 'js', REMOTE_CODE),
     createDemo('filters', 'Filters', 'Describe a filter form once. Submitted values turn into query params and re-fetch the data automatically.', 'js', FILTERS_CODE),
+    createDemo('filterTypes', 'All filter types', 'Every sau-filter field type in one form: inputText, inputNumber, inputCheckbox, date, dateRange, selectSimple, selectMultiple, plus the built-in sort order dropdown.', 'js', FILTER_TYPES_CODE),
     createDemo('types', 'Rich cell types', 'Booleans, colors, dates, links and images are all first-class header types. Try changing a value below.', 'js', TYPES_CODE),
     createDemo('templates', 'Custom templates', 'Hand the table a function for any column and render it however you like.', 'js', TEMPLATES_CODE),
     createDemo('actions', 'Conditional actions', 'Edit, delete, print and show buttons accept a predicate function per row.', 'js', ACTIONS_CODE),

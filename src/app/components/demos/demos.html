@@ -49,6 +49,17 @@
                 }
               }
 
+              @case ('filterTypes') {
+                <div class="filters-live">
+                  @for (cfg of [demo.parsed()]; track cfg) {
+                    <sau-table [url]="cfg.url" [filterConfig]="$any(cfg.filterConfig)" [contentList]="cfg.contentList"
+                      [contentTotal]="cfg.contentTotal" [pageParamName]="cfg.pageParamName"
+                      [sizeInitialPage]="cfg.sizeInitialPage" [limit]="cfg.limit" [headers]="cfg.headers" [showOptions]="cfg.showOptions">
+                    </sau-table>
+                  }
+                </div>
+              }
+
               @case ('types') {
                 @for (cfg of [demo.parsed()]; track cfg) {
                   <sau-table [headers]="cfg.headers" [showOptions]="false" [fixedContent]="cfg.fixedContent"></sau-table>
