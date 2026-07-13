@@ -92,31 +92,152 @@
             width: 100%;
             font-size: 0.875rem;
             text-align: left;
-            color: var(--sau-color-primary);
 
-            .sau-table-mobile-row {
-                border-bottom: 1px solid var(--sau-color-primary);
+            // ===================================================================
+            // "classic" theme — plain label/value rows, gradient action band
+            // ===================================================================
+            &.sau-table-mobile-theme-classic {
+                color: var(--sau-color-primary);
 
-                &:last-child {
-                    border-bottom: none;
+                .sau-table-mobile-row {
+                    border-bottom: 1px solid var(--sau-color-primary);
+
+                    &:last-child {
+                        border-bottom: none;
+                    }
+
+                    &.sau-table-mobile-row-even {
+                        background: var(--sau-color-background);
+                    }
+
+                    .sau-table-mobile-header-cell {
+                        padding: 0.5rem;
+                        font-weight: 500;
+                        background: linear-gradient(to right, var(--sau-color-primary), var(--sau-color-secondary));
+                        color: var(--sau-color-background);
+                        max-width: min-content;
+                    }
+
+                    .sau-table-mobile-data-cell {
+                        padding: 0.5rem;
+                        width: 100%;
+                        color: var(--sau-color-primary);
+                    }
                 }
 
-                &.sau-table-mobile-row-even {
-                    background: var(--sau-color-background);
-                }
-
-                .sau-table-mobile-header-cell {
-                    padding: 0.5rem;
-                    font-weight: 500;
+                .sau-table-mobile-actions-row {
+                    border-bottom: 0.5rem solid transparent;
                     background: linear-gradient(to right, var(--sau-color-primary), var(--sau-color-secondary));
-                    color: var(--sau-color-background);
-                    max-width: min-content;
+                    padding: 1rem;
+
+                    .sau-table-mobile-actions-container {
+                        display: flex;
+                        justify-content: center;
+                        gap: 1rem;
+                        padding: 0.5rem;
+                    }
+                }
+            }
+
+            // ===================================================================
+            // "cards" theme — one white rounded card per item, label above value
+            // ===================================================================
+            &.sau-table-mobile-theme-cards {
+                display: block;
+                color: var(--sau-color-text);
+                padding: 0.75rem;
+                background: rgba(0, 0, 0, 0.03);
+
+                tbody {
+                    display: block;
                 }
 
-                .sau-table-mobile-data-cell {
-                    padding: 0.5rem;
-                    width: 100%;
-                    color: var(--sau-color-primary);
+                .sau-table-mobile-row {
+                    display: block;
+                    border-bottom: none;
+                    margin-bottom: 0.75rem;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+
+                    >td {
+                        display: block;
+                    }
+
+                    // Card wrapping a single item's fields
+                    .sau-table-width-full {
+                        display: block;
+                        background: var(--sau-color-background);
+                        border-radius: 0.875rem;
+                        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+                        padding: 0.875rem 0.875rem 0.75rem;
+                        overflow: hidden;
+
+                        tbody {
+                            display: block;
+                        }
+
+                        tr {
+                            display: block;
+                            border-bottom: none;
+                            background: none;
+                            margin-bottom: 0.5rem;
+                        }
+
+                        .sau-table-mobile-header-cell {
+                            display: block;
+                            padding: 0;
+                            margin-bottom: 0.15rem;
+                            font-weight: 600;
+                            background: none;
+                            color: var(--sau-color-primary);
+                            opacity: 0.55;
+                            font-size: 0.65rem;
+                            letter-spacing: 0.03em;
+                            text-transform: uppercase;
+                            max-width: none;
+                        }
+
+                        .sau-table-mobile-data-cell {
+                            display: block;
+                            padding: 0;
+                            width: auto;
+                            color: var(--sau-color-text);
+                            font-size: 0.875rem;
+                            font-weight: 600;
+                        }
+
+                        .sau-table-mobile-actions-row {
+                            display: block;
+                            background: none;
+                            border-bottom: none;
+                            padding: 0;
+                            margin-top: 0.25rem;
+                            margin-bottom: 0;
+
+                            >td {
+                                display: block;
+                                padding: 0;
+                            }
+                        }
+
+                        .sau-table-mobile-actions-container {
+                            padding: 0;
+                            gap: 0.5rem;
+                            flex-wrap: wrap;
+
+                            .sau-table-edit-button,
+                            .sau-table-delete-button,
+                            .sau-table-print-button,
+                            .sau-table-show-button {
+                                flex: 1 1 calc(50% - 0.25rem);
+                                justify-content: center;
+                                border-radius: 0.625rem;
+                                border-width: 1.5px;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -180,73 +301,62 @@
             transition: all 0.3s ease-in-out;
         }
 
-        // Action buttons mobile
-        .sau-table-mobile-actions-row {
-            border-bottom: 0.5rem solid transparent;
-            background: linear-gradient(to right, var(--sau-color-primary), var(--sau-color-secondary));
-            padding: 1rem;
+        // Action buttons mobile — colors/hover shared by every mobileTheme;
+        // per-theme blocks above only override layout (padding/gap/wrap/radius).
+        .sau-table-mobile-actions-container {
+            .sau-table-edit-button,
+            .sau-table-delete-button,
+            .sau-table-print-button,
+            .sau-table-show-button {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+                font-weight: 500;
+                background: var(--sau-color-background);
+                transition: all 0.2s;
+                cursor: pointer;
 
-            .sau-table-mobile-actions-container {
-                display: flex;
-                justify-content: center;
-                gap: 1rem;
-                padding: 0.5rem;
-
-                .sau-table-edit-button,
-                .sau-table-delete-button,
-                .sau-table-print-button,
-                .sau-table-show-button {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    padding: 0.5rem 1rem;
-                    font-size: 0.875rem;
-                    font-weight: 500;
-                    background: var(--sau-color-background);
-                    transition: all 0.2s;
-                    cursor: pointer;
-
-                    &:hover {
-                        color: var(--sau-color-background);
-                    }
+                &:hover {
+                    color: var(--sau-color-background);
                 }
+            }
 
-                .sau-table-edit-button {
-                    color: var(--sau-color-edit);
-                    border: 1px solid var(--sau-color-edit);
+            .sau-table-edit-button {
+                color: var(--sau-color-edit);
+                border: 1px solid var(--sau-color-edit);
 
-                    &:hover {
-                        background: var(--sau-color-edit);
-                    }
+                &:hover {
+                    background: var(--sau-color-edit);
                 }
+            }
 
-                .sau-table-delete-button {
-                    color: var(--sau-color-delete);
-                    border: 1px solid var(--sau-color-delete);
+            .sau-table-delete-button {
+                color: var(--sau-color-delete);
+                border: 1px solid var(--sau-color-delete);
 
-                    &:hover {
-                        background: var(--sau-color-delete);
-                    }
+                &:hover {
+                    background: var(--sau-color-delete);
                 }
+            }
 
-                .sau-table-print-button {
-                    color: var(--sau-color-print);
-                    border: 1px solid var(--sau-color-print);
+            .sau-table-print-button {
+                color: var(--sau-color-print);
+                border: 1px solid var(--sau-color-print);
 
-                    &:hover {
-                        background: var(--sau-color-print);
-                    }
+                &:hover {
+                    background: var(--sau-color-print);
                 }
+            }
 
-                .sau-table-show-button {
-                    color: var(--sau-color-show);
-                    border: 1px solid var(--sau-color-show);
+            .sau-table-show-button {
+                color: var(--sau-color-show);
+                border: 1px solid var(--sau-color-show);
 
-                    &:hover {
-                        background: var(--sau-color-show);
-                    }
+                &:hover {
+                    background: var(--sau-color-show);
                 }
-
             }
         }
     }

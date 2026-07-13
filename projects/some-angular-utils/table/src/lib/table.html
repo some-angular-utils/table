@@ -14,7 +14,8 @@
                 <div class="sau-table-mobile-divider"></div>
             </div>
 
-            <table class="sau-table-mobile-table">
+            <table class="sau-table-mobile-table" [class.sau-table-mobile-theme-classic]="mobileTheme === 'classic'"
+                [class.sau-table-mobile-theme-cards]="mobileTheme === 'cards'">
                 <tbody>
                     @for (i of [1,2,3]; track $index) {
                     <tr class="sau-table-mobile-row">
@@ -115,7 +116,8 @@
             <div class="sau-table-mobile-divider"></div>
         </div>
 
-        <table class="sau-table-mobile-table">
+        <table class="sau-table-mobile-table" [class.sau-table-mobile-theme-classic]="mobileTheme === 'classic'"
+            [class.sau-table-mobile-theme-cards]="mobileTheme === 'cards'">
             <tbody>
                 @for (item of items; track $index) {
                 @let itemIndex = $index;

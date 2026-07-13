@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { SAUTableModule } from '@some-angular-utils/table';
 import { CodeEditorComponent } from '../code-editor/code-editor';
 
-type DemoId = 'remote' | 'filters' | 'filterTypes' | 'types' | 'templates' | 'actions' | 'theme' | 'orientation' | 'events';
+type DemoId = 'remote' | 'filters' | 'filterTypes' | 'types' | 'templates' | 'actions' | 'theme' | 'orientation' | 'mobileTheme' | 'events';
 type DemoKind = 'js' | 'css';
 
 interface DemoEntry {
@@ -248,6 +248,20 @@ const ORIENTATION_CODE = `{
   ],
 }`;
 
+const MOBILE_THEME_CODE = `{
+  orientation: 'vertical',
+  mobileTheme: 'cards',
+  headers: [
+    { name: 'NÚMERO', key: 'number' },
+    { name: 'NOMBRE', key: 'name' },
+    { name: 'CIF/NIF', key: 'taxId' },
+  ],
+  fixedContent: [
+    { id: 1, number: 1, name: 'Jose de los Santos', taxId: 'Sin especificar' },
+    { id: 2, number: 2, name: 'David Gil', taxId: 'Sin especificar' },
+  ],
+}`;
+
 const EVENTS_CODE = `{
   headers: [
     { name: 'NAME', key: 'name' },
@@ -283,6 +297,7 @@ export class DemosComponent implements OnDestroy {
     createDemo('actions', 'Conditional actions', 'Edit, delete, print and show buttons accept a predicate function per row.', 'js', ACTIONS_CODE),
     createDemo('theme', 'Theming', 'Every color is a CSS custom property. Edit the values below and watch the table restyle instantly.', 'css', THEME_CODE),
     createDemo('orientation', 'Orientation', 'Force a vertical, horizontal or dynamic layout — just change the orientation field.', 'js', ORIENTATION_CODE),
+    createDemo('mobileTheme', 'Mobile theme', 'Switch the phone layout between the classic label/value rows and the new stacked card look — just flip mobileTheme.', 'js', MOBILE_THEME_CODE),
     createDemo('events', 'Items loaded event', 'sau-table emits itemsLoadedEvent every time it finishes loading rows — from a fetch or from fixedContent.', 'js', EVENTS_CODE),
   ];
 
@@ -322,6 +337,27 @@ export class DemosComponent implements OnDestroy {
   selectTab(id: DemoId) {
     this.activeTab.set(id);
     this.eventLog.set(null);
+  }
+
+  // Lets a toggle button rewrite a single string field in a demo's live code
+  // (e.g. orientation: 'horizontal' -> 'vertical') instead of hand-editing it.
+  setConfigField(demoId: DemoId, field: string, value: string) {
+    const demo = this.demos.find((d) => d.id === demoId);
+    if (!demo) return;
+
+    const text = demo.code();
+    const regex = new RegExp(`(${field}\\s*:\\s*)'[^']*'`);
+    if (!regex.test(text)) return;
+
+    const nextText = text.replace(regex, `$1'${value}'`);
+    demo.code.set(nextText);
+
+    try {
+      demo.parsed.set(evalConfig(nextText));
+      demo.error.set(null);
+    } catch (err) {
+      demo.error.set(err instanceof Error ? err.message : 'Invalid code');
+    }
   }
 
   log(action: string, item: any) {

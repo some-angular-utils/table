@@ -24,6 +24,38 @@
       @if (activeTab() === demo.id) {
         <p class="mt-6 max-w-2xl text-gray-600">{{ demo.description }}</p>
 
+        @if (demo.id === 'orientation') {
+          <div class="mt-4 flex flex-wrap gap-2">
+            @for (opt of ['dynamic', 'horizontal', 'vertical']; track opt) {
+              <button type="button" (click)="setConfigField('orientation', 'orientation', opt)"
+                class="cursor-pointer rounded-full border px-3 py-1.5 text-xs font-medium capitalize transition"
+                [class.bg-gray-900]="demo.parsed().orientation === opt"
+                [class.text-white]="demo.parsed().orientation === opt"
+                [class.border-gray-900]="demo.parsed().orientation === opt"
+                [class.border-gray-200]="demo.parsed().orientation !== opt"
+                [class.text-gray-600]="demo.parsed().orientation !== opt">
+                {{ opt }}
+              </button>
+            }
+          </div>
+        }
+
+        @if (demo.id === 'mobileTheme') {
+          <div class="mt-4 flex flex-wrap gap-2">
+            @for (opt of ['cards', 'classic']; track opt) {
+              <button type="button" (click)="setConfigField('mobileTheme', 'mobileTheme', opt)"
+                class="cursor-pointer rounded-full border px-3 py-1.5 text-xs font-medium capitalize transition"
+                [class.bg-gray-900]="demo.parsed().mobileTheme === opt"
+                [class.text-white]="demo.parsed().mobileTheme === opt"
+                [class.border-gray-900]="demo.parsed().mobileTheme === opt"
+                [class.border-gray-200]="demo.parsed().mobileTheme !== opt"
+                [class.text-gray-600]="demo.parsed().mobileTheme !== opt">
+                {{ opt }}
+              </button>
+            }
+          </div>
+        }
+
         <div class="mt-6 grid items-start gap-6 lg:grid-cols-[minmax(0,420px)_1fr]">
           <app-code-editor [code]="demo.code()" (codeChange)="demo.code.set($event)" [error]="demo.error()"
             [initial]="demo.initialCode" [filename]="demo.kind === 'css' ? 'theme.css' : 'config.js'">
@@ -103,6 +135,19 @@
                 @for (cfg of [demo.parsed()]; track cfg) {
                   <sau-table [orientation]="cfg.orientation" [headers]="cfg.headers" [showOptions]="false" [fixedContent]="cfg.fixedContent">
                   </sau-table>
+                }
+              }
+
+              @case ('mobileTheme') {
+                @for (cfg of [demo.parsed()]; track cfg) {
+                  <sau-table [orientation]="cfg.orientation" [mobileTheme]="cfg.mobileTheme" [headers]="cfg.headers"
+                    [fixedContent]="cfg.fixedContent" (editEvent)="log('edit', $event)"
+                    (deleteEvent)="log('delete', $event)">
+                  </sau-table>
+                }
+
+                @if (eventLog()) {
+                  <p class="mt-4 font-mono text-xs text-brand-700">{{ eventLog() }}</p>
                 }
               }
 
