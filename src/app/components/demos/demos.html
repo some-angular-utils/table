@@ -56,11 +56,7 @@
           </div>
         }
 
-        <div class="mt-6 grid items-start gap-6 lg:grid-cols-[minmax(0,420px)_1fr]">
-          <app-code-editor [code]="demo.code()" (codeChange)="demo.code.set($event)" [error]="demo.error()"
-            [initial]="demo.initialCode" [filename]="demo.kind === 'css' ? 'theme.css' : 'config.js'">
-          </app-code-editor>
-
+        <div class="mt-6 flex flex-col gap-6">
           <div class="rounded-2xl border border-gray-200 bg-white p-5">
             @switch (demo.id) {
               @case ('remote') {
@@ -168,6 +164,10 @@
               }
             }
           </div>
+
+          <app-code-editor [code]="demo.code()" (codeChange)="demo.code.set($event)" [error]="demo.error()"
+            [initial]="demo.initialCode" [filename]="demo.kind === 'css' ? 'theme.css' : 'config.js'">
+          </app-code-editor>
         </div>
       }
     }
