@@ -74,6 +74,10 @@ Como `table.ts` solo lee `headers`/`fixedContent` una vez (no tiene `ngOnChanges
 
 No hay `tailwind.config.js` — v4 se configura con `@import "tailwindcss";` + un bloque `@theme { ... }` directamente en `src/styles.scss`, procesado por `@tailwindcss/postcss` (ver `.postcssrc.json`). La escala de color de marca (`brand-50`...`brand-900`) vive ahí. El IDE puede marcar "Unknown at rule @theme" como advertencia — es solo que el linter no conoce la sintaxis de Tailwind v4, no es un error de build.
 
+## Convención de unidades CSS
+
+En los `.scss` del proyecto (tanto la librería como la app showcase), usar siempre `rem` para tamaños, espaciados y radios — nunca `px`. Excepción: bordes de 1px (`border: 1px solid ...`), que se mantienen en `px` para un trazo nítido de un pixel.
+
 ## Gotcha de rutas en Windows + git-bash (solo importa al scriptear/probar con la herramienta Bash)
 
 El `/tmp` de git-bash está mapeado a `AppData/Local/Temp`, pero un proceso `node.exe` nativo resuelve un string literal `'/tmp/...'` pasado como argumento JS relativo a la raíz de la unidad actual (`C:\tmp\...`) en su lugar — **no** son el mismo directorio. Si un script de Node escribe archivos en `/tmp/...` y la herramienta Bash no los encuentra después, revisar primero `C:\tmp\...` antes de asumir que la escritura falló.

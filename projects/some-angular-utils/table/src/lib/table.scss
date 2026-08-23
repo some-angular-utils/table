@@ -8,6 +8,7 @@
     --sau-color-delete: rgb(239, 68, 68);
     --sau-color-print: rgb(212, 167, 44);
     --sau-color-show: rgb(44, 122, 212);
+    --sau-color-clone: rgb(36, 100, 52);
     --sau-color-text: rgb(31, 41, 55);
 
     background: var(--sau-color-background);
@@ -170,7 +171,7 @@
                         display: block;
                         background: var(--sau-color-background);
                         border-radius: 0.875rem;
-                        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+                        box-shadow: 0 1px 0.25rem rgba(0, 0, 0, 0.08);
                         padding: 0.875rem 0.875rem 0.75rem;
                         overflow: hidden;
 
@@ -224,13 +225,15 @@
 
                         .sau-table-mobile-actions-container {
                             padding: 0;
+                            display: grid;
                             gap: 0.5rem;
-                            flex-wrap: wrap;
+                            grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
 
                             .sau-table-edit-button,
                             .sau-table-delete-button,
                             .sau-table-print-button,
-                            .sau-table-show-button {
+                            .sau-table-show-button,
+                            .sau-table-clone-button {
                                 flex: 1 1 calc(50% - 0.25rem);
                                 justify-content: center;
                                 border-radius: 0.625rem;
@@ -307,7 +310,8 @@
             .sau-table-edit-button,
             .sau-table-delete-button,
             .sau-table-print-button,
-            .sau-table-show-button {
+            .sau-table-show-button,
+            .sau-table-clone-button {
                 display: inline-flex;
                 align-items: center;
                 gap: 0.5rem;
@@ -356,6 +360,15 @@
 
                 &:hover {
                     background: var(--sau-color-show);
+                }
+            }
+
+            .sau-table-clone-button {
+                color: var(--sau-color-clone);
+                border: 1px solid var(--sau-color-clone);
+
+                &:hover {
+                    background: var(--sau-color-clone);
                 }
             }
         }
@@ -421,7 +434,8 @@
                     .sau-table-desktop-edit-button,
                     .sau-table-desktop-delete-button,
                     .sau-table-desktop-print-button,
-                    .sau-table-desktop-show-button {
+                    .sau-table-desktop-show-button,
+                    .sau-table-desktop-clone-button {
                         display: inline-flex;
                         align-items: center;
                         justify-content: center;
@@ -470,6 +484,15 @@
 
                         &:hover {
                             background: var(--sau-color-show);
+                        }
+                    }
+
+                    .sau-table-desktop-clone-button {
+                        color: var(--sau-color-clone);
+                        border: 1px solid var(--sau-color-clone);
+
+                        &:hover {
+                            background: var(--sau-color-clone);
                         }
                     }
                 }
@@ -685,7 +708,7 @@
 .skeleton-line {
     position: relative;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 0.25rem;
 
     backdrop-filter: brightness(0.9);
 
@@ -709,12 +732,12 @@
 }
 
 .skeleton-line.head {
-    height: 12px;
-    width: 60px;
+    height: 0.75rem;
+    width: 3.75rem;
 }
 
 .skeleton-line.data {
-    height: 10px;
+    height: 0.625rem;
     width: 90%;
 }
 

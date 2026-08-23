@@ -12,6 +12,7 @@ import { TrashIconComponent } from './icons/trash-icon';
 import { InboxIconComponent } from './icons/inbox-icon';
 import { PrintIconComponent } from './icons/print-icon';
 import { EyeIconComponent } from './icons/eye-icon';
+import { CloneIconComponent } from './icons/clone-icon';
 import { DataTemplateComponent } from './components/data-template/data-template.component';
 
 @Component({
@@ -30,6 +31,7 @@ import { DataTemplateComponent } from './components/data-template/data-template.
     InboxIconComponent,
     PrintIconComponent,
     EyeIconComponent,
+    CloneIconComponent,
     DataTemplateComponent,
   ]
 })
@@ -52,6 +54,7 @@ export class SAUTableModule {
   @Output() deleteEvent = new EventEmitter();
   @Output() printEvent = new EventEmitter();
   @Output() showEvent = new EventEmitter();
+  @Output() cloneEvent = new EventEmitter();
   @Output() itemsLoadedEvent = new EventEmitter<any[]>();
 
   // ContentChild para detectar cosas personalizadas
@@ -59,11 +62,13 @@ export class SAUTableModule {
   @ContentChild('deleteButton', { static: false }) deleteButtonTemplate?: TemplateRef<any>;
   @ContentChild('printButton', { static: false }) printButtonTemplate?: TemplateRef<any>;
   @ContentChild('showButton', { static: false }) showButtonTemplate?: TemplateRef<any>;
+  @ContentChild('cloneButton', { static: false }) cloneButtonTemplate?: TemplateRef<any>;
 
   @Input() canEdit?: (item: any) => boolean;
   @Input() canDelete?: (item: any) => boolean;
   @Input() canPrint?: (item: any) => boolean;
   @Input() canShow?: (item: any) => boolean;
+  @Input() canClone?: (item: any) => boolean;
 
   @ViewChild('filterComponent') filterComponent?: SAUFilterModule;
 
@@ -91,6 +96,10 @@ export class SAUTableModule {
     return this.showEvent.observed;
   }
 
+  get hasCloneSubscription(): boolean {
+    return this.cloneEvent.observed;
+  }
+
   showEdit(item: any): boolean {
     return this.canEdit ? this.canEdit(item) : this.hasEditSubscription;
   }
@@ -105,6 +114,10 @@ export class SAUTableModule {
 
   showShow(item: any): boolean {
     return this.canShow ? this.canShow(item) : this.hasShowSubscription;
+  }
+
+  showClone(item: any): boolean {
+    return this.canClone ? this.canClone(item) : this.hasCloneSubscription;
   }
 
   loading = false
@@ -273,6 +286,10 @@ export class SAUTableModule {
 
   clickShowButton(item?: any) {
     this.showEvent.emit(item);
+  }
+
+  clickCloneButton(item?: any) {
+    this.cloneEvent.emit(item);
   }
 
   onPageChange(newPage: number) {

@@ -226,6 +226,7 @@ const ACTIONS_CODE = `{
   canDelete: (item) => item.active === false,
   canPrint: () => true,
   canShow: (item) => item.role !== 'Admin',
+  canClone: () => true,
 }`;
 
 const THEME_CODE = `--sau-color-primary: rgb(35, 163, 31);
@@ -294,7 +295,7 @@ export class DemosComponent implements OnDestroy {
     createDemo('filterTypes', 'All filter types', 'Every sau-filter field type in one form: inputText, inputNumber, inputCheckbox, date, dateRange, selectSimple, selectMultiple, plus the built-in sort order dropdown.', 'js', FILTER_TYPES_CODE),
     createDemo('types', 'Rich cell types', 'Booleans, colors, dates, links and images are all first-class header types. Try changing a value below.', 'js', TYPES_CODE),
     createDemo('templates', 'Custom templates', 'Hand the table a function for any column and render it however you like.', 'js', TEMPLATES_CODE),
-    createDemo('actions', 'Conditional actions', 'Edit, delete, print and show buttons accept a predicate function per row.', 'js', ACTIONS_CODE),
+    createDemo('actions', 'Conditional actions', 'Edit, delete, print, show and clone buttons accept a predicate function per row.', 'js', ACTIONS_CODE),
     createDemo('theme', 'Theming', 'Every color is a CSS custom property. Edit the values below and watch the table restyle instantly.', 'css', THEME_CODE),
     createDemo('orientation', 'Orientation', 'Force a vertical, horizontal or dynamic layout — just change the orientation field.', 'js', ORIENTATION_CODE),
     createDemo('mobileTheme', 'Mobile theme', 'Switch the phone layout between the classic label/value rows and the new stacked card look — just flip mobileTheme.', 'js', MOBILE_THEME_CODE),

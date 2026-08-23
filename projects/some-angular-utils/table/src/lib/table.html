@@ -60,6 +60,12 @@
                                                 <div class="skeleton-line head"></div>
                                                 }
 
+                                                @if(cloneButtonTemplate){
+
+                                                } @else if(hasCloneSubscription){
+                                                <div class="skeleton-line head"></div>
+                                                }
+
                                             </div>
                                         </td>
                                     </tr>
@@ -229,6 +235,21 @@
                                             }
                                             }
 
+                                            @if(showClone(item)){
+                                            @if(cloneButtonTemplate){
+                                            <ng-container
+                                                *ngTemplateOutlet="cloneButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                                            } @else if(hasCloneSubscription){
+                                            <button class="sau-table-clone-button" (click)="clickCloneButton(item)">
+                                                <span class="sau-icon sau-icon-clone">
+                                                    <sau-clone-icon></sau-clone-icon>
+                                                </span>
+                                                Clonar
+                                            </button>
+                                            }
+                                            }
+
                                         </div>
                                     </td>
                                 </tr>
@@ -343,6 +364,21 @@
                         <button class="sau-table-desktop-show-button" (click)="clickShowButton(item)" title="Mostrar">
                             <span class="sau-icon sau-icon-eye">
                                 <sau-eye-icon></sau-eye-icon>
+                            </span>
+                        </button>
+                        }
+                        }
+
+                        @if(showClone(item)){
+                        @if(cloneButtonTemplate){
+                        <ng-container
+                            *ngTemplateOutlet="cloneButtonTemplate; context: { $implicit: item }"></ng-container>
+
+                        } @else if(hasCloneSubscription){
+                        <button class="sau-table-desktop-clone-button" (click)="clickCloneButton(item)"
+                            title="Clonar">
+                            <span class="sau-icon sau-icon-clone">
+                                <sau-clone-icon></sau-clone-icon>
                             </span>
                         </button>
                         }
