@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewEncapsulation, ContentChild, ContentChildren, QueryList, ViewChild } from '@angular/core';
 import { TemplateRef } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { SAUFilterModule } from '@some-angular-utils/filter'
 import { SAUPaginatorModule } from '@some-angular-utils/paginator'
@@ -14,6 +15,13 @@ import { PrintIconComponent } from './icons/print-icon';
 import { EyeIconComponent } from './icons/eye-icon';
 import { CloneIconComponent } from './icons/clone-icon';
 import { DataTemplateComponent } from './components/data-template/data-template.component';
+
+export interface SAUTableSetting {
+  name: string;
+  icon?: string;
+  color?: string;
+  click: (item: any) => void;
+}
 
 @Component({
   selector: 'sau-table',
@@ -50,6 +58,7 @@ export class SAUTableModule {
   @Input() headers?: { name: string, key: string | string[], subKey?: string, type?: string, innerHtml?: boolean, headers?: any }[];
 
   @Input() showOptions = true;
+  @Input() settings: SAUTableSetting[] = [];
   @Output() editEvent = new EventEmitter();
   @Output() deleteEvent = new EventEmitter();
   @Output() printEvent = new EventEmitter();
@@ -134,7 +143,8 @@ export class SAUTableModule {
 
   constructor(
     private http: HttpClient,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngAfterViewInit() {
@@ -290,6 +300,14 @@ export class SAUTableModule {
 
   clickCloneButton(item?: any) {
     this.cloneEvent.emit(item);
+  }
+
+  clickSetting(setting: SAUTableSetting, item: any) {
+    setting.click(item);
+  }
+
+  trustIcon(icon: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(icon);
   }
 
   onPageChange(newPage: number) {

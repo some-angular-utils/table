@@ -109,9 +109,9 @@
                 @for (cfg of [demo.parsed()]; track cfg) {
                   <sau-table [headers]="cfg.headers" [fixedContent]="cfg.fixedContent" [canEdit]="cfg.canEdit"
                     [canDelete]="cfg.canDelete" [canPrint]="cfg.canPrint" [canShow]="cfg.canShow"
-                    [canClone]="cfg.canClone" (editEvent)="log('edit', $event)" (deleteEvent)="log('delete', $event)"
-                    (printEvent)="log('print', $event)" (showEvent)="log('show', $event)"
-                    (cloneEvent)="log('clone', $event)">
+                    [canClone]="cfg.canClone" [settings]="cfg.settings" (editEvent)="log('edit', $event)"
+                    (deleteEvent)="log('delete', $event)" (printEvent)="log('print', $event)"
+                    (showEvent)="log('show', $event)" (cloneEvent)="log('clone', $event)">
                   </sau-table>
                 }
 

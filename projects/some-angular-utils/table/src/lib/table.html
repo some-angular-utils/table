@@ -66,6 +66,10 @@
                                                 <div class="skeleton-line head"></div>
                                                 }
 
+                                                @for (setting of settings; track $index) {
+                                                <div class="skeleton-line head"></div>
+                                                }
+
                                             </div>
                                         </td>
                                     </tr>
@@ -250,6 +254,17 @@
                                             }
                                             }
 
+                                            @for (setting of settings; track $index) {
+                                            <button class="sau-table-setting-button"
+                                                [style.--sau-setting-color]="setting.color"
+                                                (click)="clickSetting(setting, item)">
+                                                @if(setting.icon){
+                                                <span class="sau-icon" [innerHTML]="trustIcon(setting.icon)"></span>
+                                                }
+                                                {{setting.name}}
+                                            </button>
+                                            }
+
                                         </div>
                                     </td>
                                 </tr>
@@ -382,6 +397,16 @@
                             </span>
                         </button>
                         }
+                        }
+
+                        @for (setting of settings; track $index) {
+                        <button class="sau-table-desktop-setting-button"
+                            [style.--sau-setting-color]="setting.color" (click)="clickSetting(setting, item)"
+                            [title]="setting.name">
+                            @if(setting.icon){
+                            <span class="sau-icon" [innerHTML]="trustIcon(setting.icon)"></span>
+                            }
+                        </button>
                         }
 
                     </div>

@@ -233,7 +233,8 @@
                             .sau-table-delete-button,
                             .sau-table-print-button,
                             .sau-table-show-button,
-                            .sau-table-clone-button {
+                            .sau-table-clone-button,
+                            .sau-table-setting-button {
                                 flex: 1 1 calc(50% - 0.25rem);
                                 justify-content: center;
                                 border-radius: 0.625rem;
@@ -311,7 +312,8 @@
             .sau-table-delete-button,
             .sau-table-print-button,
             .sau-table-show-button,
-            .sau-table-clone-button {
+            .sau-table-clone-button,
+            .sau-table-setting-button {
                 display: inline-flex;
                 align-items: center;
                 gap: 0.5rem;
@@ -369,6 +371,15 @@
 
                 &:hover {
                     background: var(--sau-color-clone);
+                }
+            }
+
+            .sau-table-setting-button {
+                color: var(--sau-setting-color, var(--sau-color-primary));
+                border: 1px solid var(--sau-setting-color, var(--sau-color-primary));
+
+                &:hover {
+                    background: var(--sau-setting-color, var(--sau-color-primary));
                 }
             }
         }
@@ -435,7 +446,8 @@
                     .sau-table-desktop-delete-button,
                     .sau-table-desktop-print-button,
                     .sau-table-desktop-show-button,
-                    .sau-table-desktop-clone-button {
+                    .sau-table-desktop-clone-button,
+                    .sau-table-desktop-setting-button {
                         display: inline-flex;
                         align-items: center;
                         justify-content: center;
@@ -493,6 +505,15 @@
 
                         &:hover {
                             background: var(--sau-color-clone);
+                        }
+                    }
+
+                    .sau-table-desktop-setting-button {
+                        color: var(--sau-setting-color, var(--sau-color-primary));
+                        border: 1px solid var(--sau-setting-color, var(--sau-color-primary));
+
+                        &:hover {
+                            background: var(--sau-setting-color, var(--sau-color-primary));
                         }
                     }
                 }

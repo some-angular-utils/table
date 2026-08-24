@@ -227,6 +227,15 @@ const ACTIONS_CODE = `{
   canPrint: () => true,
   canShow: (item) => item.role !== 'Admin',
   canClone: () => true,
+  // custom row actions: any icon/color/name/click you want, no predicate needed
+  settings: [
+    {
+      name: 'Favorite',
+      color: '#f59e0b',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>',
+      click: (item) => alert('Favorite: ' + item.name),
+    },
+  ],
 }`;
 
 const THEME_CODE = `--sau-color-primary: rgb(35, 163, 31);
