@@ -59,6 +59,7 @@ export class SAUTableModule {
   @Input() headers?: { name: string, key: string | string[], subKey?: string, type?: string, innerHtml?: boolean, headers?: any }[];
 
   @Input() showOptions = true;
+  @Input() optionsColumnName = 'Opciones';
   @Input() settings: SAUTableSetting[] = [];
   @Output() editEvent = new EventEmitter();
   @Output() deleteEvent = new EventEmitter();

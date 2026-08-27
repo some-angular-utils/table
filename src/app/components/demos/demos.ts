@@ -227,6 +227,8 @@ const ACTIONS_CODE = `{
   canPrint: () => true,
   canShow: (item) => item.role !== 'Admin',
   canClone: () => true,
+  // rename the header of the options/settings column, defaults to 'Opciones'
+  optionsColumnName: 'Actions',
   // custom row actions: any icon/color/name/click you want, no predicate needed
   settings: [
     {
