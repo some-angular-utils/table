@@ -114,6 +114,7 @@
                     (showEvent)="log('show', $event)" (cloneEvent)="log('clone', $event)">
                   </sau-table>
                 }
+                <p class="mt-2 text-xs text-gray-400">"Promote" only shows on non-Admin rows.</p>
 
                 @if (eventLog()) {
                   <p class="mt-4 font-mono text-xs text-brand-700">{{ eventLog() }}</p>

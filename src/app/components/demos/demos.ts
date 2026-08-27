@@ -235,6 +235,14 @@ const ACTIONS_CODE = `{
       icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>',
       click: (item) => alert('Favorite: ' + item.name),
     },
+    {
+      // "show" hides this setting on a per-row basis, same predicate pattern as canEdit/canDelete/etc.
+      name: 'Promote',
+      color: '#6366f1',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4l8 8h-5v8h-6v-8H4l8-8z"/></svg>',
+      show: (item) => item.role !== 'Admin',
+      click: (item) => alert('Promote: ' + item.name),
+    },
   ],
 }`;
 
@@ -304,7 +312,7 @@ export class DemosComponent implements OnDestroy {
     createDemo('filterTypes', 'All filter types', 'Every sau-filter field type in one form: inputText, inputNumber, inputCheckbox, date, dateRange, selectSimple, selectMultiple, plus the built-in sort order dropdown.', 'js', FILTER_TYPES_CODE),
     createDemo('types', 'Rich cell types', 'Booleans, colors, dates, links and images are all first-class header types. Try changing a value below.', 'js', TYPES_CODE),
     createDemo('templates', 'Custom templates', 'Hand the table a function for any column and render it however you like.', 'js', TEMPLATES_CODE),
-    createDemo('actions', 'Conditional actions', 'Edit, delete, print, show and clone buttons accept a predicate function per row.', 'js', ACTIONS_CODE),
+    createDemo('actions', 'Conditional actions', 'Edit, delete, print, show and clone buttons accept a predicate function per row — and so do custom settings entries.', 'js', ACTIONS_CODE),
     createDemo('theme', 'Theming', 'Every color is a CSS custom property. Edit the values below and watch the table restyle instantly.', 'css', THEME_CODE),
     createDemo('orientation', 'Orientation', 'Force a vertical, horizontal or dynamic layout — just change the orientation field.', 'js', ORIENTATION_CODE),
     createDemo('mobileTheme', 'Mobile theme', 'Switch the phone layout between the classic label/value rows and the new stacked card look — just flip mobileTheme.', 'js', MOBILE_THEME_CODE),

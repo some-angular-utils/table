@@ -20,6 +20,7 @@ export interface SAUTableSetting {
   name: string;
   icon?: string;
   color?: string;
+  show?: (item: any) => boolean;
   click: (item: any) => void;
 }
 
@@ -127,6 +128,10 @@ export class SAUTableModule {
 
   showClone(item: any): boolean {
     return this.canClone ? this.canClone(item) : this.hasCloneSubscription;
+  }
+
+  showSetting(setting: SAUTableSetting, item: any): boolean {
+    return setting.show ? setting.show(item) : true;
   }
 
   loading = false
