@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { SAUTableModule } from '@some-angular-utils/table';
 import { CodeEditorComponent } from '../code-editor/code-editor';
 
-type DemoId = 'remote' | 'filters' | 'filterTypes' | 'types' | 'templates' | 'actions' | 'theme' | 'orientation' | 'mobileTheme' | 'events';
+type DemoId = 'remote' | 'filters' | 'filterTypes' | 'quickSearch' | 'quickSearchCombined' | 'types' | 'templates' | 'actions' | 'theme' | 'orientation' | 'mobileTheme' | 'events';
 type DemoKind = 'js' | 'css';
 
 interface DemoEntry {
@@ -180,6 +180,86 @@ const FILTER_TYPES_CODE = `{
   ],
 }`;
 
+const QUICK_SEARCH_CODE = `{
+  url: 'https://rickandmortyapi.com/api/character/',
+  contentList: 'results',
+  contentTotal: 'info.count',
+  pageParamName: 'page',
+  sizeInitialPage: 1,
+  limit: 20,
+  showOptions: false,
+  filterConfig: {
+    // quick search only: no regular fields, but "form" must still exist (even empty)
+    order: [],
+    form: {},
+    quickFilter: {
+      key: 'name',
+      label: 'Search characters',
+      placeholder: 'Try "Morty" or "Smith"...',
+      debounceTime: 400,
+    },
+  },
+  headers: [
+    { name: 'AVATAR', key: 'image', type: 'image', url: '{key}' },
+    { name: 'NAME', key: 'name' },
+    { name: 'SPECIES', key: 'species' },
+    { name: 'ORIGIN', key: 'origin.name' },
+  ],
+}`;
+
+const QUICK_SEARCH_COMBINED_CODE = `{
+  url: 'https://rickandmortyapi.com/api/character/',
+  contentList: 'results',
+  contentTotal: 'info.count',
+  pageParamName: 'page',
+  sizeInitialPage: 1,
+  limit: 20,
+  showOptions: false,
+  filterConfig: {
+    // the quick search value is sent together with the rest of the filters
+    quickFilter: { key: 'name', placeholder: 'Quick search by name...' },
+    order: ['status', 'gender', 'species'],
+    mobile: ['status'],
+    form: {
+      status: {
+        name: 'Life status',
+        key: 'status',
+        type: 'selectSimple',
+        dropdowns: [
+          { id: 'alive', name: 'Alive' },
+          { id: 'dead', name: 'Dead' },
+          { id: 'unknown', name: 'Unknown' },
+        ],
+        defaultValue: 'alive',
+      },
+      gender: {
+        name: 'Gender',
+        key: 'gender',
+        type: 'selectSimple',
+        dropdowns: [
+          { id: 'female', name: 'Female' },
+          { id: 'male', name: 'Male' },
+          { id: 'genderless', name: 'Genderless' },
+          { id: 'unknown', name: 'Unknown' },
+        ],
+      },
+      species: {
+        name: 'Species',
+        key: 'species',
+        type: 'inputText',
+        defaultValue: '',
+      },
+    },
+  },
+  headers: [
+    { name: 'AVATAR', key: 'image', type: 'image', url: '{key}' },
+    { name: 'NAME', key: 'name' },
+    { name: 'STATUS', key: 'status' },
+    { name: 'GENDER', key: 'gender' },
+    { name: 'SPECIES', key: 'species' },
+  ],
+}`;
+
 const TYPES_CODE = `{
   headers: [
     { name: 'NAME', key: 'name' },
@@ -312,6 +392,8 @@ export class DemosComponent implements OnDestroy {
     createDemo('remote', 'Remote data', 'Point sau-table at any REST endpoint. Edit the URL, headers or pagination params below — it refetches live.', 'js', REMOTE_CODE),
     createDemo('filters', 'Filters', 'Describe a filter form once. Submitted values turn into query params and re-fetch the data automatically.', 'js', FILTERS_CODE),
     createDemo('filterTypes', 'All filter types', 'Every sau-filter field type in one form: inputText, inputNumber, inputCheckbox, date, dateRange, selectSimple, selectMultiple, plus the built-in sort order dropdown.', 'js', FILTER_TYPES_CODE),
+    createDemo('quickSearch', 'Quick search', 'Add quickFilter to filterConfig for a search box that fires on its own once you stop typing — no search button needed. Type a name below.', 'js', QUICK_SEARCH_CODE),
+    createDemo('quickSearchCombined', 'Quick search + filters', 'quickFilter works alongside regular fields: its value is sent in the same query string as the rest of the filters.', 'js', QUICK_SEARCH_COMBINED_CODE),
     createDemo('types', 'Rich cell types', 'Booleans, colors, dates, links and images are all first-class header types. Try changing a value below.', 'js', TYPES_CODE),
     createDemo('templates', 'Custom templates', 'Hand the table a function for any column and render it however you like.', 'js', TEMPLATES_CODE),
     createDemo('actions', 'Conditional actions', 'Edit, delete, print, show and clone buttons accept a predicate function per row — and so do custom settings entries.', 'js', ACTIONS_CODE),
